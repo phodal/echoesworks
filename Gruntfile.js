@@ -3,6 +3,39 @@ module.exports = function(grunt) {
   grunt.initConfig({
 
     pkg: grunt.file.readJSON('package.json'),
+    connect: {
+      server: {
+        options: {
+          port: 8000,
+          base: '.'
+        }
+      }
+    },
+
+    jasmine : {
+      src : 'dist/echoworks.js',
+      options : {
+        host: "http://0.0.0.0:8000",
+        vendor: ['node_modules/jasmine-ajax/lib/mock-ajax.js'],
+        specs : 'specs/*-spec.js',
+        template: require('grunt-template-jasmine-istanbul'),
+        templateOptions: {
+          coverage: 'coverage/coverage.json',
+          report: {
+            type: 'lcov',
+            options: {
+              dir: 'coverage'
+            }
+          },
+          thresholds: {
+            lines: 90,
+            statements: 90,
+            branches: 60,
+            functions: 85
+          }
+        }
+      }
+    },
 
     concat: {
       options: {
@@ -29,10 +62,6 @@ module.exports = function(grunt) {
       }
     },
 
-    qunit: {
-      files: ['test/*.html']
-    },
-
     jshint: {
       files: ['dist/echoesworks.js'],
       options: {
@@ -54,11 +83,12 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-qunit');
+  grunt.loadNpmTasks('grunt-contrib-jasmine');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-connect');
 
-  grunt.registerTask('test', ['jshint', 'qunit']);
-  grunt.registerTask('default', ['concat', 'jshint', 'qunit', 'uglify']);
+  grunt.registerTask('test', ['jshint','connect', 'jasmine']);
+  grunt.registerTask('default', ['concat','connect', 'jshint','jasmine', 'uglify' ]);
 
 };
