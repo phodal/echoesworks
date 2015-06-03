@@ -1,9 +1,11 @@
 # EchoWorks
 
-Play Video or Audio with showing code & PPT
+> Play Video or Audio with showing code & PPT
 
 
 ##Thanks To
+
+[https://github.com/wayou/selected](https://github.com/wayou/selected)
 
 ###[http://rawgit.com/](http://rawgit.com/)
 
