@@ -34,7 +34,7 @@ module.exports = function(grunt) {
     },
 
     jshint: {
-      files: ['dist/EchoWorks.js'],
+      files: ['dist/echoesworks.js'],
       options: {
         globals: {
           console: true,

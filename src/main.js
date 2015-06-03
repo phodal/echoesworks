@@ -1,15 +1,15 @@
-/* EchoWorks main */
+/* echoesworks main */
 
 // Base function.
-var EchoWorks = function() {
+var echoesworks = function() {
   // Add functionality here.
   return true;
 };
 
 
 // Version.
-EchoWorks.VERSION = '0.0.0';
+echoesworks.VERSION = '0.0.0';
 
 
 // Export to the root, which is probably `window`.
-root.EchoWorks = EchoWorks;
+root.echoesworks = echoesworks;

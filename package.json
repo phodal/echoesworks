@@ -1,11 +1,11 @@
 {
-  "name": "echoworks",
+  "name": "echoesworks",
   "version": "0.0.0",
-  "main": "dist/EchoWorks.min.js",
+  "main": "dist/echoesworks.min.js",
   "description": "Play Video or Audio with showing code & PPT",
   "repository": {
     "type": "git",
-    "url": "git://github.com/phodal/EchoWorks.git"
+    "url": "git://github.com/phodal/echoesworks.git"
   },
   "keywords": [],
   "author": "Phodal Huang",
