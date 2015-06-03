@@ -10,6 +10,7 @@ describe("Markdown", function () {
 		expect(EW.md.parse("#Header1")).toBe("\n<h1>Header1</h1>\n\n");
 		expect(EW.md.parse("##Header2")).toBe("\n<h2>Header2</h2>\n\n");
 		expect(EW.md.parse("###Header3")).toBe("\n<h3>Header3</h3>\n\n");
+		expect(EW.md.parse("---")).toBe("\n\n<hr/>\n\n");
 	});
 
 	it("should parse link", function () {

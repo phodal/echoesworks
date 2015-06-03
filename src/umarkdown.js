@@ -223,66 +223,6 @@ var micromarkdown = {
 			str = str.replace(stra[0], '\n<hr/>\n');
 		}
 
-		/* include */
-		if ((micromarkdown.useajax !== false) && (strict !== true)) {
-			while ((stra = micromarkdown.regexobject.include.exec(str)) !== null) {
-				helper = stra[2].replace(/[\.\:\/]+/gm, '');
-				helper1 = '';
-				if (document.getElementById(helper)) {
-					helper1 = document.getElementById(helper).innerHTML.trim();
-				} else {
-					micromarkdown.ajax(stra[2]);
-				}
-				if ((stra[1] === 'csv') && (helper1 !== '')) {
-					helper2 = {
-						';': [],
-						'\t': [],
-						',': [],
-						'|': []
-					};
-					helper2[0] = [';', '\t', ',', '|'];
-					helper1 = helper1.split('\n');
-					for (j = 0; j < helper2[0].length; j++) {
-						for (i = 0; i < helper1.length; i++) {
-							if (i > 0) {
-								if (helper2[helper2[0][j]] !== false) {
-									if ((helper2[helper2[0][j]][i] !== helper2[helper2[0][j]][i - 1]) || (helper2[helper2[0][j]][i] === 1)) {
-										helper2[helper2[0][j]] = false;
-									}
-								}
-							}
-						}
-					}
-					if ((helper2[';'] !== false) || (helper2['\t'] !== false) || (helper2[','] !== false) || (helper2['|'] !== false)) {
-						if (helper2[';'] !== false) {
-							helper2 = ';';
-						} else if (helper2['\t']) {
-							helper2 = '\t';
-						} else if (helper2[',']) {
-							helper2 = ',';
-						} else if (helper2['|']) {
-							helper2 = '|';
-						}
-						repstr = '<table>';
-						for (i = 0; i < helper1.length; i++) {
-							helper = helper1[i].split(helper2);
-							repstr += '<tr>';
-							for (j = 0; j < helper.length; j++) {
-								repstr += '<td>' + micromarkdown.htmlEncode(helper[j]) + '</td>';
-							}
-							repstr += '</tr>';
-						}
-						repstr += '</table>';
-						str = str.replace(stra[0], repstr);
-					} else {
-						str = str.replace(stra[0], '<code>' + helper1.join('\n') + '</code>');
-					}
-				} else {
-					str = str.replace(stra[0], '');
-				}
-			}
-		}
-
 		str = str.replace(/ {2,}[\n]{1,}/gmi, '<br/><br/>');
 		return str;
 	},
