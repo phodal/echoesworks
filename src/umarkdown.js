@@ -1,5 +1,5 @@
 /*
- * µmarkdown.js
+ * micro-markdown.js
  * markdown in under 5kb
  *
  * Copyright 2014, Simon Waldherr - http://simon.waldherr.eu/
