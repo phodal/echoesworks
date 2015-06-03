@@ -14,6 +14,7 @@
 ##Thanks To
 
 [https://github.com/wayou/selected](https://github.com/wayou/selected)
+[https://github.com/simonwaldherr/micromarkdown.js/](https://github.com/simonwaldherr/micromarkdown.js/)
 
 ## License
 

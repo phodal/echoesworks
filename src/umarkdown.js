@@ -10,8 +10,6 @@
  * Version: 0.3.0
  */
 
-/*global ActiveXObject */
-
 var micromarkdown = {
 	use: false,
 	regexobject: {
@@ -291,42 +289,6 @@ var micromarkdown = {
 
 		str = str.replace(/ {2,}[\n]{1,}/gmi, '<br/><br/>');
 		return str;
-	},
-	ajax: function (str) {
-		var xhr;
-		if (document.getElementById(str.replace(/[\.\:\/]+/gm, ''))) {
-			return false;
-		}
-		if (window.ActiveXObject) {
-			try {
-				xhr = new ActiveXObject("Microsoft.XMLHTTP");
-			} catch (e) {
-				xhr = null;
-				return e;
-			}
-		} else {
-			xhr = new XMLHttpRequest();
-		}
-		xhr.onreadystatechange = function () {
-			if (xhr.readyState === 4) {
-				var ele = document.createElement('code');
-				ele.innerHTML = xhr.responseText;
-				ele.id = str.replace(/[\.\:\/]+/gm, '');
-				ele.style.display = 'none';
-				document.getElementsByTagName('body')[0].appendChild(ele);
-				micromarkdown.useajax();
-			}
-		};
-		xhr.open('GET', str, true);
-		xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-		xhr.send();
-	},
-	countingChars: function (str, split) {
-		str = str.split(split);
-		if (typeof str === 'object') {
-			return str.length - 1;
-		}
-		return 0;
 	},
 	htmlEncode: function (str) {
 		var div = document.createElement('div');
