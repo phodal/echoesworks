@@ -1,5 +1,5 @@
 {
-  "name": "EchoWorks",
+  "name": "echoworks",
   "version": "0.0.0",
   "main": "dist/EchoWorks.min.js",
   "description": "Play Video or Audio with showing code & PPT",
