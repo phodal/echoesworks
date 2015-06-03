@@ -34,7 +34,6 @@ root.EW = EchoesWorks;
  */
 
 var micromarkdown = {
-	use: false,
 	regexobject: {
 		headline: /^(\#{1,6})([^\#\n]+)$/m,
 		code: /\s\`\`\`\n?([^`]+)\`\`\`/g,
@@ -238,9 +237,6 @@ var micromarkdown = {
 				case 'gp':
 					repstr = 'https://plus.google.com/+' + stra[1];
 					break;
-				case 'adn':
-					repstr = 'https://alpha.app.net/' + stra[1];
-					break;
 			}
 			str = str.replace(stra[0], '<a ' + micromarkdown.mmdCSSclass(repstr, strict) + 'href="' + repstr + '">' + stra[1] + '</a>');
 		}
@@ -335,6 +331,6 @@ var micromarkdown = {
 	}
 };
 
-
+EchoesWorks.md = micromarkdown;
 
 }(this));
