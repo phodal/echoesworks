@@ -2,41 +2,22 @@
 
 Play Video or Audio with showing code & PPT
 
-## About
 
-A JavaScript library by Phodal Huang.
+##Thanks To
 
-See the [project homepage](http://phodal.github.io/EchoWorks).
+###[http://rawgit.com/](http://rawgit.com/)
 
-## Installation
+From
 
-Using Bower:
+[https://raw.githubusercontent.com/phodal/echoworks/master/bower.json](https://raw.githubusercontent.com/phodal/echoworks/master/bower.json)
 
-    bower install EchoWorks
+To
 
-Or grab the [source](https://github.com/phodal/EchoWorks/dist/EchoWorks.js) ([minified](https://github.com/phodal/EchoWorks/dist/EchoWorks.min.js)).
+dev: [https://rawgit.com/phodal/echoworks/master/bower.json](https://rawgit.com/phodal/echoworks/master/bower.json)
 
-## Usage
+production: [https://cdn.rawgit.com/phodal/echoworks/master/bower.json](https://cdn.rawgit.com/phodal/echoworks/master/bower.json)
 
-Basic usage is as follows:
 
-    EchoWorks();
-
-For advanced usage, see the documentation.
-
-## Documentation
-
-Start with `docs/MAIN.md`.
-
-## Contributing
-
-We'll check out your contribution if you:
-
-* Provide a comprehensive suite of tests for your fork.
-* Have a clear and documented rationale for your changes.
-* Package these up in a pull request.
-
-We'll do our best to help you out with any contribution issues you may have.
 
 ## License
 
