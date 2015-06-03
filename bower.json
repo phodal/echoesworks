@@ -8,5 +8,7 @@
     "bower_components",
     "test"
   ],
-  "dependencies": {}
+  "dependencies": {
+    "howler.js": "1.1.26"
+  }
 }
