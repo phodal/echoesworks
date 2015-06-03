@@ -10,8 +10,7 @@
  * Version: 0.3.0
  */
 
-/*jslint browser: true, node: true, plusplus: true, indent: 2, regexp: true, ass: true */
-/*global ActiveXObject, define */
+/*global ActiveXObject */
 
 var micromarkdown = {
 	use: false,
@@ -30,7 +29,6 @@ var micromarkdown = {
 		url: /<([a-zA-Z0-9@:%_\+.~#?&\/\/=]{2,256}\.[a-z]{2,4}\b(\/[\-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)?)>/g
 	},
 	parse: function (str, strict) {
-		'use strict';
 		var line, nstatus = 0,
 			status, cel, calign, indent, helper, helper1, helper2, count, repstr, stra, trashgc = [],
 			casca = 0,
@@ -295,7 +293,6 @@ var micromarkdown = {
 		return str;
 	},
 	ajax: function (str) {
-		'use strict';
 		var xhr;
 		if (document.getElementById(str.replace(/[\.\:\/]+/gm, ''))) {
 			return false;
@@ -325,7 +322,6 @@ var micromarkdown = {
 		xhr.send();
 	},
 	countingChars: function (str, split) {
-		'use strict';
 		str = str.split(split);
 		if (typeof str === 'object') {
 			return str.length - 1;
@@ -333,7 +329,6 @@ var micromarkdown = {
 		return 0;
 	},
 	htmlEncode: function (str) {
-		'use strict';
 		var div = document.createElement('div');
 		div.appendChild(document.createTextNode(str));
 		str = div.innerHTML;
@@ -341,7 +336,6 @@ var micromarkdown = {
 		return str;
 	},
 	mmdCSSclass: function (str, strict) {
-		'use strict';
 		var urlTemp;
 		if ((str.indexOf('/') !== -1) && (strict !== true)) {
 			urlTemp = str.split('/');
