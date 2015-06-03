@@ -13,7 +13,7 @@ module.exports = function(grunt) {
     },
 
     jasmine : {
-      src : 'dist/echoworks.js',
+      src : 'dist/echoesworks.js',
       options : {
         host: "http://0.0.0.0:8000",
         vendor: ['node_modules/jasmine-ajax/lib/mock-ajax.js'],

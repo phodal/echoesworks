@@ -7,7 +7,7 @@ describe("Main", function () {
 	});
 
 	it("should parse", function () {
-		expect(echoesworks()).toBeTruthy()
+		expect(EW()).toBeTruthy()
 	});
 });
 

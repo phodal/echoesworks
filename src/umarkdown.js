@@ -311,3 +311,4 @@ var micromarkdown = {
 		return '';
 	}
 };
+
