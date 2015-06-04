@@ -1,10 +1,7 @@
 /* EW main */
 
 // Base function.
-var EchoesWorks = function() {
-  // Add functionality here.
-  return true;
-};
+var EchoesWorks = function() {};
 
 
 // Version.
@@ -18,11 +15,15 @@ root.EW = EchoesWorks;
 var api = {
   prev: function (){
     console.log("prev");
+    return "prev";
   },
   next: function (){
     console.log("next");
+    return "next";
   }
 };
+
+EchoesWorks.API = api;
 
 document.addEventListener("keydown", function ( event ) {
   if ( event.keyCode === 9 || ( event.keyCode >= 32 && event.keyCode <= 34 ) || (event.keyCode >= 37 && event.keyCode <= 40) ) {

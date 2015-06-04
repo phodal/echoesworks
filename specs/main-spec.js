@@ -1,13 +1,7 @@
 describe("Main", function () {
-	beforeEach(function () {
-
-	});
-	afterEach(function () {
-
-	});
-
-	it("should parse", function () {
-		expect(EW()).toBeTruthy()
+	it("should return prev & next", function () {
+		expect(EW.API.prev()).toBe("prev");
+		expect(EW.API.next()).toBe("next");
 	});
 });
 

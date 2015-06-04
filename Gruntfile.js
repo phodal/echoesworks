@@ -28,8 +28,8 @@ module.exports = function(grunt) {
             }
           },
           thresholds: {
-            lines: 90,
-            statements: 90,
+            lines: 80,
+            statements: 80,
             branches: 60,
             functions: 85
           }
