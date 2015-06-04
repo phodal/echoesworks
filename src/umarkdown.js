@@ -100,12 +100,64 @@ var micromarkdown = {
 		}
 		return str;
 	},
+	tablesFilter: function (stra, strict, str) {
+		var repstr, cel, helper, calign, helper1, helper2,
+			i=0,
+			j=0;
+
+		repstr = '<table><tr>';
+		helper = stra[1].split('|');
+		calign = stra[4].split('|');
+		for (i = 0; i < helper.length; i++) {
+			if (calign.length <= i) {
+				calign.push(0);
+			} else if ((calign[i].trimRight().slice(-1) === ':') && (strict !== true)) {
+				if (calign[i][0] === ':') {
+					calign[i] = 3;
+				} else {
+					calign[i] = 2;
+				}
+			} else if (strict !== true) {
+				if (calign[i][0] === ':') {
+					calign[i] = 1;
+				} else {
+					calign[i] = 0;
+				}
+			} else {
+				calign[i] = 0;
+			}
+		}
+		cel = ['<th>', '<th align="left">', '<th align="right">', '<th align="center">'];
+		for (i = 0; i < helper.length; i++) {
+			repstr += cel[calign[i]] + helper[i].trim() + '</th>';
+		}
+		repstr += '</tr>';
+		cel = ['<td>', '<td align="left">', '<td align="right">', '<td align="center">'];
+		helper1 = stra[7].split('\n');
+		for (i = 0; i < helper1.length; i++) {
+			helper2 = helper1[i].split('|');
+			if (helper2[0].length !== 0) {
+				while (calign.length < helper2.length) {
+					calign.push(0);
+				}
+				repstr += '<tr>';
+				for (j = 0; j < helper2.length; j++) {
+					repstr += cel[calign[j]] + helper2[j].trim() + '</td>';
+				}
+				repstr += '</tr>' + '\n';
+			}
+		}
+		repstr += '</table>';
+		str = str.replace(stra[0], repstr);
+		return str;
+	},
+
 	parse: function (str, strict) {
 		var line, nstatus = 0,
-			status, cel, calign, indent, helper, helper1, helper2, repstr, stra, trashgc = [],
+			status, indent, helper, helper1, repstr, stra, trashgc = [],
 			casca = 0,
-			i = 0,
-			j = 0;
+			i = 0;
+
 		str = '\n' + str + '\n';
 
 		var regexobject = micromarkdown.regexobject;
@@ -178,50 +230,7 @@ var micromarkdown = {
 
 		/* tables */
 		while ((stra = regexobject.tables.exec(str)) !== null) {
-			repstr = '<table><tr>';
-			helper = stra[1].split('|');
-			calign = stra[4].split('|');
-			for (i = 0; i < helper.length; i++) {
-				if (calign.length <= i) {
-					calign.push(0);
-				} else if ((calign[i].trimRight().slice(-1) === ':') && (strict !== true)) {
-					if (calign[i][0] === ':') {
-						calign[i] = 3;
-					} else {
-						calign[i] = 2;
-					}
-				} else if (strict !== true) {
-					if (calign[i][0] === ':') {
-						calign[i] = 1;
-					} else {
-						calign[i] = 0;
-					}
-				} else {
-					calign[i] = 0;
-				}
-			}
-			cel = ['<th>', '<th align="left">', '<th align="right">', '<th align="center">'];
-			for (i = 0; i < helper.length; i++) {
-				repstr += cel[calign[i]] + helper[i].trim() + '</th>';
-			}
-			repstr += '</tr>';
-			cel = ['<td>', '<td align="left">', '<td align="right">', '<td align="center">'];
-			helper1 = stra[7].split('\n');
-			for (i = 0; i < helper1.length; i++) {
-				helper2 = helper1[i].split('|');
-				if (helper2[0].length !== 0) {
-					while (calign.length < helper2.length) {
-						calign.push(0);
-					}
-					repstr += '<tr>';
-					for (j = 0; j < helper2.length; j++) {
-						repstr += cel[calign[j]] + helper2[j].trim() + '</td>';
-					}
-					repstr += '</tr>' + '\n';
-				}
-			}
-			repstr += '</table>';
-			str = str.replace(stra[0], repstr);
+			str = this.tablesFilter(stra, strict, str);
 		}
 
 		/* bold and italic */
