@@ -58,7 +58,28 @@ var micromarkdown = {
 		str = str.replace(stra[0], '<a ' + micromarkdown.mmdCSSclass(repString, strict) + 'href="' + repString + '">' + repString.replace(/(https:\/\/|http:\/\/|mailto:|ftp:\/\/)/gmi, '') + '</a>');
 		return str;
 	},
-	parse: function (str, strict) {
+	refLinksFilter: function (str, stra, helper, strict) {
+		return str.replace(stra[0], '<a ' + micromarkdown.mmdCSSclass(helper[1], strict) + 'href="' + helper[1] + '">' + stra[1] + '</a>');
+	},
+	specialLinks: function (stra, str, strict) {
+		var repstr = "";
+		switch (stra[2]) {
+			case 't':
+				repstr = 'https://twitter.com/' + stra[1];
+				break;
+			case 'gh':
+				repstr = 'https://github.com/' + stra[1];
+				break;
+			case 'fb':
+				repstr = 'https://www.facebook.com/' + stra[1];
+				break;
+			case 'gp':
+				repstr = 'https://plus.google.com/+' + stra[1];
+				break;
+		}
+		str = str.replace(stra[0], '<a ' + micromarkdown.mmdCSSclass(repstr, strict) + 'href="' + repstr + '">' + stra[1] + '</a>');
+		return str;
+	}, parse: function (str, strict) {
 		var line, nstatus = 0,
 			status, cel, calign, indent, helper, helper1, helper2, repstr, stra, trashgc = [],
 			casca = 0,
@@ -218,7 +239,7 @@ var micromarkdown = {
 		while ((stra = regexobject.reflinks.exec(str)) !== null) {
 			helper1 = new RegExp('\\[' + stra[2] + '\\]: ?([^ \n]+)', "gi");
 			if ((helper = helper1.exec(str)) !== null) {
-				str = str.replace(stra[0], '<a ' + micromarkdown.mmdCSSclass(helper[1], strict) + 'href="' + helper[1] + '">' + stra[1] + '</a>');
+				str = this.refLinksFilter(str, stra, helper, strict);
 				trashgc.push(helper[0]);
 			}
 		}
@@ -226,21 +247,7 @@ var micromarkdown = {
 			str = str.replace(trashgc[i], '');
 		}
 		while ((stra = regexobject.smlinks.exec(str)) !== null) {
-			switch (stra[2]) {
-				case 't':
-					repstr = 'https://twitter.com/' + stra[1];
-					break;
-				case 'gh':
-					repstr = 'https://github.com/' + stra[1];
-					break;
-				case 'fb':
-					repstr = 'https://www.facebook.com/' + stra[1];
-					break;
-				case 'gp':
-					repstr = 'https://plus.google.com/+' + stra[1];
-					break;
-			}
-			str = str.replace(stra[0], '<a ' + micromarkdown.mmdCSSclass(repstr, strict) + 'href="' + repstr + '">' + stra[1] + '</a>');
+			str = this.specialLinks(stra, str, strict);
 		}
 
 		/* horizontal line */
