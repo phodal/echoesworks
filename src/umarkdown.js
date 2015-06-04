@@ -25,6 +25,11 @@ var micromarkdown = {
 		include: /[\[<]include (\S+) from (https?:\/\/[a-z0-9\.\-]+\.[a-z]{2,9}[a-z0-9\.\-\?\&\/]+)[\]>]/gi,
 		url: /<([a-zA-Z0-9@:%_\+.~#?&\/\/=]{2,256}\.[a-z]{2,4}\b(\/[\-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)?)>/g
 	},
+
+	codeFilter: function (str, stra) {
+		return str.replace(stra[0], '<code>\n' + micromarkdown.htmlEncode(stra[1]).replace(/\n/gm, '<br/>').replace(/\ /gm, '&nbsp;') + '</code>\n');
+	},
+
 	parse: function (str, strict) {
 		var line, nstatus = 0,
 			status, cel, calign, indent, helper, helper1, helper2, count, repstr, stra, trashgc = [],
@@ -40,7 +45,7 @@ var micromarkdown = {
 
 		/* code */
 		while ((stra = regexobject.code.exec(str)) !== null) {
-			str = str.replace(stra[0], '<code>\n' + micromarkdown.htmlEncode(stra[1]).replace(/\n/gm, '<br/>').replace(/\ /gm, '&nbsp;') + '</code>\n');
+			str = this.codeFilter(str, stra);
 		}
 
 		/* headlines */
