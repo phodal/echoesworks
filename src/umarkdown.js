@@ -35,7 +35,14 @@ var micromarkdown = {
 		return str.replace(stra[0], '<h' + count + '>' + stra[2] + '</h' + count + '>' + '\n');
 	},
 
-	parse: function (str, strict) {
+	linksFilter: function (stra, str, strict) {
+		if (stra[0].substr(0, 1) === '!') {
+			str = str.replace(stra[0], '<img src="' + stra[2] + '" alt="' + stra[1] + '" title="' + stra[1] + '" />\n');
+		} else {
+			str = str.replace(stra[0], '<a ' + micromarkdown.mmdCSSclass(stra[2], strict) + 'href="' + stra[2] + '">' + stra[1] + '</a>\n');
+		}
+		return str;
+	}, parse: function (str, strict) {
 		var line, nstatus = 0,
 			status, cel, calign, indent, helper, helper1, helper2, repstr, stra, trashgc = [],
 			casca = 0,
@@ -184,11 +191,7 @@ var micromarkdown = {
 
 		/* links */
 		while ((stra = regexobject.links.exec(str)) !== null) {
-			if (stra[0].substr(0, 1) === '!') {
-				str = str.replace(stra[0], '<img src="' + stra[2] + '" alt="' + stra[1] + '" title="' + stra[1] + '" />\n');
-			} else {
-				str = str.replace(stra[0], '<a ' + micromarkdown.mmdCSSclass(stra[2], strict) + 'href="' + stra[2] + '">' + stra[1] + '</a>\n');
-			}
+			str = this.linksFilter(stra, str, strict);
 		}
 		while ((stra = regexobject.mail.exec(str)) !== null) {
 			str = str.replace(stra[0], '<a href="mailto:' + stra[1] + '">' + stra[1] + '</a>');
