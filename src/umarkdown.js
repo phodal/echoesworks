@@ -79,7 +79,28 @@ var micromarkdown = {
 		}
 		str = str.replace(stra[0], '<a ' + micromarkdown.mmdCSSclass(repstr, strict) + 'href="' + repstr + '">' + stra[1] + '</a>');
 		return str;
-	}, parse: function (str, strict) {
+	},
+	boldItalicFilter: function (stra, str) {
+		var repstr = [];
+		if (stra[1] === '~~') {
+			str = str.replace(stra[0], '<del>' + stra[2] + '</del>');
+		} else {
+			switch (stra[1].length) {
+				case 1:
+					repstr = ['<i>', '</i>'];
+					break;
+				case 2:
+					repstr = ['<b>', '</b>'];
+					break;
+				case 3:
+					repstr = ['<i><b>', '</b></i>'];
+					break;
+			}
+			str = str.replace(stra[0], repstr[0] + stra[2] + repstr[1]);
+		}
+		return str;
+	},
+	parse: function (str, strict) {
 		var line, nstatus = 0,
 			status, cel, calign, indent, helper, helper1, helper2, repstr, stra, trashgc = [],
 			casca = 0,
@@ -206,23 +227,7 @@ var micromarkdown = {
 		/* bold and italic */
 		for (i = 0; i < 3; i++) {
 			while ((stra = regexobject.bolditalic.exec(str)) !== null) {
-				repstr = [];
-				if (stra[1] === '~~') {
-					str = str.replace(stra[0], '<del>' + stra[2] + '</del>');
-				} else {
-					switch (stra[1].length) {
-						case 1:
-							repstr = ['<i>', '</i>'];
-							break;
-						case 2:
-							repstr = ['<b>', '</b>'];
-							break;
-						case 3:
-							repstr = ['<i><b>', '</b></i>'];
-							break;
-					}
-					str = str.replace(stra[0], repstr[0] + stra[2] + repstr[1]);
-				}
+				str = this.boldItalicFilter(stra, str);
 			}
 		}
 
