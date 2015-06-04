@@ -47,6 +47,7 @@ module.exports = function(grunt) {
           'src/main.js',
           'src/api.js',
           'src/ajax.js',
+          'src/slide.js',
           'src/umarkdown.js',
           'src/events_handler.js',
           'src/_outro.js'

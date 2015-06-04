@@ -12,7 +12,7 @@
  * ------------------------------------------------
  * https://github.com/bartaz/impress.js/blob/6314e2e15012c9db69f76e77a8bb1c437a7312b8/js/impress.js
  */
-	
+
 var steps = [1 ,3] , activeStep, api;
 api = {
 	goto: function () {
