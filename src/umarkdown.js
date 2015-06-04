@@ -33,23 +33,24 @@ var micromarkdown = {
 			j = 0;
 		str = '\n' + str + '\n';
 
+		var regexobject = micromarkdown.regexobject;
 		if (strict !== true) {
-			micromarkdown.regexobject.lists = /^((\s*(\*|\d\.) [^\n]+)\n)+/gm;
+			regexobject.lists = /^((\s*(\*|\d\.) [^\n]+)\n)+/gm;
 		}
 
 		/* code */
-		while ((stra = micromarkdown.regexobject.code.exec(str)) !== null) {
+		while ((stra = regexobject.code.exec(str)) !== null) {
 			str = str.replace(stra[0], '<code>\n' + micromarkdown.htmlEncode(stra[1]).replace(/\n/gm, '<br/>').replace(/\ /gm, '&nbsp;') + '</code>\n');
 		}
 
 		/* headlines */
-		while ((stra = micromarkdown.regexobject.headline.exec(str)) !== null) {
+		while ((stra = regexobject.headline.exec(str)) !== null) {
 			count = stra[1].length;
 			str = str.replace(stra[0], '<h' + count + '>' + stra[2] + '</h' + count + '>' + '\n');
 		}
 
 		/* lists */
-		while ((stra = micromarkdown.regexobject.lists.exec(str)) !== null) {
+		while ((stra = regexobject.lists.exec(str)) !== null) {
 			casca = 0;
 			if ((stra[0].trim().substr(0, 1) === '*') || (stra[0].trim().substr(0, 1) === '-')) {
 				repstr = '<ul>';
@@ -102,7 +103,7 @@ var micromarkdown = {
 		}
 
 		/* tables */
-		while ((stra = micromarkdown.regexobject.tables.exec(str)) !== null) {
+		while ((stra = regexobject.tables.exec(str)) !== null) {
 			repstr = '<table><tr>';
 			helper = stra[1].split('|');
 			calign = stra[4].split('|');
@@ -151,7 +152,7 @@ var micromarkdown = {
 
 		/* bold and italic */
 		for (i = 0; i < 3; i++) {
-			while ((stra = micromarkdown.regexobject.bolditalic.exec(str)) !== null) {
+			while ((stra = regexobject.bolditalic.exec(str)) !== null) {
 				repstr = [];
 				if (stra[1] === '~~') {
 					str = str.replace(stra[0], '<del>' + stra[2] + '</del>');
@@ -173,24 +174,24 @@ var micromarkdown = {
 		}
 
 		/* links */
-		while ((stra = micromarkdown.regexobject.links.exec(str)) !== null) {
+		while ((stra = regexobject.links.exec(str)) !== null) {
 			if (stra[0].substr(0, 1) === '!') {
 				str = str.replace(stra[0], '<img src="' + stra[2] + '" alt="' + stra[1] + '" title="' + stra[1] + '" />\n');
 			} else {
 				str = str.replace(stra[0], '<a ' + micromarkdown.mmdCSSclass(stra[2], strict) + 'href="' + stra[2] + '">' + stra[1] + '</a>\n');
 			}
 		}
-		while ((stra = micromarkdown.regexobject.mail.exec(str)) !== null) {
+		while ((stra = regexobject.mail.exec(str)) !== null) {
 			str = str.replace(stra[0], '<a href="mailto:' + stra[1] + '">' + stra[1] + '</a>');
 		}
-		while ((stra = micromarkdown.regexobject.url.exec(str)) !== null) {
+		while ((stra = regexobject.url.exec(str)) !== null) {
 			repstr = stra[1];
 			if (repstr.indexOf('://') === -1) {
 				repstr = 'http://' + repstr;
 			}
 			str = str.replace(stra[0], '<a ' + micromarkdown.mmdCSSclass(repstr, strict) + 'href="' + repstr + '">' + repstr.replace(/(https:\/\/|http:\/\/|mailto:|ftp:\/\/)/gmi, '') + '</a>');
 		}
-		while ((stra = micromarkdown.regexobject.reflinks.exec(str)) !== null) {
+		while ((stra = regexobject.reflinks.exec(str)) !== null) {
 			helper1 = new RegExp('\\[' + stra[2] + '\\]: ?([^ \n]+)', "gi");
 			if ((helper = helper1.exec(str)) !== null) {
 				str = str.replace(stra[0], '<a ' + micromarkdown.mmdCSSclass(helper[1], strict) + 'href="' + helper[1] + '">' + stra[1] + '</a>');
@@ -200,7 +201,7 @@ var micromarkdown = {
 		for (i = 0; i < trashgc.length; i++) {
 			str = str.replace(trashgc[i], '');
 		}
-		while ((stra = micromarkdown.regexobject.smlinks.exec(str)) !== null) {
+		while ((stra = regexobject.smlinks.exec(str)) !== null) {
 			switch (stra[2]) {
 				case 't':
 					repstr = 'https://twitter.com/' + stra[1];
@@ -219,7 +220,7 @@ var micromarkdown = {
 		}
 
 		/* horizontal line */
-		while ((stra = micromarkdown.regexobject.hr.exec(str)) !== null) {
+		while ((stra = regexobject.hr.exec(str)) !== null) {
 			str = str.replace(stra[0], '\n<hr/>\n');
 		}
 
