@@ -2,7 +2,10 @@ var TAB = 9,
 	SPACE = 32,
 	PAGE_DOWN = 34,
 	LEFT = 37,
-	DOWN = 40;
+	RIGHT = 39,
+	DOWN = 40,
+	PAGE_UP = 33,
+	UP = 38;
 
 function isHandleKey(keyCode) {
 	return keyCode === TAB || ( keyCode >= SPACE && keyCode <= PAGE_DOWN ) || (keyCode >= LEFT && keyCode <= DOWN);
@@ -21,16 +24,16 @@ document.addEventListener("keyup", function ( event ) {
 	var keyCode = event.keyCode;
 	if ( isHandleKey(keyCode) ) {
 		switch( keyCode ) {
-			case 33: // pg up
-			case 37: // left
-			case 38: // up
+			case  PAGE_UP:
+			case  LEFT:
+			case  UP:
 				api.prev();
 				break;
-			case 9:  // tab
-			case 32: // space
-			case 34: // pg down
-			case 39: // right
-			case 40: // down
+			case TAB:
+			case SPACE:
+			case PAGE_DOWN:
+			case  RIGHT:
+			case DOWN:
 				api.next();
 				break;
 		}
