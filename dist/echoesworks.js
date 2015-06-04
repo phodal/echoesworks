@@ -11,14 +11,20 @@ EchoesWorks.VERSION = '0.0.0';
 root.EchoesWorks = EchoesWorks;
 root.EW = EchoesWorks;
 
-var api = {
-	prev: function (){
-		console.log("prev");
-		return "prev";
+var steps = [1 ,3] , activeStep, api;
+api = {
+	goto: function () {
+		return "";
 	},
-	next: function (){
-		console.log("next");
-		return "next";
+	prev: function () {
+		var prev = steps.indexOf(activeStep) - 1;
+		prev = prev >= 0 ? steps[prev] : steps[steps.length - 1];
+		return this.goto(prev);
+	},
+	next: function () {
+		var next = steps.indexOf(activeStep) + 1;
+		next = next < steps.length ? steps[next] : steps[0];
+		return this.goto(next);
 	}
 };
 
