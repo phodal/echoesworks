@@ -42,7 +42,11 @@ var micromarkdown = {
 			str = str.replace(stra[0], '<a ' + micromarkdown.mmdCSSclass(stra[2], strict) + 'href="' + stra[2] + '">' + stra[1] + '</a>\n');
 		}
 		return str;
-	}, parse: function (str, strict) {
+	},
+	mailFilter: function (str, stra) {
+		return str.replace(stra[0], '<a href="mailto:' + stra[1] + '">' + stra[1] + '</a>');
+	},
+	parse: function (str, strict) {
 		var line, nstatus = 0,
 			status, cel, calign, indent, helper, helper1, helper2, repstr, stra, trashgc = [],
 			casca = 0,
@@ -194,7 +198,7 @@ var micromarkdown = {
 			str = this.linksFilter(stra, str, strict);
 		}
 		while ((stra = regexobject.mail.exec(str)) !== null) {
-			str = str.replace(stra[0], '<a href="mailto:' + stra[1] + '">' + stra[1] + '</a>');
+			str = this.mailFilter(str, stra);
 		}
 		while ((stra = regexobject.url.exec(str)) !== null) {
 			repstr = stra[1];
