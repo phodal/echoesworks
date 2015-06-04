@@ -30,9 +30,14 @@ var micromarkdown = {
 		return str.replace(stra[0], '<code>\n' + micromarkdown.htmlEncode(stra[1]).replace(/\n/gm, '<br/>').replace(/\ /gm, '&nbsp;') + '</code>\n');
 	},
 
+	headlinesFilter: function (stra, str) {
+		var count = stra[1].length;
+		return str.replace(stra[0], '<h' + count + '>' + stra[2] + '</h' + count + '>' + '\n');
+	},
+
 	parse: function (str, strict) {
 		var line, nstatus = 0,
-			status, cel, calign, indent, helper, helper1, helper2, count, repstr, stra, trashgc = [],
+			status, cel, calign, indent, helper, helper1, helper2, repstr, stra, trashgc = [],
 			casca = 0,
 			i = 0,
 			j = 0;
@@ -50,8 +55,7 @@ var micromarkdown = {
 
 		/* headlines */
 		while ((stra = regexobject.headline.exec(str)) !== null) {
-			count = stra[1].length;
-			str = str.replace(stra[0], '<h' + count + '>' + stra[2] + '</h' + count + '>' + '\n');
+			str = this.headlinesFilter(stra, str);
 		}
 
 		/* lists */
