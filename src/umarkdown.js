@@ -49,7 +49,16 @@ var micromarkdown = {
 	horizontalLineFilter: function (str, stra) {
 		str = str.replace(stra[0], '\n<hr/>\n');
 		return str;
-	}, parse: function (str, strict) {
+	},
+	kinksFilter: function (stra, str, strict) {
+		var repString = stra[1];
+		if (repString.indexOf('://') === -1) {
+			repString = 'http://' + repString;
+		}
+		str = str.replace(stra[0], '<a ' + micromarkdown.mmdCSSclass(repString, strict) + 'href="' + repString + '">' + repString.replace(/(https:\/\/|http:\/\/|mailto:|ftp:\/\/)/gmi, '') + '</a>');
+		return str;
+	},
+	parse: function (str, strict) {
 		var line, nstatus = 0,
 			status, cel, calign, indent, helper, helper1, helper2, repstr, stra, trashgc = [],
 			casca = 0,
@@ -204,11 +213,7 @@ var micromarkdown = {
 			str = this.mailFilter(str, stra);
 		}
 		while ((stra = regexobject.url.exec(str)) !== null) {
-			repstr = stra[1];
-			if (repstr.indexOf('://') === -1) {
-				repstr = 'http://' + repstr;
-			}
-			str = str.replace(stra[0], '<a ' + micromarkdown.mmdCSSclass(repstr, strict) + 'href="' + repstr + '">' + repstr.replace(/(https:\/\/|http:\/\/|mailto:|ftp:\/\/)/gmi, '') + '</a>');
+			str = this.kinksFilter(stra, str, strict);
 		}
 		while ((stra = regexobject.reflinks.exec(str)) !== null) {
 			helper1 = new RegExp('\\[' + stra[2] + '\\]: ?([^ \n]+)', "gi");
