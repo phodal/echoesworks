@@ -46,7 +46,10 @@ var micromarkdown = {
 	mailFilter: function (str, stra) {
 		return str.replace(stra[0], '<a href="mailto:' + stra[1] + '">' + stra[1] + '</a>');
 	},
-	parse: function (str, strict) {
+	horizontalLineFilter: function (str, stra) {
+		str = str.replace(stra[0], '\n<hr/>\n');
+		return str;
+	}, parse: function (str, strict) {
 		var line, nstatus = 0,
 			status, cel, calign, indent, helper, helper1, helper2, repstr, stra, trashgc = [],
 			casca = 0,
@@ -237,7 +240,7 @@ var micromarkdown = {
 
 		/* horizontal line */
 		while ((stra = regexobject.hr.exec(str)) !== null) {
-			str = str.replace(stra[0], '\n<hr/>\n');
+			str = this.horizontalLineFilter(str, stra);
 		}
 
 		str = str.replace(/ {2,}[\n]{1,}/gmi, '<br/><br/>');
