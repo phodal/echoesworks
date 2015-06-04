@@ -50,7 +50,7 @@ var micromarkdown = {
 		str = str.replace(stra[0], '\n<hr/>\n');
 		return str;
 	},
-	kinksFilter: function (stra, str, strict) {
+	urlFilter: function (stra, str, strict) {
 		var repString = stra[1];
 		if (repString.indexOf('://') === -1) {
 			repString = 'http://' + repString;
@@ -102,8 +102,8 @@ var micromarkdown = {
 	},
 	tablesFilter: function (stra, strict, str) {
 		var repstr, cel, helper, calign, helper1, helper2,
-			i=0,
-			j=0;
+			i = 0,
+			j = 0;
 
 		repstr = '<table><tr>';
 		helper = stra[1].split('|');
@@ -152,12 +152,63 @@ var micromarkdown = {
 		return str;
 	},
 
-	parse: function (str, strict) {
-		var line, nstatus = 0,
-			status, indent, helper, helper1, repstr, stra, trashgc = [],
-			casca = 0,
-			i = 0;
+	listFilter: function (stra, str) {
+		var helper, helper1, status, indent, line, nstatus, repstr,
+			i = 0,
+			casca = 0;
+		if ((stra[0].trim().substr(0, 1) === '*') || (stra[0].trim().substr(0, 1) === '-')) {
+			repstr = '<ul>';
+		} else {
+			repstr = '<ol>';
+		}
+		helper = stra[0].split('\n');
+		helper1 = [];
+		status = 0;
+		indent = false;
+		for (i = 0; i < helper.length; i++) {
+			if ((line = /^((\s*)((\*|\-)|\d(\.|\))) ([^\n]+))/.exec(helper[i])) !== null) {
+				if ((line[2] === undefined) || (line[2].length === 0)) {
+					nstatus = 0;
+				} else {
+					if (indent === false) {
+						indent = line[2].replace(/\t/, '    ').length;
+					}
+					nstatus = Math.round(line[2].replace(/\t/, '    ').length / indent);
+				}
+				while (status > nstatus) {
+					repstr += helper1.pop();
+					status--;
+					casca--;
+				}
+				while (status < nstatus) {
+					if ((line[0].trim().substr(0, 1) === '*') || (line[0].trim().substr(0, 1) === '-')) {
+						repstr += '<ul>';
+						helper1.push('</ul>');
+					} else {
+						repstr += '<ol>';
+						helper1.push('</ol>');
+					}
+					status++;
+					casca++;
+				}
+				repstr += '<li>' + line[6] + '</li>' + '\n';
+			}
+		}
+		while (casca > 0) {
+			repstr += '</ul>';
+			casca--;
+		}
+		if ((stra[0].trim().substr(0, 1) === '*') || (stra[0].trim().substr(0, 1) === '-')) {
+			repstr += '</ul>';
+		} else {
+			repstr += '</ol>';
+		}
+		str = str.replace(stra[0], repstr + '\n');
+		return str;
+	},
 
+	parse: function (str, strict) {
+		var helper, helper1, stra, trashgc = [], i;
 		str = '\n' + str + '\n';
 
 		var regexobject = micromarkdown.regexobject;
@@ -165,91 +216,40 @@ var micromarkdown = {
 			regexobject.lists = /^((\s*(\*|\d\.) [^\n]+)\n)+/gm;
 		}
 
-		/* code */
 		while ((stra = regexobject.code.exec(str)) !== null) {
 			str = this.codeFilter(str, stra);
 		}
 
-		/* headlines */
 		while ((stra = regexobject.headline.exec(str)) !== null) {
 			str = this.headlinesFilter(stra, str);
 		}
 
-		/* lists */
 		while ((stra = regexobject.lists.exec(str)) !== null) {
-			casca = 0;
-			if ((stra[0].trim().substr(0, 1) === '*') || (stra[0].trim().substr(0, 1) === '-')) {
-				repstr = '<ul>';
-			} else {
-				repstr = '<ol>';
-			}
-			helper = stra[0].split('\n');
-			helper1 = [];
-			status = 0;
-			indent = false;
-			for (i = 0; i < helper.length; i++) {
-				if ((line = /^((\s*)((\*|\-)|\d(\.|\))) ([^\n]+))/.exec(helper[i])) !== null) {
-					if ((line[2] === undefined) || (line[2].length === 0)) {
-						nstatus = 0;
-					} else {
-						if (indent === false) {
-							indent = line[2].replace(/\t/, '    ').length;
-						}
-						nstatus = Math.round(line[2].replace(/\t/, '    ').length / indent);
-					}
-					while (status > nstatus) {
-						repstr += helper1.pop();
-						status--;
-						casca--;
-					}
-					while (status < nstatus) {
-						if ((line[0].trim().substr(0, 1) === '*') || (line[0].trim().substr(0, 1) === '-')) {
-							repstr += '<ul>';
-							helper1.push('</ul>');
-						} else {
-							repstr += '<ol>';
-							helper1.push('</ol>');
-						}
-						status++;
-						casca++;
-					}
-					repstr += '<li>' + line[6] + '</li>' + '\n';
-				}
-			}
-			while (casca > 0) {
-				repstr += '</ul>';
-				casca--;
-			}
-			if ((stra[0].trim().substr(0, 1) === '*') || (stra[0].trim().substr(0, 1) === '-')) {
-				repstr += '</ul>';
-			} else {
-				repstr += '</ol>';
-			}
-			str = str.replace(stra[0], repstr + '\n');
+			str = this.listFilter(stra, str);
 		}
 
-		/* tables */
 		while ((stra = regexobject.tables.exec(str)) !== null) {
 			str = this.tablesFilter(stra, strict, str);
 		}
 
-		/* bold and italic */
 		for (i = 0; i < 3; i++) {
 			while ((stra = regexobject.bolditalic.exec(str)) !== null) {
 				str = this.boldItalicFilter(stra, str);
 			}
 		}
 
-		/* links */
 		while ((stra = regexobject.links.exec(str)) !== null) {
 			str = this.linksFilter(stra, str, strict);
 		}
+
 		while ((stra = regexobject.mail.exec(str)) !== null) {
 			str = this.mailFilter(str, stra);
 		}
+
 		while ((stra = regexobject.url.exec(str)) !== null) {
-			str = this.kinksFilter(stra, str, strict);
+			str = this.urlFilter(stra, str, strict);
 		}
+
 		while ((stra = regexobject.reflinks.exec(str)) !== null) {
 			helper1 = new RegExp('\\[' + stra[2] + '\\]: ?([^ \n]+)', "gi");
 			if ((helper = helper1.exec(str)) !== null) {
@@ -257,6 +257,7 @@ var micromarkdown = {
 				trashgc.push(helper[0]);
 			}
 		}
+
 		for (i = 0; i < trashgc.length; i++) {
 			str = str.replace(trashgc[i], '');
 		}
@@ -264,7 +265,6 @@ var micromarkdown = {
 			str = this.specialLinks(stra, str, strict);
 		}
 
-		/* horizontal line */
 		while ((stra = regexobject.hr.exec(str)) !== null) {
 			str = this.horizontalLineFilter(str, stra);
 		}
@@ -272,6 +272,7 @@ var micromarkdown = {
 		str = str.replace(/ {2,}[\n]{1,}/gmi, '<br/><br/>');
 		return str;
 	},
+
 	htmlEncode: function (str) {
 		var div = document.createElement('div');
 		div.appendChild(document.createTextNode(str));
