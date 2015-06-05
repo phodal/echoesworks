@@ -108,7 +108,8 @@ EchoesWorks.send = function (url, method, callback, data) {
 
 /*jshint -W030 */
 var from = function() {
-	var parent = EchoesWorks.element.nodeType === 1 ? EchoesWorks.element : document.querySelector(EchoesWorks.element),
+	var element =  this.options.element,
+		parent = element.nodeType === 1 ? element : document.querySelector(element),
 		slides = [].filter.call(parent.children, function(el) { return el.nodeName !== 'SCRIPT'; }),
 		activeSlide = slides[0],
 		listeners = {},
@@ -177,6 +178,7 @@ var from = function() {
 };
 
 EchoesWorks.slide = from;
+EchoesWorks.prototype = EchoesWorks.extend(EchoesWorks.prototype, {slide: from});
 
 /*
  * micro-markdown.js
