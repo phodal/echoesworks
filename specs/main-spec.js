@@ -1,6 +1,7 @@
 describe("Main", function () {
 	it("should return true", function () {
-		expect(EW({})).toBeTruthy();
+		var EW = new EchoesWorks();
+		expect(EW.element).toBe('#slide');
 	});
 });
 

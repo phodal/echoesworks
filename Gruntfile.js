@@ -49,8 +49,8 @@ module.exports = function(grunt) {
           'src/ajax.js',
           'src/slide.js',
           'src/umarkdown.js',
-          'src/events_handler.js',
-          'src/_outro.js'
+          'src/_outro.js',
+          'src/events_handler.js'
         ],
         dest: 'dist/<%= pkg.name.replace(".js", "") %>.js'
       }

@@ -13,7 +13,6 @@ var EchoesWorks = function(options) {
 	options = EchoesWorks.extend(options, defaultOptions);
 	this.options = options;
 	this.element = this.options.element;
-	return true;
 };
 
 EchoesWorks.VERSION = '0.0.0';
@@ -108,8 +107,8 @@ EchoesWorks.send = function (url, method, callback, data) {
  */
 
 /*jshint -W030 */
-var from = function(selectorOrElement) {
-	var parent = selectorOrElement.nodeType === 1 ? selectorOrElement : document.querySelector(selectorOrElement),
+var from = function() {
+	var parent = EchoesWorks.element.nodeType === 1 ? EchoesWorks.element : document.querySelector(EchoesWorks.element),
 		slides = [].filter.call(parent.children, function(el) { return el.nodeName !== 'SCRIPT'; }),
 		activeSlide = slides[0],
 		listeners = {},
@@ -478,6 +477,9 @@ var micromarkdown = {
 
 EchoesWorks.md = micromarkdown;
 
+}(this));
+
+
 var TAB = 9,
 	SPACE = 32,
 	PAGE_DOWN = 34,
@@ -487,41 +489,36 @@ var TAB = 9,
 	PAGE_UP = 33,
 	UP = 38;
 
-function isHandleKey(keyCode) {
-	return keyCode === TAB || ( keyCode >= SPACE && keyCode <= PAGE_DOWN ) || (keyCode >= LEFT && keyCode <= DOWN);
-}
+document.addEventListener("EchoesWorks", function (event) {
+	"use strict";
+	console.log(event);
 
-EchoesWorks.handleInput = isHandleKey;
-
-document.addEventListener("keydown", function ( event ) {
-	var keyCode = event.keyCode;
-	if ( isHandleKey(keyCode) ) {
-		event.preventDefault();
-	}
-}, false);
-
-//var slide = new EchoesWorks.slide(EchoesWorks.element);
-
-document.addEventListener("keyup", function ( event ) {
-	var keyCode = event.keyCode;
-	if ( isHandleKey(keyCode) ) {
-		switch( keyCode ) {
-			case  PAGE_UP:
-			case  LEFT:
-			case  UP:
-				//slide.prev();
-				break;
-			case TAB:
-			case SPACE:
-			case PAGE_DOWN:
-			case  RIGHT:
-			case DOWN:
-				//slide.next();
-				break;
+	document.addEventListener("keydown", function (event) {
+		var keyCode = event.keyCode;
+		if (keyCode === TAB || ( keyCode >= SPACE && keyCode <= PAGE_DOWN ) || (keyCode >= LEFT && keyCode <= DOWN)) {
+			event.preventDefault();
 		}
+	}, false);
 
-		event.preventDefault();
-	}
-}, false);
+	document.addEventListener("keyup", function (event) {
+		var keyCode = event.keyCode;
+		if (keyCode === TAB || ( keyCode >= SPACE && keyCode <= PAGE_DOWN ) || (keyCode >= LEFT && keyCode <= DOWN)) {
+			switch (keyCode) {
+				case  PAGE_UP:
+				case  LEFT:
+				case  UP:
+					//EchoesWorks.slide.prev();
+					break;
+				case TAB:
+				case SPACE:
+				case PAGE_DOWN:
+				case  RIGHT:
+				case DOWN:
+					//EchoesWorks.slide.next();
+					break;
+			}
 
-}(this));
+			event.preventDefault();
+		}
+	}, false);
+});

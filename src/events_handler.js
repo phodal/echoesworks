@@ -7,37 +7,36 @@ var TAB = 9,
 	PAGE_UP = 33,
 	UP = 38;
 
-function isHandleKey(keyCode) {
-	return keyCode === TAB || ( keyCode >= SPACE && keyCode <= PAGE_DOWN ) || (keyCode >= LEFT && keyCode <= DOWN);
-}
+document.addEventListener("EchoesWorks", function (event) {
+	"use strict";
+	console.log(event);
 
-EchoesWorks.handleInput = isHandleKey;
-
-document.addEventListener("keydown", function ( event ) {
-	var keyCode = event.keyCode;
-	if ( isHandleKey(keyCode) ) {
-		event.preventDefault();
-	}
-}, false);
-
-document.addEventListener("keyup", function ( event ) {
-	var keyCode = event.keyCode;
-	if ( isHandleKey(keyCode) ) {
-		switch( keyCode ) {
-			case  PAGE_UP:
-			case  LEFT:
-			case  UP:
-				//EchoesWorks.slide.prev();
-				break;
-			case TAB:
-			case SPACE:
-			case PAGE_DOWN:
-			case  RIGHT:
-			case DOWN:
-				//EchoesWorks.slide.next();
-				break;
+	document.addEventListener("keydown", function (event) {
+		var keyCode = event.keyCode;
+		if (keyCode === TAB || ( keyCode >= SPACE && keyCode <= PAGE_DOWN ) || (keyCode >= LEFT && keyCode <= DOWN)) {
+			event.preventDefault();
 		}
+	}, false);
 
-		event.preventDefault();
-	}
-}, false);
+	document.addEventListener("keyup", function (event) {
+		var keyCode = event.keyCode;
+		if (keyCode === TAB || ( keyCode >= SPACE && keyCode <= PAGE_DOWN ) || (keyCode >= LEFT && keyCode <= DOWN)) {
+			switch (keyCode) {
+				case  PAGE_UP:
+				case  LEFT:
+				case  UP:
+					//EchoesWorks.slide.prev();
+					break;
+				case TAB:
+				case SPACE:
+				case PAGE_DOWN:
+				case  RIGHT:
+				case DOWN:
+					//EchoesWorks.slide.next();
+					break;
+			}
+
+			event.preventDefault();
+		}
+	}, false);
+});

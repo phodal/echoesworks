@@ -9,7 +9,6 @@ var EchoesWorks = function(options) {
 	options = EchoesWorks.extend(options, defaultOptions);
 	this.options = options;
 	this.element = this.options.element;
-	return true;
 };
 
 EchoesWorks.VERSION = '0.0.0';
