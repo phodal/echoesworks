@@ -7,8 +7,8 @@
  */
 
 /*jshint -W030 */
-var from = function(selectorOrElement) {
-	var parent = selectorOrElement.nodeType === 1 ? selectorOrElement : document.querySelector(selectorOrElement),
+var from = function() {
+	var parent = EchoesWorks.element.nodeType === 1 ? EchoesWorks.element : document.querySelector(EchoesWorks.element),
 		slides = [].filter.call(parent.children, function(el) { return el.nodeName !== 'SCRIPT'; }),
 		activeSlide = slides[0],
 		listeners = {},
@@ -76,4 +76,4 @@ var from = function(selectorOrElement) {
 	return deck;
 };
 
-EchoesWorks.prototype = EchoesWorks.extend(EchoesWorks.prototype, {slide: from});
+EchoesWorks.slide = from;
