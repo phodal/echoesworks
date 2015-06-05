@@ -229,16 +229,14 @@ var micromarkdown = {
 		return str.replace(stra[0], '<a href="mailto:' + stra[1] + '">' + stra[1] + '</a>');
 	},
 	horizontalLineFilter: function (str, stra) {
-		str = str.replace(stra[0], '\n<hr/>\n');
-		return str;
+		return str.replace(stra[0], '\n<hr/>\n');
 	},
 	urlFilter: function (stra, str, strict) {
 		var repString = stra[1];
 		if (repString.indexOf('://') === -1) {
 			repString = 'http://' + repString;
 		}
-		str = str.replace(stra[0], '<a ' + micromarkdown.mmdCSSclass(repString, strict) + 'href="' + repString + '">' + repString.replace(/(https:\/\/|http:\/\/|mailto:|ftp:\/\/)/gmi, '') + '</a>');
-		return str;
+		return str.replace(stra[0], '<a ' + micromarkdown.mmdCSSclass(repString, strict) + 'href="' + repString + '">' + repString.replace(/(https:\/\/|http:\/\/|mailto:|ftp:\/\/)/gmi, '') + '</a>');
 	},
 	refLinksFilter: function (str, stra, helper, strict) {
 		return str.replace(stra[0], '<a ' + micromarkdown.mmdCSSclass(helper[1], strict) + 'href="' + helper[1] + '">' + stra[1] + '</a>');
@@ -259,8 +257,7 @@ var micromarkdown = {
 				repstr = 'https://plus.google.com/+' + stra[1];
 				break;
 		}
-		str = str.replace(stra[0], '<a ' + micromarkdown.mmdCSSclass(repstr, strict) + 'href="' + repstr + '">' + stra[1] + '</a>');
-		return str;
+		return str.replace(stra[0], '<a ' + micromarkdown.mmdCSSclass(repstr, strict) + 'href="' + repstr + '">' + stra[1] + '</a>');
 	},
 	boldItalicFilter: function (stra, str) {
 		var repstr = [];
@@ -330,8 +327,7 @@ var micromarkdown = {
 			}
 		}
 		repstr += '</table>';
-		str = str.replace(stra[0], repstr);
-		return str;
+		return str.replace(stra[0], repstr);
 	},
 
 	listFilter: function (stra, str) {
@@ -385,8 +381,7 @@ var micromarkdown = {
 		} else {
 			repstr += '</ol>';
 		}
-		str = str.replace(stra[0], repstr + '\n');
-		return str;
+		return str.replace(stra[0], repstr + '\n');
 	},
 
 	parse: function (str, strict) {
@@ -451,17 +446,15 @@ var micromarkdown = {
 			str = this.horizontalLineFilter(str, stra);
 		}
 
-		str = str.replace(/ {2,}[\n]{1,}/gmi, '<br/><br/>');
-		return str;
+		return str.replace(/ {2,}[\n]{1,}/gmi, '<br/><br/>');
 	},
 
 	htmlEncode: function (str) {
 		var div = document.createElement('div');
 		div.appendChild(document.createTextNode(str));
-		str = div.innerHTML;
-		div = undefined;
-		return str;
+		return div.innerHTML;
 	},
+
 	mmdCSSclass: function (str, strict) {
 		var urlTemp;
 		if ((str.indexOf('/') !== -1) && (strict !== true)) {

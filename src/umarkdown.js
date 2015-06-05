@@ -270,10 +270,9 @@ var micromarkdown = {
 	htmlEncode: function (str) {
 		var div = document.createElement('div');
 		div.appendChild(document.createTextNode(str));
-		str = div.innerHTML;
-		div = undefined;
-		return str;
+		return div.innerHTML;
 	},
+
 	mmdCSSclass: function (str, strict) {
 		var urlTemp;
 		if ((str.indexOf('/') !== -1) && (strict !== true)) {
