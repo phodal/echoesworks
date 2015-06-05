@@ -76,4 +76,4 @@ var from = function(selectorOrElement) {
 	return deck;
 };
 
-EchoesWorks.slide = from;
+EchoesWorks.prototype = EchoesWorks.extend(EchoesWorks.prototype, {slide: from});
