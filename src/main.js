@@ -1,4 +1,14 @@
-var EchoesWorks = function() {
+var EchoesWorks = function(options) {
+	if(!EchoesWorks.isObject(options)){
+		options = {};
+	}
+	var defaultOptions = {
+		element: "#slide"
+	};
+
+	options = EchoesWorks.extend(options, defaultOptions);
+	this.options = options;
+	this.element = this.options.element;
 	return true;
 };
 

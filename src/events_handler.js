@@ -20,6 +20,8 @@ document.addEventListener("keydown", function ( event ) {
 	}
 }, false);
 
+//var slide = new EchoesWorks.slide(EchoesWorks.element);
+
 document.addEventListener("keyup", function ( event ) {
 	var keyCode = event.keyCode;
 	if ( isHandleKey(keyCode) ) {
@@ -27,14 +29,14 @@ document.addEventListener("keyup", function ( event ) {
 			case  PAGE_UP:
 			case  LEFT:
 			case  UP:
-				api.prev();
+				//slide.prev();
 				break;
 			case TAB:
 			case SPACE:
 			case PAGE_DOWN:
 			case  RIGHT:
 			case DOWN:
-				api.next();
+				//slide.next();
 				break;
 		}
 

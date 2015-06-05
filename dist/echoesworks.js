@@ -2,7 +2,17 @@
 
   "use strict";
 
-var EchoesWorks = function() {
+var EchoesWorks = function(options) {
+	if(!EchoesWorks.isObject(options)){
+		options = {};
+	}
+	var defaultOptions = {
+		element: "#slide"
+	};
+
+	options = EchoesWorks.extend(options, defaultOptions);
+	this.options = options;
+	this.element = this.options.element;
 	return true;
 };
 
@@ -11,41 +21,51 @@ EchoesWorks.VERSION = '0.0.0';
 root.EchoesWorks = EchoesWorks;
 root.EW = EchoesWorks;
 
-/**
- * impress.js
- *
- * impress.js is a presentation tool based on the power of CSS3 transforms and transitions
- * in modern browsers and inspired by the idea behind prezi.com.
- *
- *
- * Copyright 2011-2012 Bartek Szopka (@bartaz)
- *
- * Released under the MIT and GPL Licenses.
- *
- * ------------------------------------------------
- * https://github.com/bartaz/impress.js/blob/6314e2e15012c9db69f76e77a8bb1c437a7312b8/js/impress.js
- */
+/*     (c) 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+*     Underscore may be freely distributed under the MIT license.
+*/
 
-var steps = [1 ,3] , activeStep, api;
-api = {
-	goto: function () {
-		return "";
-	},
-	prev: function () {
-		console.log("prev");
-		var prev = steps.indexOf(activeStep) - 1;
-		prev = prev >= 0 ? steps[prev] : steps[steps.length - 1];
-		return this.goto(prev);
-	},
-	next: function () {
-		console.log("next");
-		var next = steps.indexOf(activeStep) + 1;
-		next = next < steps.length ? steps[next] : steps[0];
-		return this.goto(next);
-	}
+EchoesWorks.isObject = function (obj) {
+    var type = typeof obj;
+    return type === 'function' || type === 'object' && !!obj;
 };
 
-EchoesWorks.API = api;
+EchoesWorks.isFunction = function(obj) {
+    return typeof obj == 'function' || false;
+};
+
+EchoesWorks.defaults = function(obj) {
+    if (!EchoesWorks.isObject(obj)) {
+        return obj;
+    }
+
+    for (var i = 1, length = arguments.length; i < length; i++) {
+        var source = arguments[i];
+        for (var prop in source) {
+            if (obj[prop] === void 0) {
+                obj[prop] = source[prop];
+            }
+        }
+    }
+    return obj;
+};
+
+EchoesWorks.extend = function (obj) {
+    if (!EchoesWorks.isObject(obj)) {
+        return obj;
+    }
+    var source, prop;
+    for (var i = 1, length = arguments.length; i < length; i++) {
+        source = arguments[i];
+        for (prop in source) {
+            if (hasOwnProperty.call(source, prop)) {
+                obj[prop] = source[prop];
+            }
+        }
+    }
+    return obj;
+};
+
 
 EchoesWorks.get = function (url, callback) {
     EchoesWorks.send(url, 'GET', callback);
@@ -480,6 +500,8 @@ document.addEventListener("keydown", function ( event ) {
 	}
 }, false);
 
+//var slide = new EchoesWorks.slide(EchoesWorks.element);
+
 document.addEventListener("keyup", function ( event ) {
 	var keyCode = event.keyCode;
 	if ( isHandleKey(keyCode) ) {
@@ -487,14 +509,14 @@ document.addEventListener("keyup", function ( event ) {
 			case  PAGE_UP:
 			case  LEFT:
 			case  UP:
-				api.prev();
+				//slide.prev();
 				break;
 			case TAB:
 			case SPACE:
 			case PAGE_DOWN:
 			case  RIGHT:
 			case DOWN:
-				api.next();
+				//slide.next();
 				break;
 		}
 
