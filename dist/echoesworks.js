@@ -4,13 +4,11 @@
 
 var EchoesWorks = function(options) {
 	if(!EchoesWorks.isObject(options)){
-		options = {};
+		options = {
+			element: '#slide'
+		};
 	}
-	var defaultOptions = {
-		element: "#slide"
-	};
 
-	options = EchoesWorks.extend(options, defaultOptions);
 	this.options = options;
 	this.element = this.options.element;
 };
@@ -208,7 +206,7 @@ var micromarkdown = {
 		url: /<([a-zA-Z0-9@:%_\+.~#?&\/\/=]{2,256}\.[a-z]{2,4}\b(\/[\-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)?)>/g
 	},
 
-	codeFilter: function (str, stra) {
+	codeFilter: function (stra, str) {
 		return str.replace(stra[0], '<code>\n' + micromarkdown.htmlEncode(stra[1]).replace(/\n/gm, '<br/>').replace(/\ /gm, '&nbsp;') + '</code>\n');
 	},
 
@@ -225,10 +223,10 @@ var micromarkdown = {
 		}
 		return str;
 	},
-	mailFilter: function (str, stra) {
+	mailFilter: function (stra, str) {
 		return str.replace(stra[0], '<a href="mailto:' + stra[1] + '">' + stra[1] + '</a>');
 	},
-	horizontalLineFilter: function (str, stra) {
+	horizontalLineFilter: function (stra, str) {
 		return str.replace(stra[0], '\n<hr/>\n');
 	},
 	urlFilter: function (stra, str, strict) {
@@ -279,7 +277,7 @@ var micromarkdown = {
 		}
 		return str;
 	},
-	tablesFilter: function (stra, strict, str) {
+	tablesFilter: function (stra, str, strict) {
 		var repstr, cel, helper, calign, helper1, helper2,
 			i = 0,
 			j = 0;
@@ -394,7 +392,7 @@ var micromarkdown = {
 		}
 
 		while ((stra = regexobject.code.exec(str)) !== null) {
-			str = this.codeFilter(str, stra);
+			str = this.codeFilter(stra, str);
 		}
 
 		while ((stra = regexobject.headline.exec(str)) !== null) {
@@ -406,7 +404,7 @@ var micromarkdown = {
 		}
 
 		while ((stra = regexobject.tables.exec(str)) !== null) {
-			str = this.tablesFilter(stra, strict, str);
+			str = this.tablesFilter(stra, str, strict);
 		}
 
 		for (i = 0; i < 3; i++) {
@@ -420,7 +418,7 @@ var micromarkdown = {
 		}
 
 		while ((stra = regexobject.mail.exec(str)) !== null) {
-			str = this.mailFilter(str, stra);
+			str = this.mailFilter(stra, str);
 		}
 
 		while ((stra = regexobject.url.exec(str)) !== null) {
@@ -443,7 +441,7 @@ var micromarkdown = {
 		}
 
 		while ((stra = regexobject.hr.exec(str)) !== null) {
-			str = this.horizontalLineFilter(str, stra);
+			str = this.horizontalLineFilter(stra, str);
 		}
 
 		return str.replace(/ {2,}[\n]{1,}/gmi, '<br/><br/>');
