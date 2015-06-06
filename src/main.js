@@ -1,12 +1,10 @@
 var EchoesWorks = function(options) {
 	if(!EchoesWorks.isObject(options)){
-		options = {};
+		options = {
+			element: '#slide'
+		};
 	}
-	var defaultOptions = {
-		element: "#slide"
-	};
 
-	options = EchoesWorks.extend(options, defaultOptions);
 	this.options = options;
 	this.element = this.options.element;
 };
