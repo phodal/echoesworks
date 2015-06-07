@@ -1,8 +1,8 @@
 languages:
   JavaScript: true
 exclude_paths:
-  - "demo/"
-  - "docs/"
-  - "specs/"
-  - "app/"
+  - "demo/*.js"
+  - "docs/**/*.js"
+  - "specs/*.js"
+  - "app/*.js"
   - "src/"
