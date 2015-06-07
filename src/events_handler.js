@@ -1,3 +1,8 @@
+/* global EchoesWorks */
+
+/* istanbul ignore next */
+/*jshint unused:false, eqnull:true */
+
 (function (document) {
 	'use strict';
 
@@ -8,10 +13,14 @@
 		RIGHT = 39,
 		DOWN = 40,
 		PAGE_UP = 33,
-		UP = 38;
+		UP = 38,
+		EW,
+		slide;
 
-	//document.addEventListener("echoesworks:slide:init", function (event) {
-	//	console.log("event_handler", event);
+	EW = new EchoesWorks({element: 'slide'});
+
+	document.addEventListener("ew:slide:init", function (event) {
+		slide = EW.slide();
 
 		document.addEventListener("keydown", function (event) {
 			var keyCode = event.keyCode;
@@ -27,21 +36,21 @@
 					case  PAGE_UP:
 					case  LEFT:
 					case  UP:
-						console.log("prev");
-						//EchoesWorks.slide.prev();
+						slide.prev();
+						console.log("prev", slide.slide());
 						break;
 					case TAB:
 					case SPACE:
 					case PAGE_DOWN:
 					case  RIGHT:
 					case DOWN:
-						console.log("next");
-						//EchoesWorks.slide.next();
+						slide.next();
+						console.log("next", slide.slide());
 						break;
 				}
 
 				event.preventDefault();
 			}
-		//}, false);
+		});
 	});
 }(document));

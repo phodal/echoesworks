@@ -108,12 +108,14 @@ EchoesWorks.send = function (url, method, callback, data) {
 
 /*jshint -W030 */
 //
-//var triggerEvent = function (eventName) {
-//	var event = document.createEvent("CustomEvent");
-//	event.initCustomEvent(eventName, true, true, {});
-//};
+var triggerEvent = function (eventName) {
+	var event = document.createEvent('Event');
+	event.initEvent(eventName, true, true);
+	document.dispatchEvent(event);
+};
 
 var from = function() {
+
 	var element =  this.options.element,
 		parent = element.nodeType === 1 ? element : document.querySelector(element),
 		slides = [].filter.call(parent.children, function(el) { return el.nodeName !== 'SCRIPT'; }),
@@ -183,7 +185,6 @@ var from = function() {
 	return deck;
 };
 
-EchoesWorks.slide = from;
 EchoesWorks.prototype = EchoesWorks.extend(EchoesWorks.prototype, {slide: from});
 
 var parser = function () {
@@ -519,6 +520,11 @@ EchoesWorks.md = micromarkdown;
 }(this));
 
 
+/* global EchoesWorks */
+
+/* istanbul ignore next */
+/*jshint unused:false, eqnull:true */
+
 (function (document) {
 	'use strict';
 
@@ -529,10 +535,14 @@ EchoesWorks.md = micromarkdown;
 		RIGHT = 39,
 		DOWN = 40,
 		PAGE_UP = 33,
-		UP = 38;
+		UP = 38,
+		EW,
+		slide;
 
-	//document.addEventListener("echoesworks:slide:init", function (event) {
-	//	console.log("event_handler", event);
+	EW = new EchoesWorks({element: 'slide'});
+
+	document.addEventListener("ew:slide:init", function (event) {
+		slide = EW.slide();
 
 		document.addEventListener("keydown", function (event) {
 			var keyCode = event.keyCode;
@@ -548,21 +558,21 @@ EchoesWorks.md = micromarkdown;
 					case  PAGE_UP:
 					case  LEFT:
 					case  UP:
-						console.log("prev");
-						//EchoesWorks.slide.prev();
+						slide.prev();
+						console.log("prev", slide.slide());
 						break;
 					case TAB:
 					case SPACE:
 					case PAGE_DOWN:
 					case  RIGHT:
 					case DOWN:
-						console.log("next");
-						//EchoesWorks.slide.next();
+						slide.next();
+						console.log("next", slide.slide());
 						break;
 				}
 
 				event.preventDefault();
 			}
-		//}, false);
+		});
 	});
 }(document));

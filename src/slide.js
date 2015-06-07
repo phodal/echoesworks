@@ -8,12 +8,14 @@
 
 /*jshint -W030 */
 //
-//var triggerEvent = function (eventName) {
-//	var event = document.createEvent("CustomEvent");
-//	event.initCustomEvent(eventName, true, true, {});
-//};
+var triggerEvent = function (eventName) {
+	var event = document.createEvent('Event');
+	event.initEvent(eventName, true, true);
+	document.dispatchEvent(event);
+};
 
 var from = function() {
+
 	var element =  this.options.element,
 		parent = element.nodeType === 1 ? element : document.querySelector(element),
 		slides = [].filter.call(parent.children, function(el) { return el.nodeName !== 'SCRIPT'; }),
@@ -83,5 +85,4 @@ var from = function() {
 	return deck;
 };
 
-EchoesWorks.slide = from;
 EchoesWorks.prototype = EchoesWorks.extend(EchoesWorks.prototype, {slide: from});
