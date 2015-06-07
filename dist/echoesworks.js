@@ -107,6 +107,12 @@ EchoesWorks.send = function (url, method, callback, data) {
  */
 
 /*jshint -W030 */
+//
+//var triggerEvent = function (eventName) {
+//	var event = document.createEvent("CustomEvent");
+//	event.initCustomEvent(eventName, true, true, {});
+//};
+
 var from = function() {
 	var element =  this.options.element,
 		parent = element.nodeType === 1 ? element : document.querySelector(element),
@@ -192,7 +198,7 @@ parser.init = function (source) {
 		if (request.readyState === 4 && (request.status === 200 || request.status === 0)) {
 			parser.parse(request.responseText);
 		} else {
-			
+
 		}
 	};
 
@@ -503,45 +509,50 @@ EchoesWorks.md = micromarkdown;
 }(this));
 
 
-var TAB = 9,
-	SPACE = 32,
-	PAGE_DOWN = 34,
-	LEFT = 37,
-	RIGHT = 39,
-	DOWN = 40,
-	PAGE_UP = 33,
-	UP = 38;
+(function (document) {
+	'use strict';
 
-document.addEventListener("EchoesWorks", function (event) {
-	"use strict";
-	console.log(event);
+	var TAB = 9,
+		SPACE = 32,
+		PAGE_DOWN = 34,
+		LEFT = 37,
+		RIGHT = 39,
+		DOWN = 40,
+		PAGE_UP = 33,
+		UP = 38;
 
-	document.addEventListener("keydown", function (event) {
-		var keyCode = event.keyCode;
-		if (keyCode === TAB || ( keyCode >= SPACE && keyCode <= PAGE_DOWN ) || (keyCode >= LEFT && keyCode <= DOWN)) {
-			event.preventDefault();
-		}
-	}, false);
+	//document.addEventListener("echoesworks:slide:init", function (event) {
+	//	console.log("event_handler", event);
 
-	document.addEventListener("keyup", function (event) {
-		var keyCode = event.keyCode;
-		if (keyCode === TAB || ( keyCode >= SPACE && keyCode <= PAGE_DOWN ) || (keyCode >= LEFT && keyCode <= DOWN)) {
-			switch (keyCode) {
-				case  PAGE_UP:
-				case  LEFT:
-				case  UP:
-					//EchoesWorks.slide.prev();
-					break;
-				case TAB:
-				case SPACE:
-				case PAGE_DOWN:
-				case  RIGHT:
-				case DOWN:
-					//EchoesWorks.slide.next();
-					break;
+		document.addEventListener("keydown", function (event) {
+			var keyCode = event.keyCode;
+			if (keyCode === TAB || ( keyCode >= SPACE && keyCode <= PAGE_DOWN ) || (keyCode >= LEFT && keyCode <= DOWN)) {
+				event.preventDefault();
 			}
+		}, false);
 
-			event.preventDefault();
-		}
-	}, false);
-});
+		document.addEventListener("keyup", function (event) {
+			var keyCode = event.keyCode;
+			if (keyCode === TAB || ( keyCode >= SPACE && keyCode <= PAGE_DOWN ) || (keyCode >= LEFT && keyCode <= DOWN)) {
+				switch (keyCode) {
+					case  PAGE_UP:
+					case  LEFT:
+					case  UP:
+						console.log("prev");
+						//EchoesWorks.slide.prev();
+						break;
+					case TAB:
+					case SPACE:
+					case PAGE_DOWN:
+					case  RIGHT:
+					case DOWN:
+						console.log("next");
+						//EchoesWorks.slide.next();
+						break;
+				}
+
+				event.preventDefault();
+			}
+		//}, false);
+	});
+}(document));

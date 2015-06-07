@@ -20,7 +20,7 @@ parser.init = function (source) {
 };
 
 parser.parse = function(data) {
-	
+	console.log(data);
 };
 
 EchoesWorks.prototype = EchoesWorks.extend(EchoesWorks.prototype, {parser: parser});

@@ -7,6 +7,12 @@
  */
 
 /*jshint -W030 */
+//
+//var triggerEvent = function (eventName) {
+//	var event = document.createEvent("CustomEvent");
+//	event.initCustomEvent(eventName, true, true, {});
+//};
+
 var from = function() {
 	var element =  this.options.element,
 		parent = element.nodeType === 1 ? element : document.querySelector(element),
