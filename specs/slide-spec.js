@@ -22,7 +22,6 @@ describe("Slide", function () {
 		for (var i = 0; i < NO_OF_SLIDES; i++) {
 			slides.push(document.createElement(SLIDE_TAG));
 			article.appendChild(slides[i]);
-			article.appendChild(document.createElement('script'));
 		}
 
 		document.body.appendChild(article);
