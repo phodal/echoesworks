@@ -2,26 +2,26 @@
   {
     "time": "00:01.00",
     "code": "https://raw.githubusercontent.com/phodal/echoesworks/master/bower.json",
-    "show": 1
+    "word": "hello, world"
   },
   {
     "time": "00:02.51",
     "code": "https://raw.githubusercontent.com/phodal/echoesworks/master/bower.json",
-    "show": 2
+    "word": "hello, world, next"
   },
   {
     "time": "00:03.51",
     "code": false,
-    "show": 4
+    "word": "hello, world, next"
   },
   {
     "time": "00:04.51",
     "code": "https://raw.githubusercontent.com/phodal/echoesworks/master/bower.json",
-    "show": 4
+    "word": "hello, world, next"
   },
   {
     "time": "00:05.51",
     "code": "https://raw.githubusercontent.com/phodal/echoesworks/master/bower.json",
-    "show": 6
+    "word": "hello, world, next"
   }
 ]
