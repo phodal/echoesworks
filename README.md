@@ -15,7 +15,9 @@
 - Markdown Presentation
 - Integrate Github Code/Gist Code
 
-##Thanks To
+##Inspired by & Thanks to
+
+[https://github.com/markdalgleish/bespoke.js](https://github.com/markdalgleish/bespoke.js)
 
 [https://github.com/wayou/selected](https://github.com/wayou/selected)
 
