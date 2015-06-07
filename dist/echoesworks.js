@@ -5,11 +5,13 @@
 var EchoesWorks = function(options) {
 	if(!EchoesWorks.isObject(options)){
 		options = {
-			element: '#slide'
+			element: '#slide',
+			source: 'data.json'
 		};
 	}
 
 	this.options = options;
+	this.source = this.options.source;
 	this.element = this.options.element;
 };
 
@@ -177,6 +179,34 @@ var from = function() {
 
 EchoesWorks.slide = from;
 EchoesWorks.prototype = EchoesWorks.extend(EchoesWorks.prototype, {slide: from});
+
+
+var parser = function () {
+	var that = this;
+	parser.init(that.source);
+};
+
+parser.init = function (source) {
+	var request = new XMLHttpRequest();
+	request.onreadystatechange = function () {
+		if (request.readyState === 4 && (request.status === 200 || request.status === 0)) {
+			parser.parse(request.responseText);
+		} else {
+			
+		}
+	};
+
+	request.open('GET', source, true);
+	request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+	request.send();
+};
+
+parser.parse = function(data) {
+	console.log(data);
+};
+
+EchoesWorks.prototype = EchoesWorks.extend(EchoesWorks.prototype, {parser: parser});
+
 
 /*
  * micro-markdown.js
