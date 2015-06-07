@@ -8,12 +8,17 @@
 
 # EchoesWorks
 
-> Play Video or Audio with showing code & PPT
-
+> Next-Generation Tech Blog/Presentation Framework
+ 
+- Timer Audio
+- Timer subtitles
+- Markdown Presentation
+- Integrate Github Code/Gist Code
 
 ##Thanks To
 
 [https://github.com/wayou/selected](https://github.com/wayou/selected)
+
 [https://github.com/simonwaldherr/micromarkdown.js/](https://github.com/simonwaldherr/micromarkdown.js/)
 
 ## License
