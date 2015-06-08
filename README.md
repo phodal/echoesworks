@@ -14,6 +14,7 @@
 - Timer subtitles
 - Markdown Presentation
 - Integrate Github Code/Gist Code
+- Time Control
 
 ##Inspired by & Thanks to
 
