@@ -1,64 +1,34 @@
-describe("Ajax", function () {
-    beforeEach(function () {
-        jasmine.Ajax.install();
-    });
-    afterEach(function () {
-        jasmine.Ajax.uninstall();
-    });
+describe("Parser", function () {
+	beforeEach(function () {
+		jasmine.clock().install();
+		jasmine.Ajax.install();
+	});
+	afterEach(function () {
+		jasmine.clock().uninstall();
+		jasmine.Ajax.uninstall();
+	});
 
-    it("specifying response when you need it", function (done) {
-        var doneFn = jasmine.createSpy("success");
+	it("parse data", function () {
+		var ew = new EchoesWorks({element: 'slide', source: 'data/data.json'});
+		//
+		spyOn(ew.parser, 'parse');
+		ew.parser.init('/data/data.json');
+		//jasmine.clock().tick(300);
+		//expect(ew.parser.parse).toHaveBeenCalled();
+		//
+		jasmine.Ajax.requests.mostRecent().respondWith({
+			"status": 200,
+			"contentType": 'text/plain',
+			"responseText": '[{"time": "00:05.51",' +
+			'"code": "https://raw.githubusercontent.com/phodal/echoesworks/master/bower.json","word": "hello, world, next"}]'
+		});
+	});
 
-        EchoesWorks.get('/some/cool/url', function (result) {
-            expect(result).toEqual("awesome response");
-            done();
-        });
+	it("parse time", function () {
+		var ew = new EchoesWorks({element: 'slide', source: 'data/data.json'});
 
-        expect(jasmine.Ajax.requests.mostRecent().url).toBe('/some/cool/url');
-        expect(doneFn).not.toHaveBeenCalled();
-
-        jasmine.Ajax.requests.mostRecent().respondWith({
-            "status": 200,
-            "contentType": 'text/plain',
-            "responseText": 'awesome response'
-        });
-    });
-
-    it("specifying html when you need it", function (done) {
-        var doneFn = jasmine.createSpy("success");
-
-        EchoesWorks.load('/some', function (result) {
-            expect(result).toEqual("<h2>fsasfA</h2>");
-            done();
-        });
-
-        expect(jasmine.Ajax.requests.mostRecent().url).toBe('/some');
-        expect(doneFn).not.toHaveBeenCalled();
-
-        jasmine.Ajax.requests.mostRecent().respondWith({
-            "status": 200,
-            "contentType": 'text/plain',
-            "responseText": '<h2>fsasfA</h2>'
-        });
-    });
-
-
-    it("should be post to some where", function (done) {
-        var doneFn = jasmine.createSpy("success");
-
-        EchoesWorks.post('/some/cool/url', [], function (result) {
-            expect(result).toEqual("awesome response");
-            done();
-        });
-
-        expect(jasmine.Ajax.requests.mostRecent().url).toBe('/some/cool/url');
-        expect(doneFn).not.toHaveBeenCalled();
-
-        jasmine.Ajax.requests.mostRecent().respondWith({
-            "status": 200,
-            "contentType": 'text/plain',
-            "responseText": 'awesome response'
-        });
-    });
+		var result = ew.parser.parseTime(["00:05.51"]);
+		expect(result[0][0]).toBe(5.5);
+	});
 });
 

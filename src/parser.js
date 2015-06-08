@@ -30,8 +30,7 @@ parser.parse = function (data) {
 	}
 
 	data.forEach(callback);
-	console.log(times, codes, words);
-	console.log(parser.parseTime(times));
+	return [times, codes, words];
 };
 
 parser.parseTime = function(times) {
