@@ -13,11 +13,10 @@ var EchoesWorks = function(options) {
 	this.options = options;
 	this.source = this.options.source;
 	this.element = this.options.element;
-	this.playing = true;
-	this.totalTime = 0;
+	this.playing = false;
 	var self = this;
 	this.fps = 30;
-	this.loopInterval = setInterval(function() {
+	setInterval(function() {
 		self.update();
 	}, 1000/this.fps);
 	this.time = 0;
@@ -36,15 +35,9 @@ EchoesWorks.prototype.play = function() {
 	this.playing = true;
 };
 
-EchoesWorks.prototype.preUpdate = function() {
-
-};
-
 EchoesWorks.prototype.update = function() {
 	if (this.playing) {
-		this.totalTime += 1/30;
-		this.prevTime = this.time;
-		this.time += 1/30;
+		this.time += 1/this.fps;
 	}
 };
 
@@ -142,11 +135,11 @@ EchoesWorks.send = function (url, method, callback, data) {
 
 /*jshint -W030 */
 //
-var triggerEvent = function (eventName) {
-	var event = document.createEvent('Event');
-	event.initEvent(eventName, true, true);
-	document.dispatchEvent(event);
-};
+//var triggerEvent = function (eventName) {
+//	var event = document.createEvent('Event');
+//	event.initEvent(eventName, true, true);
+//	document.dispatchEvent(event);
+//};
 
 var from = function() {
 

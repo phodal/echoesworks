@@ -24,6 +24,7 @@ describe("Main", function () {
 
 	it("should auto call update function", function () {
 		var ew = new EchoesWorks();
+		ew.play();
 		spyOn(ew, 'update');
 		expect(ew.update).not.toHaveBeenCalled();
 		jasmine.clock().tick(2000);
@@ -32,6 +33,7 @@ describe("Main", function () {
 
 	it("should test time correctly", function () {
 		var ew = new EchoesWorks();
+		ew.play();
 		jasmine.clock().tick(2000);
 		expect(ew.time).toBeGreaterThan(2);
 	});

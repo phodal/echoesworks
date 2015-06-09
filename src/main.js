@@ -9,7 +9,7 @@ var EchoesWorks = function(options) {
 	this.options = options;
 	this.source = this.options.source;
 	this.element = this.options.element;
-	this.playing = true;
+	this.playing = false;
 	var self = this;
 	this.fps = 30;
 	setInterval(function() {
