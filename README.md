@@ -18,11 +18,11 @@
 
 ##Inspired by & Thanks to
 
-[https://github.com/markdalgleish/bespoke.js](https://github.com/markdalgleish/bespoke.js)
+slide: [https://github.com/markdalgleish/bespoke.js](https://github.com/markdalgleish/bespoke.js)
 
-[https://github.com/wayou/selected](https://github.com/wayou/selected)
+markdown: [https://github.com/simonwaldherr/micromarkdown.js/](https://github.com/simonwaldherr/micromarkdown.js/)
 
-[https://github.com/simonwaldherr/micromarkdown.js/](https://github.com/simonwaldherr/micromarkdown.js/)
+ppt: [https://github.com/vorg/timeline.js](https://github.com/vorg/timeline.js)
 
 ## License
 
