@@ -36,7 +36,7 @@ describe("Parser", function () {
 
 	it("parse time correctly", function () {
 		var result = ew.parser.parseTime(["00:05.51"]);
-		expect(result[0][0]).toBe(5.5);
+		expect(result[0]).toBe(5.5);
 	});
 });
 

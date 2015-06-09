@@ -21,13 +21,18 @@ var EchoesWorks = function(options) {
 };
 
 EchoesWorks.prototype.init = function() {
+	function getMaxOfArray(numArray) {
+		return Math.max.apply(null, numArray);
+	}
+
 	var that = this;
 	that.parser();
-	//var times = that.parser.parseTime(that.parser.data.times);
-	//console.log(times);
-	//that.totalTime = Math.max(times);
-	//console.log(that.totalTime);
+	if(typeof that.parser.data.times === 'object'){
+		var times = that.parser.parseTime(that.parser.data.times);
+		that.totalTime = getMaxOfArray(times);
+	}
 };
+
 EchoesWorks.prototype.stop = function() {
 	this.playing = false;
 	this.time = 0;
