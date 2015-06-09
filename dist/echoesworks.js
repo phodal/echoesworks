@@ -13,7 +13,41 @@ var EchoesWorks = function(options) {
 	this.options = options;
 	this.source = this.options.source;
 	this.element = this.options.element;
+	this.playing = true;
+	this.totalTime = 0;
+	var self = this;
+	this.fps = 30;
+	this.loopInterval = setInterval(function() {
+		self.update();
+	}, 1000/this.fps);
+	this.time = 0;
 };
+
+EchoesWorks.prototype.stop = function() {
+	this.playing = false;
+	this.time = 0;
+};
+
+EchoesWorks.prototype.pause = function() {
+	this.playing = false;
+};
+
+EchoesWorks.prototype.play = function() {
+	this.playing = true;
+};
+
+EchoesWorks.prototype.preUpdate = function() {
+
+};
+
+EchoesWorks.prototype.update = function() {
+	if (this.playing) {
+		this.totalTime += 1/30;
+		this.prevTime = this.time;
+		this.time += 1/30;
+	}
+};
+
 
 EchoesWorks.VERSION = '0.0.0';
 
