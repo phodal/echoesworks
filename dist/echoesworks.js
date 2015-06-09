@@ -25,13 +25,25 @@ var EchoesWorks = function(options) {
 };
 
 EchoesWorks.prototype.init = function() {
+	function getMaxOfArray(numArray) {
+		return Math.max.apply(null, numArray);
+	}
+
+	function triggerEvent (eventName) {
+		var event = document.createEvent('Event');
+		event.initEvent(eventName, true, true);
+		document.dispatchEvent(event);
+	}
+
 	var that = this;
 	that.parser();
-	//var times = that.parser.parseTime(that.parser.data.times);
-	//console.log(times);
-	//that.totalTime = Math.max(times);
-	//console.log(that.totalTime);
+	if(typeof that.parser.data.times === 'object'){
+		var times = that.parser.parseTime(that.parser.data.times);
+		that.totalTime = getMaxOfArray(times);
+		triggerEvent("ew:slide:init");
+	}
 };
+
 EchoesWorks.prototype.stop = function() {
 	this.playing = false;
 	this.time = 0;
@@ -150,11 +162,6 @@ EchoesWorks.send = function (url, method, callback, data) {
 
 /*jshint -W030 */
 //
-//var triggerEvent = function (eventName) {
-//	var event = document.createEvent('Event');
-//	event.initEvent(eventName, true, true);
-//	document.dispatchEvent(event);
-//};
 
 var from = function() {
 
@@ -274,14 +281,13 @@ parser.parse = function (data) {
 };
 
 parser.parseTime = function(times) {
-	console.log(times);
 	var pattern = /\[\d{2}:\d{2}.\d{2}\]/g,
 		result = [];
 
 	times.forEach(function(v1) {
 		var t = v1.slice(1, -1).split(':');
 		var value = v1.replace(pattern, '');
-		result.push([parseInt(t[0], 10) * 60 + parseFloat(t[1]), value]);
+		result.push([parseFloat(t[0]) * 60 + parseFloat(t[1]), value][0]);
 	});
 	return result;
 };
@@ -610,6 +616,7 @@ EchoesWorks.md = micromarkdown;
 
 	document.addEventListener("ew:slide:init", function (event) {
 		slide = EW.slide();
+		window.slide = slide;
 
 		document.addEventListener("keydown", function (event) {
 			var keyCode = event.keyCode;
@@ -625,7 +632,7 @@ EchoesWorks.md = micromarkdown;
 					case  PAGE_UP:
 					case  LEFT:
 					case  UP:
-						slide.prev();
+						window.slide.prev();
 						console.log("prev", slide.slide());
 						break;
 					case TAB:
@@ -633,7 +640,7 @@ EchoesWorks.md = micromarkdown;
 					case PAGE_DOWN:
 					case  RIGHT:
 					case DOWN:
-						slide.next();
+						window.slide.next();
 						console.log("next", slide.slide());
 						break;
 				}

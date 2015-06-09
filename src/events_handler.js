@@ -24,6 +24,7 @@
 
 	document.addEventListener("ew:slide:init", function (event) {
 		slide = EW.slide();
+		window.slide = slide;
 
 		document.addEventListener("keydown", function (event) {
 			var keyCode = event.keyCode;
@@ -39,7 +40,7 @@
 					case  PAGE_UP:
 					case  LEFT:
 					case  UP:
-						slide.prev();
+						window.slide.prev();
 						console.log("prev", slide.slide());
 						break;
 					case TAB:
@@ -47,7 +48,7 @@
 					case PAGE_DOWN:
 					case  RIGHT:
 					case DOWN:
-						slide.next();
+						window.slide.next();
 						console.log("next", slide.slide());
 						break;
 				}
