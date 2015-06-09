@@ -46,6 +46,7 @@ describe("Markdown", function () {
 	it("should parse font style", function () {
 		expect(EW.md.parse("**bold** text")).toBe('\n<b>bold</b> text\n');
 		expect(EW.md.parse("*italic* test")).toBe('\n<i>italic</i> test\n');
+		expect(EW.md.parse("~~italic~~ test")).toBe('\n<del>italic</del> test\n');
 		expect(EW.md.parse("*italic and **bold** text*")).toBe('\n<i>italic and <b>bold</b> text</i>\n');
 	});
 
@@ -71,6 +72,10 @@ describe("Markdown", function () {
 
 		expect(EW.md.parse('this | is a   | table\n-----:|:--------:|:--------\nwith | sample | content'))
 			.toBe('<table><tr><th align="right">this</th><th align="center">is a</th><th align="left">table</th></tr><tr><td align="right">with</td><td align="center">sample</td><td align="left">content</td></tr>\n</table>');
+	});
+
+	it("should parse h1~h3", function () {
+		expect(EW.md.mmdCSSclass('', '')).toBe('');
 	});
 
 });

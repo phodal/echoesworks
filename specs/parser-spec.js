@@ -12,6 +12,7 @@ describe("Parser", function () {
 
 	it("parse data", function () {
 		spyOn(ew.parser, 'parse');
+		ew.parser();
 		ew.parser.init('/data/data.json');
 		//jasmine.clock().tick(300);
 		//expect(ew.parser.parse).toHaveBeenCalled();
