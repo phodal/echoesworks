@@ -31,7 +31,7 @@ describe("Parser", function () {
 			"word": "hello, world, next"
 		}];
 		var result = ew.parser.parse(data);
-		expect(result[2][0]).toBe("hello, world, next");
+		expect(result.words[0]).toBe("hello, world, next");
 	});
 
 	it("parse time correctly", function () {

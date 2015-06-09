@@ -5,8 +5,8 @@
 var EchoesWorks = function(options) {
 	if(!EchoesWorks.isObject(options)){
 		options = {
-			element: '#slide',
-			source: 'data.json'
+			element: 'slide',
+			source: 'data/data.json'
 		};
 	}
 
@@ -14,14 +14,24 @@ var EchoesWorks = function(options) {
 	this.source = this.options.source;
 	this.element = this.options.element;
 	this.playing = false;
+	this.totalTime = 0;
 	var self = this;
 	this.fps = 30;
 	setInterval(function() {
 		self.update();
 	}, 1000/this.fps);
 	this.time = 0;
+	this.init();
 };
 
+EchoesWorks.prototype.init = function() {
+	var that = this;
+	that.parser();
+	//var times = that.parser.parseTime(that.parser.data.times);
+	//console.log(times);
+	//that.totalTime = Math.max(times);
+	//console.log(that.totalTime);
+};
 EchoesWorks.prototype.stop = function() {
 	this.playing = false;
 	this.time = 0;
@@ -39,6 +49,11 @@ EchoesWorks.prototype.update = function() {
 	if (this.playing) {
 		this.time += 1/this.fps;
 	}
+	this.applyEchoes();
+};
+
+EchoesWorks.prototype.applyEchoes = function() {
+
 };
 
 
@@ -219,6 +234,8 @@ var parser = function () {
 	parser.init(that.source);
 };
 
+parser.data = [];
+
 parser.init = function (source) {
 	var request = new XMLHttpRequest();
 	request.onreadystatechange = function () {
@@ -237,7 +254,8 @@ parser.init = function (source) {
 parser.parse = function (data) {
 	var times = [],
 		codes = [],
-		words = [];
+		words = [],
+		results;
 
 	function callback(element) {
 		times.push(element.time);
@@ -246,10 +264,17 @@ parser.parse = function (data) {
 	}
 
 	data.forEach(callback);
-	return [times, codes, words];
+	results = {
+		times: times,
+		codes: codes,
+		words: words
+	};
+	parser.data = results;
+	return results;
 };
 
 parser.parseTime = function(times) {
+	console.log(times);
 	var pattern = /\[\d{2}:\d{2}.\d{2}\]/g,
 		result = [];
 
@@ -578,7 +603,10 @@ EchoesWorks.md = micromarkdown;
 		EW,
 		slide;
 
-	EW = new EchoesWorks({element: 'slide'});
+	EW = new EchoesWorks({
+		element: 'slide',
+		source: 'data/data.json'
+	});
 
 	document.addEventListener("ew:slide:init", function (event) {
 		slide = EW.slide();

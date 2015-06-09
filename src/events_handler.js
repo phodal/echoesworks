@@ -17,7 +17,10 @@
 		EW,
 		slide;
 
-	EW = new EchoesWorks({element: 'slide'});
+	EW = new EchoesWorks({
+		element: 'slide',
+		source: 'data/data.json'
+	});
 
 	document.addEventListener("ew:slide:init", function (event) {
 		slide = EW.slide();

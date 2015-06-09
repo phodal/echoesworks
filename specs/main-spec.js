@@ -9,7 +9,7 @@ describe("Main", function () {
 	});
 
 	it("should return element", function () {
-		expect(EW.element).toBe('#slide');
+		expect(EW.element).toBe('slide');
 	});
 
 	it("should return respond logic", function () {

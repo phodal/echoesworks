@@ -3,6 +3,8 @@ var parser = function () {
 	parser.init(that.source);
 };
 
+parser.data = [];
+
 parser.init = function (source) {
 	var request = new XMLHttpRequest();
 	request.onreadystatechange = function () {
@@ -21,7 +23,8 @@ parser.init = function (source) {
 parser.parse = function (data) {
 	var times = [],
 		codes = [],
-		words = [];
+		words = [],
+		results;
 
 	function callback(element) {
 		times.push(element.time);
@@ -30,10 +33,17 @@ parser.parse = function (data) {
 	}
 
 	data.forEach(callback);
-	return [times, codes, words];
+	results = {
+		times: times,
+		codes: codes,
+		words: words
+	};
+	parser.data = results;
+	return results;
 };
 
 parser.parseTime = function(times) {
+	console.log(times);
 	var pattern = /\[\d{2}:\d{2}.\d{2}\]/g,
 		result = [];
 
