@@ -7,6 +7,9 @@
     "type": "git",
     "url": "git://github.com/phodal/echoesworks.git"
   },
+  "scripts": {
+    "test": "grunt test;"
+  },
   "keywords": [],
   "author": "Phodal Huang",
   "license": "MIT",
