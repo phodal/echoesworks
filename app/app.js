@@ -1,7 +1,6 @@
-//var EW = new EchoesWorks();
-//var slide = EW.slide();
-//slide.on();
-//slide.next();
-//console.log(slide.slide());
-
-EchoesWorks.md.parse("----\n#hello");
+window.onload = function(){
+	var EW = new EchoesWorks({
+		element: 'slide',
+		source: 'data/data.json'
+	});
+};
