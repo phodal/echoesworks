@@ -176,8 +176,10 @@ var from = function() {
 				return;
 			}
 
+			activeSlide.className = activeSlide.className.replace(new RegExp('active' +'(\\s|$)', 'g'), ' ').trim();
 			fire('deactivate', createEventData(activeSlide, customData));
 			activeSlide = slides[index];
+			activeSlide.classList.add('active');
 			fire('activate', createEventData(activeSlide, customData));
 		},
 
@@ -643,7 +645,7 @@ EchoesWorks.prototype = EchoesWorks.extend(EchoesWorks.prototype, {fn: Github});
 					case  LEFT:
 					case  UP:
 						window.slide.prev();
-						console.log("prev", slide.slide());
+						console.log("prev", window.slide.slide());
 						break;
 					case TAB:
 					case SPACE:
@@ -651,7 +653,7 @@ EchoesWorks.prototype = EchoesWorks.extend(EchoesWorks.prototype, {fn: Github});
 					case  RIGHT:
 					case DOWN:
 						window.slide.next();
-						console.log("next", slide.slide());
+						console.log("next", window.slide.slide());
 						break;
 				}
 

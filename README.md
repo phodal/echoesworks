@@ -16,6 +16,14 @@
 - Integrate Github Code/Gist Code
 - Time Control
 
+##Usage
+
+     var EW = new EchoesWorks({
+     		element: 'slide',
+     		source: 'data/data.json'
+     	});
+
+
 ##Inspired by & Thanks to
 
 slide: [https://github.com/markdalgleish/bespoke.js](https://github.com/markdalgleish/bespoke.js)
