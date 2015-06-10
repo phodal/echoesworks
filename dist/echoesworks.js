@@ -69,7 +69,7 @@ EchoesWorks.prototype.applyEchoes = function() {
 };
 
 
-EchoesWorks.VERSION = '0.0.0';
+EchoesWorks.VERSION = '0.0.1';
 
 root.EchoesWorks = EchoesWorks;
 root.EW = EchoesWorks;
@@ -645,7 +645,6 @@ EchoesWorks.prototype = EchoesWorks.extend(EchoesWorks.prototype, {fn: Github});
 					case  LEFT:
 					case  UP:
 						window.slide.prev();
-						console.log("prev", window.slide.slide());
 						break;
 					case TAB:
 					case SPACE:
@@ -653,7 +652,6 @@ EchoesWorks.prototype = EchoesWorks.extend(EchoesWorks.prototype, {fn: Github});
 					case  RIGHT:
 					case DOWN:
 						window.slide.next();
-						console.log("next", window.slide.slide());
 						break;
 				}
 

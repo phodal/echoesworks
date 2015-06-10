@@ -1,6 +1,6 @@
 section {
     display: block;
-    width: 50%;
+    width: 100%;
     min-height: 600px;
     height: 80%;
     background-color: #ecf0f1;
@@ -19,10 +19,32 @@ section h1 {
     margin-right: auto;
 }
 
+section h1,
+section h2,
+section h3 {
+    padding: 0 0 0 40px;
+}
+
+slide  {
+    width: 50%;
+    float:left;
+}
+
 slide section {
     display: none;
 }
 
 section.active {
     display: block;
+}
+
+code {
+    width: 49%;
+    float: right;
+    color: #ecf0f1;
+    font-size: 1.5em;
+    background-color: #34495e;
+    border-radius: 10px;
+    min-height: 600px;
+    height: 80%;
 }
