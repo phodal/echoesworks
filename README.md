@@ -4,6 +4,7 @@
 [![Test Coverage](https://codeclimate.com/github/phodal/echoesworks/badges/coverage.svg)](https://codeclimate.com/github/phodal/echoesworks)
 [![Node](https://img.shields.io/node/v/gh-badges.svg?style=flat)]()
 [![npm](https://img.shields.io/npm/dm/echoesworks.svg?style=flat)]()
+[![Bower](https://img.shields.io/bower/v/echoesworks.svg?style=flat)]()
 [![LICENSE](https://img.shields.io/badge/license-MIT-green.svg?style=flat)]()
 
 # EchoesWorks
