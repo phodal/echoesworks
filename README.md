@@ -27,7 +27,10 @@
 
 ##Inspired by & Thanks to
 
-slide: [https://github.com/markdalgleish/bespoke.js](https://github.com/markdalgleish/bespoke.js)
+slide:
+
+ - [https://github.com/markdalgleish/bespoke.js](https://github.com/markdalgleish/bespoke.js)
+ - [https://github.com/bartaz/impress.js](https://github.com/bartaz/impress.js)
 
 markdown: [https://github.com/simonwaldherr/micromarkdown.js/](https://github.com/simonwaldherr/micromarkdown.js/)
 
@@ -36,3 +39,4 @@ time: [https://github.com/vorg/timeline.js](https://github.com/vorg/timeline.js)
 ## License
 
 MIT. See `LICENSE.txt` in this directory.
+
