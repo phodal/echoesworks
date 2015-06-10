@@ -22,8 +22,10 @@ var from = function() {
 				return;
 			}
 
+			activeSlide.className = activeSlide.className.replace(new RegExp('active' +'(\\s|$)', 'g'), ' ').trim();
 			fire('deactivate', createEventData(activeSlide, customData));
 			activeSlide = slides[index];
+			activeSlide.classList.add('active');
 			fire('activate', createEventData(activeSlide, customData));
 		},
 
