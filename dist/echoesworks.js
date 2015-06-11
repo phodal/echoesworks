@@ -2,8 +2,8 @@
 
   "use strict";
 
-var EchoesWorks = function(options) {
-	if(!EchoesWorks.isObject(options)){
+var EchoesWorks = function (options) {
+	if (!EchoesWorks.isObject(options)) {
 		options = {
 			element: 'slide',
 			source: 'data/data.json'
@@ -15,21 +15,23 @@ var EchoesWorks = function(options) {
 	this.element = this.options.element;
 	this.playing = false;
 	this.totalTime = 0;
+	this.data = [];
+	this.dataStatus = false;
 	var self = this;
 	this.fps = 10;
-	setInterval(function() {
+	setInterval(function () {
 		self.update();
-	}, 1000/this.fps);
+	}, 1000 / this.fps);
 	this.time = 0;
 	this.init();
 };
 
-EchoesWorks.prototype.init = function() {
+EchoesWorks.prototype.init = function () {
 	function getMaxOfArray(numArray) {
 		return Math.max.apply(null, numArray);
 	}
 
-	function triggerEvent (eventName) {
+	function triggerEvent(eventName) {
 		var event = document.createEvent('Event');
 		event.initEvent(eventName, true, true);
 		document.dispatchEvent(event);
@@ -37,35 +39,43 @@ EchoesWorks.prototype.init = function() {
 
 	var that = this;
 	that.parser();
-	if(typeof that.parser.data.times === 'object'){
+	if (typeof that.parser.data.times === 'object') {
+		that.data = that.parser.data;
+		that.dataStatus = true;
 		var times = that.parser.parseTime(that.parser.data.times);
 		that.totalTime = getMaxOfArray(times);
 		triggerEvent("ew:slide:init");
 	}
 };
 
-EchoesWorks.prototype.stop = function() {
+EchoesWorks.prototype.stop = function () {
 	this.playing = false;
 	this.time = 0;
 };
 
-EchoesWorks.prototype.pause = function() {
+EchoesWorks.prototype.pause = function () {
 	this.playing = false;
 };
 
-EchoesWorks.prototype.play = function() {
+EchoesWorks.prototype.play = function () {
 	this.playing = true;
 };
 
-EchoesWorks.prototype.update = function() {
+EchoesWorks.prototype.update = function () {
 	if (this.playing) {
-		this.time += 1/this.fps;
+		this.time += 1 / this.fps;
 	}
 	this.applyEchoes();
 };
 
-EchoesWorks.prototype.applyEchoes = function() {
-
+EchoesWorks.prototype.applyEchoes = function () {
+	var that = this;
+	if (that.dataStatus && that.data) {
+		var times = that.parser.parseTime(that.data.times);
+		if (parseFloat(that.time) > times[window.slide.slide()]) {
+			window.slide.next();
+		}
+	}
 };
 
 
