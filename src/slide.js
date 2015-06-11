@@ -7,7 +7,6 @@
  */
 
 /*jshint -W030 */
-//
 
 var from = function() {
 
