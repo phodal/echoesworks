@@ -474,57 +474,75 @@ var micromarkdown = {
 		return str.replace(stra[0], repstr);
 	},
 
-	listHandler: function (stra, str) {
-		var helper, helper1, status, indent, line, nstatus, repstr,
-			i = 0,
-			casca = 0;
+	listHanderStart: function (stra, repstr) {
 		if ((stra[0].trim().substr(0, 1) === '*') || (stra[0].trim().substr(0, 1) === '-')) {
 			repstr = '<ul>';
 		} else {
 			repstr = '<ol>';
 		}
+		return repstr;
+	},
+
+	listsHandlerEnd: function (stra, repstr) {
+		if ((stra[0].trim().substr(0, 1) === '*') || (stra[0].trim().substr(0, 1) === '-')) {
+			repstr += '</ul>';
+		} else {
+			repstr += '</ol>';
+		}
+		return repstr;
+	}, listsHandlerSub: function (line, repstr, helper1) {
+		if ((line[0].trim().substr(0, 1) === '*') || (line[0].trim().substr(0, 1) === '-')) {
+			repstr += '<ul>';
+			helper1.push('</ul>');
+		} else {
+			repstr += '<ol>';
+			helper1.push('</ol>');
+		}
+		return repstr;
+	},
+
+	listHandler: function (line, nstatus, status, repstr, helper1, casca) {
+		var indent = false;
+		if ((line[2] === undefined) || (line[2].length === 0)) {
+			nstatus = 0;
+		} else {
+			if (indent === false) {
+				indent = line[2].replace(/\t/, '    ').length;
+			}
+			nstatus = Math.round(line[2].replace(/\t/, '    ').length / indent);
+		}
+		while (status > nstatus) {
+			repstr += helper1.pop();
+			status--;
+			casca--;
+		}
+		while (status < nstatus) {
+			repstr = this.listsHandlerSub(line, repstr, helper1);
+			status++;
+			casca++;
+		}
+		repstr += '<li>' + line[6] + '</li>' + '\n';
+		return {nstatus: nstatus, status: status, repstr: repstr, casca: casca};
+	},
+
+	listsHandler: function (stra, str) {
+		var helper, helper1 = [], status = 0, line, nstatus, repstr, i, casca = 0;
+		repstr = this.listHanderStart(stra, repstr);
 		helper = stra[0].split('\n');
-		helper1 = [];
-		status = 0;
-		indent = false;
 		for (i = 0; i < helper.length; i++) {
 			if ((line = /^((\s*)((\*|\-)|\d(\.|\))) ([^\n]+))/.exec(helper[i])) !== null) {
-				if ((line[2] === undefined) || (line[2].length === 0)) {
-					nstatus = 0;
-				} else {
-					if (indent === false) {
-						indent = line[2].replace(/\t/, '    ').length;
-					}
-					nstatus = Math.round(line[2].replace(/\t/, '    ').length / indent);
-				}
-				while (status > nstatus) {
-					repstr += helper1.pop();
-					status--;
-					casca--;
-				}
-				while (status < nstatus) {
-					if ((line[0].trim().substr(0, 1) === '*') || (line[0].trim().substr(0, 1) === '-')) {
-						repstr += '<ul>';
-						helper1.push('</ul>');
-					} else {
-						repstr += '<ol>';
-						helper1.push('</ol>');
-					}
-					status++;
-					casca++;
-				}
-				repstr += '<li>' + line[6] + '</li>' + '\n';
+				var result = this.listHandler(line, nstatus, status, repstr, helper1, casca);
+				nstatus = result.nstatus;
+				status = result.status;
+				repstr = result.repstr;
+				casca = result.casca;
 			}
 		}
 		while (casca > 0) {
 			repstr += '</ul>';
 			casca--;
 		}
-		if ((stra[0].trim().substr(0, 1) === '*') || (stra[0].trim().substr(0, 1) === '-')) {
-			repstr += '</ul>';
-		} else {
-			repstr += '</ol>';
-		}
+		repstr = this.listsHandlerEnd(stra, repstr);
 		return str.replace(stra[0], repstr + '\n');
 	},
 
@@ -546,7 +564,7 @@ var micromarkdown = {
 		}
 
 		while ((stra = regexobject.lists.exec(str)) !== null) {
-			str = this.listHandler(stra, str);
+			str = this.listsHandler(stra, str);
 		}
 
 		while ((stra = regexobject.tables.exec(str)) !== null) {

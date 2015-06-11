@@ -177,7 +177,8 @@ var micromarkdown = {
 		return repstr;
 	},
 
-	listHandler: function (line, nstatus, indent, status, repstr, helper1, casca) {
+	listHandler: function (line, nstatus, status, repstr, helper1, casca) {
+		var indent = false;
 		if ((line[2] === undefined) || (line[2].length === 0)) {
 			nstatus = 0;
 		} else {
@@ -197,21 +198,20 @@ var micromarkdown = {
 			casca++;
 		}
 		repstr += '<li>' + line[6] + '</li>' + '\n';
-		return {nstatus: nstatus, indent: indent, status: status, repstr: repstr, casca: casca};
+		return {nstatus: nstatus, status: status, repstr: repstr, casca: casca};
 	},
 
 	listsHandler: function (stra, str) {
-		var helper, helper1 = [], status = 0, indent = false, line, nstatus, repstr, i, casca = 0;
+		var helper, helper1 = [], status = 0, line, nstatus, repstr, i, casca = 0;
 		repstr = this.listHanderStart(stra, repstr);
 		helper = stra[0].split('\n');
 		for (i = 0; i < helper.length; i++) {
 			if ((line = /^((\s*)((\*|\-)|\d(\.|\))) ([^\n]+))/.exec(helper[i])) !== null) {
-				var __ret = this.listHandler(line, nstatus, indent, status, repstr, helper1, casca);
-				nstatus = __ret.nstatus;
-				indent = __ret.indent;
-				status = __ret.status;
-				repstr = __ret.repstr;
-				casca = __ret.casca;
+				var result = this.listHandler(line, nstatus, status, repstr, helper1, casca);
+				nstatus = result.nstatus;
+				status = result.status;
+				repstr = result.repstr;
+				casca = result.casca;
 			}
 		}
 		while (casca > 0) {
