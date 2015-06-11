@@ -230,19 +230,28 @@ var micromarkdown = {
 		return str.replace(stra[0], repstr + '\n');
 	},
 
-	parse: function (str, strict) {
-		var helper, helper1, stra, trashgc = [], i, that = this;
-		str = '\n' + str + '\n';
-
-		var regexobject = micromarkdown.regexobject;
+	listStrict: function (strict, regexobject) {
 		if (strict !== true) {
 			regexobject.lists = /^((\s*(\*|\d\.) [^\n]+)\n)+/gm;
 		}
+		return regexobject.lists;
+	},
+	removeRefLinks: function (trashgc, str) {
+		var i;
+		for (i = 0; i < trashgc.length; i++) {
+			str = str.replace(trashgc[i], '');
+		}
+		return str;
+	},
 
+	parse: function (str, strict) {
+		var helper, helper1, stra, trashgc = [], i, that = this, regexobject = micromarkdown.regexobject;
+		regexobject.lists = this.listStrict(strict, regexobject);
+
+		str = '\n' + str + '\n';
 		['code', 'headline', 'lists', 'tables', 'links', 'mail', 'url', 'smlinks', 'hr'].forEach(function(type){
 			while((stra = regexobject[type].exec(str)) !== null) {
-				var func  = type + 'Handler';
-				str = that[func].apply(that, [stra, str, strict]);
+				str = that[(type + 'Handler')].apply(that, [stra, str, strict]);
 			}
 		});
 
@@ -260,10 +269,7 @@ var micromarkdown = {
 			}
 		}
 
-		for (i = 0; i < trashgc.length; i++) {
-			str = str.replace(trashgc[i], '');
-		}
-
+		str = this.removeRefLinks(trashgc, str);
 		return str.replace(/ {2,}[\n]{1,}/gmi, '<br/><br/>');
 	},
 
