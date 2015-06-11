@@ -159,7 +159,14 @@ var micromarkdown = {
 		return repstr;
 	},
 
-	listHandler: function (stra, str) {
+	listsHandlerEnd: function (stra, repstr) {
+		if ((stra[0].trim().substr(0, 1) === '*') || (stra[0].trim().substr(0, 1) === '-')) {
+			repstr += '</ul>';
+		} else {
+			repstr += '</ol>';
+		}
+		return repstr;
+	}, listHandler: function (stra, str) {
 		var helper, helper1, status, indent, line, nstatus, repstr, i, casca = 0;
 		repstr = this.listHanderStart(stra, repstr);
 		helper = stra[0].split('\n');
@@ -199,11 +206,7 @@ var micromarkdown = {
 			repstr += '</ul>';
 			casca--;
 		}
-		if ((stra[0].trim().substr(0, 1) === '*') || (stra[0].trim().substr(0, 1) === '-')) {
-			repstr += '</ul>';
-		} else {
-			repstr += '</ol>';
-		}
+		repstr = this.listsHandlerEnd(stra, repstr);
 		return str.replace(stra[0], repstr + '\n');
 	},
 
