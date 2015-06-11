@@ -46,7 +46,7 @@ var micromarkdown = {
 	mailHandler: function (stra, str) {
 		return str.replace(stra[0], '<a href="mailto:' + stra[1] + '">' + stra[1] + '</a>');
 	},
-	horizontalLineHandler: function (stra, str) {
+	hrHandler: function (stra, str) {
 		return str.replace(stra[0], '\n<hr/>\n');
 	},
 	urlHandler: function (stra, str, strict) {
@@ -59,7 +59,7 @@ var micromarkdown = {
 	refLinksHandler: function (str, stra, helper, strict) {
 		return str.replace(stra[0], '<a ' + micromarkdown.mmdCSSclass(helper[1], strict) + 'href="' + helper[1] + '">' + stra[1] + '</a>');
 	},
-	specialLinks: function (stra, str, strict) {
+	smlinksHandler: function (stra, str, strict) {
 		var repstr = "";
 		switch (stra[2]) {
 			case 't':
@@ -239,33 +239,17 @@ var micromarkdown = {
 			regexobject.lists = /^((\s*(\*|\d\.) [^\n]+)\n)+/gm;
 		}
 
-		['code', 'headline', 'lists'].forEach(function(type){
+		['code', 'headline', 'lists', 'tables', 'links', 'mail', 'url', 'smlinks', 'hr'].forEach(function(type){
 			while((stra = regexobject[type].exec(str)) !== null) {
 				var func  = type + 'Handler';
-				str = that[func].apply(that, [stra, str]);
+				str = that[func].apply(that, [stra, str, strict]);
 			}
 		});
-
-		while ((stra = regexobject.tables.exec(str)) !== null) {
-			str = this.tablesHandler(stra, str, strict);
-		}
 
 		for (i = 0; i < 3; i++) {
 			while ((stra = regexobject.bolditalic.exec(str)) !== null) {
 				str = this.boldItalicHandler(stra, str);
 			}
-		}
-
-		while ((stra = regexobject.links.exec(str)) !== null) {
-			str = this.linksHandler(stra, str, strict);
-		}
-
-		while ((stra = regexobject.mail.exec(str)) !== null) {
-			str = this.mailHandler(stra, str);
-		}
-
-		while ((stra = regexobject.url.exec(str)) !== null) {
-			str = this.urlHandler(stra, str, strict);
 		}
 
 		while ((stra = regexobject.reflinks.exec(str)) !== null) {
@@ -278,13 +262,6 @@ var micromarkdown = {
 
 		for (i = 0; i < trashgc.length; i++) {
 			str = str.replace(trashgc[i], '');
-		}
-		while ((stra = regexobject.smlinks.exec(str)) !== null) {
-			str = this.specialLinks(stra, str, strict);
-		}
-
-		while ((stra = regexobject.hr.exec(str)) !== null) {
-			str = this.horizontalLineHandler(stra, str);
 		}
 
 		return str.replace(/ {2,}[\n]{1,}/gmi, '<br/><br/>');
