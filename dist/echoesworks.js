@@ -180,6 +180,17 @@ var from = function() {
 		activeSlide = slides[0],
 		listeners = {},
 
+		readURL = function () {
+			var hash = window.location.hash,
+				 current = hash.replace( /#|\//gi, '' );
+
+			if(current > 0){
+				activate(current);
+			} else {
+				activate(0);
+			}
+		},
+
 		activate = function(index, customData) {
 			if (!slides[index]) {
 				return;
@@ -189,6 +200,7 @@ var from = function() {
 			fire('deactivate', createEventData(activeSlide, customData));
 			activeSlide = slides[index];
 			activeSlide.classList.add('active');
+			writeURL(index);
 			fire('activate', createEventData(activeSlide, customData));
 		},
 
@@ -198,6 +210,10 @@ var from = function() {
 			} else {
 				return slides.indexOf(activeSlide);
 			}
+		},
+
+		writeURL = function(index) {
+			window.location.hash = '#/' + index;
 		},
 
 		step = function(offset, customData) {
@@ -240,7 +256,7 @@ var from = function() {
 			slides: slides
 		};
 
-	activate(0);
+	readURL();
 
 	return deck;
 };
@@ -599,7 +615,9 @@ var micromarkdown = {
 EchoesWorks.md = micromarkdown;
 
 function rawGitConvert(url){
-	return url.replace('github.com', 'rawgit.com');
+	var results = url.replace('github.com', 'rawgit.com');
+	results = results.replace('raw.githubusercontent.com', 'rawgit.com');
+	return results;
 }
 
 var Github = {
