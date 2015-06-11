@@ -54,14 +54,18 @@ Example with slide
 
 ##Inspired by & Thanks to
 
-slide:
+- Slide
 
- - [https://github.com/markdalgleish/bespoke.js](https://github.com/markdalgleish/bespoke.js)
- - [https://github.com/bartaz/impress.js](https://github.com/bartaz/impress.js)
+    * [https://github.com/markdalgleish/bespoke.js](https://github.com/markdalgleish/bespoke.js)
+    * [https://github.com/bartaz/impress.js](https://github.com/bartaz/impress.js)
 
-markdown: [https://github.com/simonwaldherr/micromarkdown.js/](https://github.com/simonwaldherr/micromarkdown.js/)
+- Markdown
+    
+    * [https://github.com/simonwaldherr/micromarkdown.js/](https://github.com/simonwaldherr/micromarkdown.js/)
 
-time: [https://github.com/vorg/timeline.js](https://github.com/vorg/timeline.js)
+- Time 
+    
+    * [https://github.com/vorg/timeline.js](https://github.com/vorg/timeline.js)
 
 ## License
 
