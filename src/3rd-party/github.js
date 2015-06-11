@@ -1,5 +1,7 @@
 function rawGitConvert(url){
-	return url.replace('github.com', 'rawgit.com');
+	var results = url.replace('github.com', 'rawgit.com');
+	results = results.replace('raw.githubusercontent.com', 'rawgit.com');
+	return results;
 }
 
 var Github = {
