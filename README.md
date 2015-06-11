@@ -38,6 +38,20 @@ Example with slide
     };
 
 
+##Setup Development
+
+1.Install devDependencies
+
+     npm install
+
+2.Development
+
+3.Run Test
+
+     npm test
+      
+4.Push Code & Waiting CI            
+
 ##Inspired by & Thanks to
 
 slide:
