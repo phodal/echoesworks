@@ -177,31 +177,41 @@ var micromarkdown = {
 		return repstr;
 	},
 
-	listHandler: function (stra, str) {
+	listHandler: function (line, nstatus, indent, status, repstr, helper1, casca) {
+		if ((line[2] === undefined) || (line[2].length === 0)) {
+			nstatus = 0;
+		} else {
+			if (indent === false) {
+				indent = line[2].replace(/\t/, '    ').length;
+			}
+			nstatus = Math.round(line[2].replace(/\t/, '    ').length / indent);
+		}
+		while (status > nstatus) {
+			repstr += helper1.pop();
+			status--;
+			casca--;
+		}
+		while (status < nstatus) {
+			repstr = this.listsHandlerSub(line, repstr, helper1);
+			status++;
+			casca++;
+		}
+		repstr += '<li>' + line[6] + '</li>' + '\n';
+		return {nstatus: nstatus, indent: indent, status: status, repstr: repstr, casca: casca};
+	},
+
+	listsHandler: function (stra, str) {
 		var helper, helper1 = [], status = 0, indent = false, line, nstatus, repstr, i, casca = 0;
 		repstr = this.listHanderStart(stra, repstr);
 		helper = stra[0].split('\n');
 		for (i = 0; i < helper.length; i++) {
 			if ((line = /^((\s*)((\*|\-)|\d(\.|\))) ([^\n]+))/.exec(helper[i])) !== null) {
-				if ((line[2] === undefined) || (line[2].length === 0)) {
-					nstatus = 0;
-				} else {
-					if (indent === false) {
-						indent = line[2].replace(/\t/, '    ').length;
-					}
-					nstatus = Math.round(line[2].replace(/\t/, '    ').length / indent);
-				}
-				while (status > nstatus) {
-					repstr += helper1.pop();
-					status--;
-					casca--;
-				}
-				while (status < nstatus) {
-					repstr = this.listsHandlerSub(line, repstr, helper1);
-					status++;
-					casca++;
-				}
-				repstr += '<li>' + line[6] + '</li>' + '\n';
+				var __ret = this.listHandler(line, nstatus, indent, status, repstr, helper1, casca);
+				nstatus = __ret.nstatus;
+				indent = __ret.indent;
+				status = __ret.status;
+				repstr = __ret.repstr;
+				casca = __ret.casca;
 			}
 		}
 		while (casca > 0) {
@@ -230,7 +240,7 @@ var micromarkdown = {
 		}
 
 		while ((stra = regexobject.lists.exec(str)) !== null) {
-			str = this.listHandler(stra, str);
+			str = this.listsHandler(stra, str);
 		}
 
 		while ((stra = regexobject.tables.exec(str)) !== null) {
