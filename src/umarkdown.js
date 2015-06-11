@@ -166,13 +166,21 @@ var micromarkdown = {
 			repstr += '</ol>';
 		}
 		return repstr;
-	}, listHandler: function (stra, str) {
-		var helper, helper1, status, indent, line, nstatus, repstr, i, casca = 0;
+	}, listsHandlerSub: function (line, repstr, helper1) {
+		if ((line[0].trim().substr(0, 1) === '*') || (line[0].trim().substr(0, 1) === '-')) {
+			repstr += '<ul>';
+			helper1.push('</ul>');
+		} else {
+			repstr += '<ol>';
+			helper1.push('</ol>');
+		}
+		return repstr;
+	},
+
+	listHandler: function (stra, str) {
+		var helper, helper1 = [], status = 0, indent = false, line, nstatus, repstr, i, casca = 0;
 		repstr = this.listHanderStart(stra, repstr);
 		helper = stra[0].split('\n');
-		helper1 = [];
-		status = 0;
-		indent = false;
 		for (i = 0; i < helper.length; i++) {
 			if ((line = /^((\s*)((\*|\-)|\d(\.|\))) ([^\n]+))/.exec(helper[i])) !== null) {
 				if ((line[2] === undefined) || (line[2].length === 0)) {
@@ -189,13 +197,7 @@ var micromarkdown = {
 					casca--;
 				}
 				while (status < nstatus) {
-					if ((line[0].trim().substr(0, 1) === '*') || (line[0].trim().substr(0, 1) === '-')) {
-						repstr += '<ul>';
-						helper1.push('</ul>');
-					} else {
-						repstr += '<ol>';
-						helper1.push('</ol>');
-					}
+					repstr = this.listsHandlerSub(line, repstr, helper1);
 					status++;
 					casca++;
 				}
