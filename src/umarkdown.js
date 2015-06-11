@@ -97,14 +97,8 @@ var micromarkdown = {
 		}
 		return str;
 	},
-	tablesHandler: function (stra, str, strict) {
-		var repstr, cel, helper, calign, helper1, helper2,
-			i = 0,
-			j = 0;
-
-		repstr = '<table><tr>';
-		helper = stra[1].split('|');
-		calign = stra[4].split('|');
+	tableHandlerHelper: function (helper, calign, strict) {
+		var i;
 		for (i = 0; i < helper.length; i++) {
 			if (calign.length <= i) {
 				calign.push(0);
@@ -124,6 +118,14 @@ var micromarkdown = {
 				calign[i] = 0;
 			}
 		}
+	},
+	tablesHandler: function (stra, str, strict) {
+		var repstr, cel, helper, calign, helper1, helper2, i, j;
+
+		repstr = '<table><tr>';
+		helper = stra[1].split('|');
+		calign = stra[4].split('|');
+		this.tableHandlerHelper(helper, calign, strict);
 		cel = ['<th>', '<th align="left">', '<th align="right">', '<th align="center">'];
 		for (i = 0; i < helper.length; i++) {
 			repstr += cel[calign[i]] + helper[i].trim() + '</th>';

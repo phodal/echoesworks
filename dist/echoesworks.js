@@ -350,16 +350,16 @@ var micromarkdown = {
 		url: /<([a-zA-Z0-9@:%_\+.~#?&\/\/=]{2,256}\.[a-z]{2,4}\b(\/[\-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)?)>/g
 	},
 
-	codeFilter: function (stra, str) {
+	codeHandler: function (stra, str) {
 		return str.replace(stra[0], '<code>\n' + micromarkdown.htmlEncode(stra[1]).replace(/\n/gm, '<br/>').replace(/\ /gm, '&nbsp;') + '</code>\n');
 	},
 
-	headlinesFilter: function (stra, str) {
+	headlinesHandler: function (stra, str) {
 		var count = stra[1].length;
 		return str.replace(stra[0], '<h' + count + '>' + stra[2] + '</h' + count + '>' + '\n');
 	},
 
-	linksFilter: function (stra, str, strict) {
+	linksHandler: function (stra, str, strict) {
 		if (stra[0].substr(0, 1) === '!') {
 			str = str.replace(stra[0], '<img src="' + stra[2] + '" alt="' + stra[1] + '" title="' + stra[1] + '" />\n');
 		} else {
@@ -367,20 +367,20 @@ var micromarkdown = {
 		}
 		return str;
 	},
-	mailFilter: function (stra, str) {
+	mailHandler: function (stra, str) {
 		return str.replace(stra[0], '<a href="mailto:' + stra[1] + '">' + stra[1] + '</a>');
 	},
-	horizontalLineFilter: function (stra, str) {
+	horizontalLineHandler: function (stra, str) {
 		return str.replace(stra[0], '\n<hr/>\n');
 	},
-	urlFilter: function (stra, str, strict) {
+	urlHandler: function (stra, str, strict) {
 		var repString = stra[1];
 		if (repString.indexOf('://') === -1) {
 			repString = 'http://' + repString;
 		}
 		return str.replace(stra[0], '<a ' + micromarkdown.mmdCSSclass(repString, strict) + 'href="' + repString + '">' + repString.replace(/(https:\/\/|http:\/\/|mailto:|ftp:\/\/)/gmi, '') + '</a>');
 	},
-	refLinksFilter: function (str, stra, helper, strict) {
+	refLinksHandler: function (str, stra, helper, strict) {
 		return str.replace(stra[0], '<a ' + micromarkdown.mmdCSSclass(helper[1], strict) + 'href="' + helper[1] + '">' + stra[1] + '</a>');
 	},
 	specialLinks: function (stra, str, strict) {
@@ -401,7 +401,7 @@ var micromarkdown = {
 		}
 		return str.replace(stra[0], '<a ' + micromarkdown.mmdCSSclass(repstr, strict) + 'href="' + repstr + '">' + stra[1] + '</a>');
 	},
-	boldItalicFilter: function (stra, str) {
+	boldItalicHandler: function (stra, str) {
 		var repstr = [];
 		if (stra[1] === '~~') {
 			str = str.replace(stra[0], '<del>' + stra[2] + '</del>');
@@ -421,14 +421,8 @@ var micromarkdown = {
 		}
 		return str;
 	},
-	tablesFilter: function (stra, str, strict) {
-		var repstr, cel, helper, calign, helper1, helper2,
-			i = 0,
-			j = 0;
-
-		repstr = '<table><tr>';
-		helper = stra[1].split('|');
-		calign = stra[4].split('|');
+	tableHandlerHelper: function (helper, calign, strict) {
+		var i;
 		for (i = 0; i < helper.length; i++) {
 			if (calign.length <= i) {
 				calign.push(0);
@@ -448,6 +442,14 @@ var micromarkdown = {
 				calign[i] = 0;
 			}
 		}
+	},
+	tablesHandler: function (stra, str, strict) {
+		var repstr, cel, helper, calign, helper1, helper2, i, j;
+
+		repstr = '<table><tr>';
+		helper = stra[1].split('|');
+		calign = stra[4].split('|');
+		this.tableHandlerHelper(helper, calign, strict);
 		cel = ['<th>', '<th align="left">', '<th align="right">', '<th align="center">'];
 		for (i = 0; i < helper.length; i++) {
 			repstr += cel[calign[i]] + helper[i].trim() + '</th>';
@@ -472,7 +474,7 @@ var micromarkdown = {
 		return str.replace(stra[0], repstr);
 	},
 
-	listFilter: function (stra, str) {
+	listHandler: function (stra, str) {
 		var helper, helper1, status, indent, line, nstatus, repstr,
 			i = 0,
 			casca = 0;
@@ -536,43 +538,43 @@ var micromarkdown = {
 		}
 
 		while ((stra = regexobject.code.exec(str)) !== null) {
-			str = this.codeFilter(stra, str);
+			str = this.codeHandler(stra, str);
 		}
 
 		while ((stra = regexobject.headline.exec(str)) !== null) {
-			str = this.headlinesFilter(stra, str);
+			str = this.headlinesHandler(stra, str);
 		}
 
 		while ((stra = regexobject.lists.exec(str)) !== null) {
-			str = this.listFilter(stra, str);
+			str = this.listHandler(stra, str);
 		}
 
 		while ((stra = regexobject.tables.exec(str)) !== null) {
-			str = this.tablesFilter(stra, str, strict);
+			str = this.tablesHandler(stra, str, strict);
 		}
 
 		for (i = 0; i < 3; i++) {
 			while ((stra = regexobject.bolditalic.exec(str)) !== null) {
-				str = this.boldItalicFilter(stra, str);
+				str = this.boldItalicHandler(stra, str);
 			}
 		}
 
 		while ((stra = regexobject.links.exec(str)) !== null) {
-			str = this.linksFilter(stra, str, strict);
+			str = this.linksHandler(stra, str, strict);
 		}
 
 		while ((stra = regexobject.mail.exec(str)) !== null) {
-			str = this.mailFilter(stra, str);
+			str = this.mailHandler(stra, str);
 		}
 
 		while ((stra = regexobject.url.exec(str)) !== null) {
-			str = this.urlFilter(stra, str, strict);
+			str = this.urlHandler(stra, str, strict);
 		}
 
 		while ((stra = regexobject.reflinks.exec(str)) !== null) {
 			helper1 = new RegExp('\\[' + stra[2] + '\\]: ?([^ \n]+)', "gi");
 			if ((helper = helper1.exec(str)) !== null) {
-				str = this.refLinksFilter(str, stra, helper, strict);
+				str = this.refLinksHandler(str, stra, helper, strict);
 				trashgc.push(helper[0]);
 			}
 		}
@@ -585,7 +587,7 @@ var micromarkdown = {
 		}
 
 		while ((stra = regexobject.hr.exec(str)) !== null) {
-			str = this.horizontalLineFilter(stra, str);
+			str = this.horizontalLineHandler(stra, str);
 		}
 
 		return str.replace(/ {2,}[\n]{1,}/gmi, '<br/><br/>');
