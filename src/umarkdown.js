@@ -30,7 +30,7 @@ var micromarkdown = {
 		return str.replace(stra[0], '<code>\n' + micromarkdown.htmlEncode(stra[1]).replace(/\n/gm, '<br/>').replace(/\ /gm, '&nbsp;') + '</code>\n');
 	},
 
-	headlinesHandler: function (stra, str) {
+	headlineHandler: function (stra, str) {
 		var count = stra[1].length;
 		return str.replace(stra[0], '<h' + count + '>' + stra[2] + '</h' + count + '>' + '\n');
 	},
@@ -231,7 +231,7 @@ var micromarkdown = {
 	},
 
 	parse: function (str, strict) {
-		var helper, helper1, stra, trashgc = [], i;
+		var helper, helper1, stra, trashgc = [], i, that = this;
 		str = '\n' + str + '\n';
 
 		var regexobject = micromarkdown.regexobject;
@@ -239,17 +239,12 @@ var micromarkdown = {
 			regexobject.lists = /^((\s*(\*|\d\.) [^\n]+)\n)+/gm;
 		}
 
-		while ((stra = regexobject.code.exec(str)) !== null) {
-			str = this.codeHandler(stra, str);
-		}
-
-		while ((stra = regexobject.headline.exec(str)) !== null) {
-			str = this.headlinesHandler(stra, str);
-		}
-
-		while ((stra = regexobject.lists.exec(str)) !== null) {
-			str = this.listsHandler(stra, str);
-		}
+		['code', 'headline', 'lists'].forEach(function(type){
+			while((stra = regexobject[type].exec(str)) !== null) {
+				var func  = type + 'Handler';
+				str = that[func].apply(that, [stra, str]);
+			}
+		});
 
 		while ((stra = regexobject.tables.exec(str)) !== null) {
 			str = this.tablesHandler(stra, str, strict);
