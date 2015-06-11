@@ -443,8 +443,24 @@ var micromarkdown = {
 			}
 		}
 	},
+	tableHandler: function (helper1, i, calign, repstr, cel) {
+		var j, helper2;
+		helper2 = helper1[i].split('|');
+		if (helper2[0].length !== 0) {
+			while (calign.length < helper2.length) {
+				calign.push(0);
+			}
+			repstr += '<tr>';
+			for (j = 0; j < helper2.length; j++) {
+				repstr += cel[calign[j]] + helper2[j].trim() + '</td>';
+			}
+			repstr += '</tr>' + '\n';
+		}
+		return {helper2: helper2, repstr: repstr};
+	},
+
 	tablesHandler: function (stra, str, strict) {
-		var repstr, cel, helper, calign, helper1, helper2, i, j;
+		var repstr, cel, helper, calign, helper1, helper2, i;
 
 		repstr = '<table><tr>';
 		helper = stra[1].split('|');
@@ -458,23 +474,15 @@ var micromarkdown = {
 		cel = ['<td>', '<td align="left">', '<td align="right">', '<td align="center">'];
 		helper1 = stra[7].split('\n');
 		for (i = 0; i < helper1.length; i++) {
-			helper2 = helper1[i].split('|');
-			if (helper2[0].length !== 0) {
-				while (calign.length < helper2.length) {
-					calign.push(0);
-				}
-				repstr += '<tr>';
-				for (j = 0; j < helper2.length; j++) {
-					repstr += cel[calign[j]] + helper2[j].trim() + '</td>';
-				}
-				repstr += '</tr>' + '\n';
-			}
+			var result = this.tableHandler(helper1, i, calign, repstr, cel);
+			helper2 = result.helper2;
+			repstr = result.repstr;
 		}
 		repstr += '</table>';
 		return str.replace(stra[0], repstr);
 	},
 
-	listHanderStart: function (stra, repstr) {
+	listHandlerStart: function (stra, repstr) {
 		if ((stra[0].trim().substr(0, 1) === '*') || (stra[0].trim().substr(0, 1) === '-')) {
 			repstr = '<ul>';
 		} else {
@@ -527,7 +535,7 @@ var micromarkdown = {
 
 	listsHandler: function (stra, str) {
 		var helper, helper1 = [], status = 0, line, nstatus, repstr, i, casca = 0;
-		repstr = this.listHanderStart(stra, repstr);
+		repstr = this.listHandlerStart(stra, repstr);
 		helper = stra[0].split('\n');
 		for (i = 0; i < helper.length; i++) {
 			if ((line = /^((\s*)((\*|\-)|\d(\.|\))) ([^\n]+))/.exec(helper[i])) !== null) {
