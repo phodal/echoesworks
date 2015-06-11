@@ -150,7 +150,7 @@ var micromarkdown = {
 		return str.replace(stra[0], repstr);
 	},
 
-	listHanderStart: function (stra, repstr) {
+	listHandlerStart: function (stra, repstr) {
 		if ((stra[0].trim().substr(0, 1) === '*') || (stra[0].trim().substr(0, 1) === '-')) {
 			repstr = '<ul>';
 		} else {
@@ -203,7 +203,7 @@ var micromarkdown = {
 
 	listsHandler: function (stra, str) {
 		var helper, helper1 = [], status = 0, line, nstatus, repstr, i, casca = 0;
-		repstr = this.listHanderStart(stra, repstr);
+		repstr = this.listHandlerStart(stra, repstr);
 		helper = stra[0].split('\n');
 		for (i = 0; i < helper.length; i++) {
 			if ((line = /^((\s*)((\*|\-)|\d(\.|\))) ([^\n]+))/.exec(helper[i])) !== null) {
