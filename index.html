@@ -25,10 +25,12 @@
 <a href="https://codeclimate.com/github/phodal/echoesworks"><img src="https://codeclimate.com/github/phodal/echoesworks/badges/coverage.svg" alt="Test Coverage"></a>
 <a href=""><img src="https://img.shields.io/node/v/gh-badges.svg?style=flat" alt="Node"></a>
 <a href=""><img src="https://img.shields.io/npm/dm/echoesworks.svg?style=flat" alt="npm"></a>
+<a href=""><img src="https://img.shields.io/bower/v/echoesworks.svg?style=flat" alt="Bower"></a>
 <a href=""><img src="https://img.shields.io/badge/license-MIT-green.svg?style=flat" alt="LICENSE"></a></p>
 
 <h1>
-<a id="echoesworks" class="anchor" href="#echoesworks" aria-hidden="true"><span class="octicon octicon-link"></span></a>EchoesWorks</h1>
+<a id="echoesworks" class="anchor" href="#echoesworks" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="http://www.echoesworks.com/">EchoesWorks</a>
+</h1>
 
 <blockquote>
 <p>Next-Generation Tech Blog/Presentation Framework</p>
@@ -51,14 +53,64 @@
     });
 </code></pre>
 
+<p>Example with slide</p>
+
+<pre><code>window.onload = function(){
+  EchoesWorks.get('data/example.md', function(data){
+    var sections = EchoesWorks.md.parse(data);
+    document.querySelector('slide').innerHTML = sections;
+    new EchoesWorks({
+      element: 'slide',
+      source: 'data/data.json'
+    });
+  })
+};
+</code></pre>
+
+<h2>
+<a id="setup-development" class="anchor" href="#setup-development" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setup Development</h2>
+
+<p>1.Install devDependencies</p>
+
+<pre><code> npm install
+</code></pre>
+
+<p>2.Development</p>
+
+<p>3.Run Test</p>
+
+<pre><code> npm test
+</code></pre>
+
+<p>4.Push Code &amp; Waiting CI            </p>
+
 <h2>
 <a id="inspired-by--thanks-to" class="anchor" href="#inspired-by--thanks-to" aria-hidden="true"><span class="octicon octicon-link"></span></a>Inspired by &amp; Thanks to</h2>
 
-<p>slide: <a href="https://github.com/markdalgleish/bespoke.js">https://github.com/markdalgleish/bespoke.js</a></p>
+<ul>
+<li>
+<p>Slide</p>
 
-<p>markdown: <a href="https://github.com/simonwaldherr/micromarkdown.js/">https://github.com/simonwaldherr/micromarkdown.js/</a></p>
+<ul>
+<li><a href="https://github.com/markdalgleish/bespoke.js">https://github.com/markdalgleish/bespoke.js</a></li>
+<li><a href="https://github.com/bartaz/impress.js">https://github.com/bartaz/impress.js</a></li>
+</ul>
+</li>
+<li>
+<p>Markdown</p>
 
-<p>time: <a href="https://github.com/vorg/timeline.js">https://github.com/vorg/timeline.js</a></p>
+<ul>
+<li><a href="https://github.com/simonwaldherr/micromarkdown.js/">https://github.com/simonwaldherr/micromarkdown.js/</a></li>
+</ul>
+</li>
+<li>
+<p>Time </p>
+
+<ul>
+<li><a href="https://github.com/vorg/timeline.js">https://github.com/vorg/timeline.js</a></li>
+</ul>
+</li>
+</ul>
 
 <h2>
 <a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
