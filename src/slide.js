@@ -25,6 +25,7 @@ var from = function() {
 			fire('deactivate', createEventData(activeSlide, customData));
 			activeSlide = slides[index];
 			activeSlide.classList.add('active');
+			writeURL(index);
 			fire('activate', createEventData(activeSlide, customData));
 		},
 
@@ -34,6 +35,10 @@ var from = function() {
 			} else {
 				return slides.indexOf(activeSlide);
 			}
+		},
+
+		writeURL = function(index) {
+			window.location.hash = index;
 		},
 
 		step = function(offset, customData) {
