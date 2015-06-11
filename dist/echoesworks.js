@@ -16,7 +16,7 @@ var EchoesWorks = function(options) {
 	this.playing = false;
 	this.totalTime = 0;
 	var self = this;
-	this.fps = 30;
+	this.fps = 10;
 	setInterval(function() {
 		self.update();
 	}, 1000/this.fps);
@@ -161,7 +161,6 @@ EchoesWorks.send = function (url, method, callback, data) {
  */
 
 /*jshint -W030 */
-//
 
 var from = function() {
 
