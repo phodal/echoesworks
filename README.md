@@ -7,7 +7,7 @@
 [![Bower](https://img.shields.io/bower/v/echoesworks.svg?style=flat)]()
 [![LICENSE](https://img.shields.io/badge/license-MIT-green.svg?style=flat)]()
 
-# EchoesWorks
+# [EchoesWorks](http://www.echoesworks.com/)
 
 > Next-Generation Tech Blog/Presentation Framework
  
@@ -23,6 +23,19 @@
      		element: 'slide',
      		source: 'data/data.json'
      	});
+
+Example with slide
+
+    window.onload = function(){
+      EchoesWorks.get('data/example.md', function(data){
+        var sections = EchoesWorks.md.parse(data);
+        document.querySelector('slide').innerHTML = sections;
+        new EchoesWorks({
+          element: 'slide',
+          source: 'data/data.json'
+        });
+      })
+    };
 
 
 ##Inspired by & Thanks to
