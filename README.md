@@ -7,7 +7,7 @@
 [![Bower](https://img.shields.io/bower/v/echoesworks.svg?style=flat)]()
 [![LICENSE](https://img.shields.io/badge/license-MIT-green.svg?style=flat)]()
 
-# [EchoesWorks](http://www.echoesworks.com/)
+#[EchoesWorks](http://www.echoesworks.com/)#
 
 > Next-Generation Tech Blog/Presentation Framework
  
@@ -17,7 +17,7 @@
 - Integrate Github Code/Gist Code
 - Time Control
 
-##Usage
+##Usage##
 
      var EW = new EchoesWorks({
      		element: 'slide',
@@ -38,7 +38,7 @@ Example with slide
     };
 
 
-##Setup Development
+##Setup Development##
 
 1.Install devDependencies
 
@@ -52,7 +52,7 @@ Example with slide
       
 4.Push Code & Waiting CI            
 
-##Inspired by & Thanks to
+##Inspired by & Thanks to##
 
 - Slide
 
@@ -67,7 +67,7 @@ Example with slide
     
     * [https://github.com/vorg/timeline.js](https://github.com/vorg/timeline.js)
 
-## License
+##License##
 
 MIT. See `LICENSE.txt` in this directory.
 
