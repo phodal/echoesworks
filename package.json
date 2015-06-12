@@ -2,7 +2,7 @@
   "name": "echoesworks",
   "version": "0.0.3",
   "main": "dist/echoesworks.min.js",
-  "description": "Play Video or Audio with showing code & PPT",
+  "description": "Next-Generation Tech Blog/Presentation Framework",
   "repository": {
     "type": "git",
     "url": "git://github.com/phodal/echoesworks.git"
@@ -10,7 +10,7 @@
   "scripts": {
     "test": "grunt test;"
   },
-  "keywords": [],
+  "keywords": ["Presentation", "MOOC", "EchoesWorks", "Presentation Framework", "Echoes"],
   "author": "Phodal Huang",
   "license": "MIT",
   "readmeFilename": "README.md",
