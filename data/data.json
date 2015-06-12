@@ -8,7 +8,7 @@
   {
     "time": "00:7.51",
     "slide": 2,
-    "code": "https://raw.githubusercontent.com/phodal/echoesworks/master/bower.json",
+    "code": "https://raw.githubusercontent.com/phodal/echoesworks/master/package.json",
     "word": "hello, world, next"
   },
   {
@@ -19,13 +19,13 @@
   {
     "time": "00:17.51",
     "slide": 3,
-    "code": "https://raw.githubusercontent.com/phodal/echoesworks/master/bower.json",
+    "code": "https://raw.githubusercontent.com/phodal/lettuce/master/bower.json",
     "word": "hello, world, next"
   },
   {
     "time": "00:22.51",
     "slide": 4,
-    "code": "https://raw.githubusercontent.com/phodal/echoesworks/master/bower.json",
+    "code": "https://raw.githubusercontent.com/phodal/echoesworks/master/src/parser.js",
     "word": "hello, world, next"
   }
 ]

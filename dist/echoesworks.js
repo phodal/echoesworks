@@ -72,8 +72,16 @@ EchoesWorks.prototype.applyEchoes = function () {
 	var that = this;
 	if (that.dataStatus && that.data) {
 		var times = that.parser.parseTime(that.data.times);
-		if (parseFloat(that.time) > times[window.slide.slide()]) {
+		var currentSlide = window.slide.slide();
+
+		if (parseFloat(that.time) > times[currentSlide]) {
 			window.slide.next();
+			if(that.data.codes[currentSlide]){
+				var url = EchoesWorks.fn.rawGitConvert(that.data.codes[currentSlide]);
+				EchoesWorks.get(url, function(data){
+					document.querySelector('code').innerHTML = EchoesWorks.md.parse(data);
+				});
+			}
 		}
 	}
 };
@@ -158,11 +166,6 @@ EchoesWorks.send = function (url, method, callback, data) {
         };
     }
     request.open(method, url, true);
-    if (data instanceof Object) {
-        data = JSON.stringify(data);
-        request.setRequestHeader('Content-Type', 'application/json');
-    }
-    request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
     request.send(data);
 };
 

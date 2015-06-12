@@ -21,10 +21,5 @@ EchoesWorks.send = function (url, method, callback, data) {
         };
     }
     request.open(method, url, true);
-    if (data instanceof Object) {
-        data = JSON.stringify(data);
-        request.setRequestHeader('Content-Type', 'application/json');
-    }
-    request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
     request.send(data);
 };
