@@ -13,6 +13,7 @@
 var micromarkdown = {
 	regexobject: {
 		headline: /^(\#{1,6})([^\#\n]+)$/m,
+		pre: /\s\`\`\`(\w+)\n?[^`]+\`\`\`/g,
 		code: /\s\`\`\`\n?([^`]+)\`\`\`/g,
 		hr: /^(?:([\*\-_] ?)+)\1\1$/gm,
 		lists: /^((\s*((\*|\-)|\d(\.|\))) [^\n]+)\n)+/gm,
@@ -27,7 +28,12 @@ var micromarkdown = {
 	},
 
 	codeHandler: function (stra, str) {
-		return str.replace(stra[0], '<pre><code>\n' + micromarkdown.htmlEncode(stra[1]).replace(/\n/gm, '<br/>').replace(/\ /gm, '&nbsp;') + '</code></pre>\n');
+		var pre='', preClass;
+		if((preClass = this.regexobject.pre.exec(stra)) !== null){
+			pre = preClass[1];
+		}
+
+		return str.replace(stra[0], '<pre><code class="' + pre + '">\n' + micromarkdown.htmlEncode(stra[1]).replace(pre + '\n', '').replace(/\n/gm, '<br/>').replace(/\ /gm, '&nbsp;') + '</code></pre>\n');
 	},
 
 	headlineHandler: function (stra, str) {
