@@ -1,7 +1,9 @@
 var EchoesWorks = function (options) {
-	var defaults = {
+	var defaults, self = this;
+	defaults = {
 		element: 'slide',
-		source: 'data/data.json'
+		source: 'data/data.json',
+		auto: false
 	};
 
 	if(options === undefined) {
@@ -14,11 +16,10 @@ var EchoesWorks = function (options) {
 	this.options = options;
 	this.source = this.options.source;
 	this.element = this.options.element;
-	this.playing = false;
+	this.playing = this.options.auto;
 	this.totalTime = 0;
 	this.data = [];
 	this.dataStatus = false;
-	var self = this;
 	this.fps = 10;
 	setInterval(function () {
 		self.update();

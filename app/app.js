@@ -4,7 +4,8 @@ window.onload = function(){
 		document.querySelector('slide').innerHTML = sections;
 		var EW = new EchoesWorks({
 			element: 'slide',
-			source: 'data/data.json'
+			source: 'data/data.json',
+			auto: true
 		});
 		EW.play();
 	})

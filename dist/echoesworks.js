@@ -3,21 +3,27 @@
   "use strict";
 
 var EchoesWorks = function (options) {
-	if (!EchoesWorks.isObject(options)) {
-		options = {
-			element: 'slide',
-			source: 'data/data.json'
-		};
+	var defaults, self = this;
+	defaults = {
+		element: 'slide',
+		source: 'data/data.json',
+		auto: false
+	};
+
+	if(options === undefined) {
+		console.log("Default Options is Empty, use default options...");
+		options = {};
 	}
+
+	EchoesWorks.defaults(options, defaults);
 
 	this.options = options;
 	this.source = this.options.source;
 	this.element = this.options.element;
-	this.playing = false;
+	this.playing = this.options.auto;
 	this.totalTime = 0;
 	this.data = [];
 	this.dataStatus = false;
-	var self = this;
 	this.fps = 10;
 	setInterval(function () {
 		self.update();
@@ -31,12 +37,6 @@ EchoesWorks.prototype.init = function () {
 		return Math.max.apply(null, numArray);
 	}
 
-	function triggerEvent(eventName) {
-		var event = document.createEvent('Event');
-		event.initEvent(eventName, true, true);
-		document.dispatchEvent(event);
-	}
-
 	var that = this;
 	that.parser();
 	if (typeof that.parser.data.times === 'object') {
@@ -44,7 +44,7 @@ EchoesWorks.prototype.init = function () {
 		that.dataStatus = true;
 		var times = that.parser.parseTime(that.parser.data.times);
 		that.totalTime = getMaxOfArray(times);
-		triggerEvent("ew:slide:init");
+		EchoesWorks.triggerEvent("ew:slide:init");
 	}
 };
 
@@ -85,50 +85,55 @@ root.EchoesWorks = EchoesWorks;
 root.EW = EchoesWorks;
 
 /*     (c) 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
-*     Underscore may be freely distributed under the MIT license.
-*/
+ *     Underscore may be freely distributed under the MIT license.
+ */
 
 EchoesWorks.isObject = function (obj) {
-    var type = typeof obj;
-    return type === 'function' || type === 'object' && !!obj;
+	var type = typeof obj;
+	return type === 'function' || type === 'object' && !!obj;
 };
 
-EchoesWorks.isFunction = function(obj) {
-    return typeof obj == 'function' || false;
+EchoesWorks.isFunction = function (obj) {
+	return typeof obj == 'function' || false;
 };
 
-EchoesWorks.defaults = function(obj) {
-    if (!EchoesWorks.isObject(obj)) {
-        return obj;
-    }
+EchoesWorks.defaults = function (obj) {
+	if (!EchoesWorks.isObject(obj)) {
+		return obj;
+	}
 
-    for (var i = 1, length = arguments.length; i < length; i++) {
-        var source = arguments[i];
-        for (var prop in source) {
-            if (obj[prop] === void 0) {
-                obj[prop] = source[prop];
-            }
-        }
-    }
-    return obj;
+	for (var i = 1, length = arguments.length; i < length; i++) {
+		var source = arguments[i];
+		for (var prop in source) {
+			if (obj[prop] === void 0) {
+				obj[prop] = source[prop];
+			}
+		}
+	}
+	return obj;
 };
 
 EchoesWorks.extend = function (obj) {
-    if (!EchoesWorks.isObject(obj)) {
-        return obj;
-    }
-    var source, prop;
-    for (var i = 1, length = arguments.length; i < length; i++) {
-        source = arguments[i];
-        for (prop in source) {
-            if (hasOwnProperty.call(source, prop)) {
-                obj[prop] = source[prop];
-            }
-        }
-    }
-    return obj;
+	if (!EchoesWorks.isObject(obj)) {
+		return obj;
+	}
+	var source, prop;
+	for (var i = 1, length = arguments.length; i < length; i++) {
+		source = arguments[i];
+		for (prop in source) {
+			if (hasOwnProperty.call(source, prop)) {
+				obj[prop] = source[prop];
+			}
+		}
+	}
+	return obj;
 };
 
+EchoesWorks.triggerEvent = function (eventName) {
+	var event = document.createEvent('Event');
+	event.initEvent(eventName, true, true);
+	document.dispatchEvent(event);
+};
 
 EchoesWorks.get = function (url, callback) {
     EchoesWorks.send(url, 'GET', callback);
