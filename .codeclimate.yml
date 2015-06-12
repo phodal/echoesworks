@@ -5,4 +5,4 @@ exclude_paths:
   - "docs/**/*.js"
   - "specs/*.js"
   - "app/*.js"
-  - "src/*.js"
+  - "dist/*.js"
