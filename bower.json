@@ -1,14 +1,20 @@
 {
   "name": "echoesworks",
   "version": "0.0.2",
-  "main": "dist/echoesworks.min.js",
+  "main": "dist/echoesworks.js",
   "ignore": [
     "**/.*",
     "node_modules",
     "bower_components",
-    "test"
-  ],
-  "dependencies": {
-    "howler.js": "1.1.26"
-  }
+    "specs",
+    "coverage",
+    "app",
+    ".editorconfig",
+    ".codeclimate.yml",
+    ".jshintrc",
+    ".gitignore",
+    ".travis.yml",
+    "index.html",
+    "Roadmap.map"
+  ]
 }
