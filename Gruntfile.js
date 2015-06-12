@@ -50,6 +50,7 @@ module.exports = function (grunt) {
 					'src/slide.js',
 					'src/parser.js',
 					'src/umarkdown.js',
+					'src/3rd-party/main.js',
 					'src/3rd-party/github.js',
 					'src/_outro.js',
 					'src/events_handler.js'

@@ -5,7 +5,7 @@ function rawGitConvert(url){
 }
 
 var Github = {
-	convertURL: rawGitConvert
+	rawGitConvert: rawGitConvert
 };
 
-EchoesWorks.prototype = EchoesWorks.extend(EchoesWorks.prototype, {fn: Github});
+EchoesWorks.fn = EchoesWorks.extend(EchoesWorks.fn, Github);

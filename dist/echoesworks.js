@@ -625,6 +625,12 @@ var micromarkdown = {
 
 EchoesWorks.md = micromarkdown;
 
+var fn = function () {
+
+};
+
+EchoesWorks.fn = fn;
+
 function rawGitConvert(url){
 	var results = url.replace('github.com', 'rawgit.com');
 	results = results.replace('raw.githubusercontent.com', 'rawgit.com');
@@ -632,10 +638,10 @@ function rawGitConvert(url){
 }
 
 var Github = {
-	convertURL: rawGitConvert
+	rawGitConvert: rawGitConvert
 };
 
-EchoesWorks.prototype = EchoesWorks.extend(EchoesWorks.prototype, {fn: Github});
+EchoesWorks.fn = EchoesWorks.extend(EchoesWorks.fn, Github);
 
 }(this));
 

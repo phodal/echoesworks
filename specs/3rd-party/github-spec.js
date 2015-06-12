@@ -1,6 +1,4 @@
 describe("Github", function () {
-	var EW = new EchoesWorks();
-
 	beforeEach(function () {
 		jasmine.clock().install();
 	});
@@ -9,8 +7,8 @@ describe("Github", function () {
 	});
 
 	it("should return raw git url", function () {
-		expect(EW.fn.convertURL("https://github.com/phodal/echoesworks")).toBe('https://rawgit.com/phodal/echoesworks');
-		expect(EW.fn.convertURL("https://raw.githubusercontent.com/phodal/echoesworks/master/bower.json"))
+		expect(EchoesWorks.fn.rawGitConvert("https://github.com/phodal/echoesworks")).toBe('https://rawgit.com/phodal/echoesworks');
+		expect(EchoesWorks.fn.rawGitConvert("https://raw.githubusercontent.com/phodal/echoesworks/master/bower.json"))
 			.toBe('https://rawgit.com/phodal/echoesworks/master/bower.json');
 	});
 });
