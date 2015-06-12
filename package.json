@@ -1,6 +1,6 @@
 {
   "name": "echoesworks",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "dist/echoesworks.min.js",
   "description": "Play Video or Audio with showing code & PPT",
   "repository": {
