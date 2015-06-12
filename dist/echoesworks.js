@@ -78,8 +78,8 @@ EchoesWorks.prototype.applyEchoes = function () {
 			window.slide.next();
 			if(that.data.codes[currentSlide]){
 				var url = EchoesWorks.fn.rawGitConvert(that.data.codes[currentSlide]);
-				EchoesWorks.get(url, function(data){
-					document.querySelector('code').innerHTML = EchoesWorks.md.parse(data);
+				EchoesWorks.get(url, function(response){
+					document.querySelector('pre').innerHTML = response;
 				});
 			}
 		}
@@ -345,6 +345,7 @@ EchoesWorks.prototype = EchoesWorks.extend(EchoesWorks.prototype, {parser: parse
 var micromarkdown = {
 	regexobject: {
 		headline: /^(\#{1,6})([^\#\n]+)$/m,
+		pre: /\s\`\`\`(\w+)\n?[^`]+\`\`\`/g,
 		code: /\s\`\`\`\n?([^`]+)\`\`\`/g,
 		hr: /^(?:([\*\-_] ?)+)\1\1$/gm,
 		lists: /^((\s*((\*|\-)|\d(\.|\))) [^\n]+)\n)+/gm,
@@ -359,7 +360,12 @@ var micromarkdown = {
 	},
 
 	codeHandler: function (stra, str) {
-		return str.replace(stra[0], '<code>\n' + micromarkdown.htmlEncode(stra[1]).replace(/\n/gm, '<br/>').replace(/\ /gm, '&nbsp;') + '</code>\n');
+		var pre='', preClass, replaced;
+		if((preClass = this.regexobject.pre.exec(stra)) !== null){
+			pre = preClass[1];
+		}
+
+		return str.replace(stra[0], '<pre><code class="' + pre + '">\n' + micromarkdown.htmlEncode(stra[1]).replace(pre + '\n', '').replace(/\n/gm, '<br/>').replace(/\ /gm, '&nbsp;') + '</code></pre>\n');
 	},
 
 	headlineHandler: function (stra, str) {
