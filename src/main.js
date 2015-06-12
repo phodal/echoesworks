@@ -27,12 +27,6 @@ EchoesWorks.prototype.init = function () {
 		return Math.max.apply(null, numArray);
 	}
 
-	function triggerEvent(eventName) {
-		var event = document.createEvent('Event');
-		event.initEvent(eventName, true, true);
-		document.dispatchEvent(event);
-	}
-
 	var that = this;
 	that.parser();
 	if (typeof that.parser.data.times === 'object') {
@@ -40,7 +34,7 @@ EchoesWorks.prototype.init = function () {
 		that.dataStatus = true;
 		var times = that.parser.parseTime(that.parser.data.times);
 		that.totalTime = getMaxOfArray(times);
-		triggerEvent("ew:slide:init");
+		EchoesWorks.triggerEvent("ew:slide:init");
 	}
 };
 

@@ -42,3 +42,9 @@ EchoesWorks.extend = function (obj) {
     }
     return obj;
 };
+
+EchoesWorks.triggerEvent = function (eventName) {
+    var event = document.createEvent('Event');
+    event.initEvent(eventName, true, true);
+    document.dispatchEvent(event);
+};
