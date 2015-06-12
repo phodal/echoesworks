@@ -52,7 +52,7 @@ describe("Markdown", function () {
 
 	it("should parse code", function () {
 		expect(EW.md.parse('```\nvar md   = document.getElementById("md").value```'))
-			.toBe('<code>\nvar&nbsp;md&nbsp;&nbsp;&nbsp;=&nbsp;document.getElementById("md").value</code>\n\n');
+			.toBe('<pre><code>\nvar&nbsp;md&nbsp;&nbsp;&nbsp;=&nbsp;document.getElementById("md").value</code></pre>\n\n');
 	});
 
 	it("should parse ul list", function () {

@@ -27,7 +27,7 @@ var micromarkdown = {
 	},
 
 	codeHandler: function (stra, str) {
-		return str.replace(stra[0], '<code>\n' + micromarkdown.htmlEncode(stra[1]).replace(/\n/gm, '<br/>').replace(/\ /gm, '&nbsp;') + '</code>\n');
+		return str.replace(stra[0], '<pre><code>\n' + micromarkdown.htmlEncode(stra[1]).replace(/\n/gm, '<br/>').replace(/\ /gm, '&nbsp;') + '</code></pre>\n');
 	},
 
 	headlineHandler: function (stra, str) {
