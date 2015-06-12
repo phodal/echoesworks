@@ -74,8 +74,9 @@ EchoesWorks.prototype.applyEchoes = function () {
 			window.slide.next();
 			if(that.data.codes[currentSlide]){
 				var url = EchoesWorks.fn.rawGitConvert(that.data.codes[currentSlide]);
-				EchoesWorks.get(url, function(data){
-					document.querySelector('code').innerHTML = EchoesWorks.md.parse(data);
+				EchoesWorks.get(url, function(response){
+					response = response.replace(/\n/g, "<br/>").replace(/ /g, "&nbsp;");
+					document.querySelector('code').innerHTML = EchoesWorks.md.parse(response);
 				});
 			}
 		}
