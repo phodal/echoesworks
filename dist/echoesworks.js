@@ -80,7 +80,12 @@ EchoesWorks.prototype.applyEchoes = function () {
 				var url = EchoesWorks.fn.rawGitConvert(that.data.codes[currentSlide]);
 				EchoesWorks.get(url, function(response){
 					document.querySelector('pre').innerHTML = response;
+					document.querySelector('slide').classList.remove('full');
+					document.querySelector('code').classList.remove('hidden');
 				});
+			} else {
+				document.querySelector('slide').classList.add('full');
+				document.querySelector('code').classList.add('hidden');
 			}
 		}
 	}
@@ -360,7 +365,7 @@ var micromarkdown = {
 	},
 
 	codeHandler: function (stra, str) {
-		var pre='', preClass, replaced;
+		var pre='', preClass;
 		if((preClass = this.regexobject.pre.exec(stra)) !== null){
 			pre = preClass[1];
 		}
