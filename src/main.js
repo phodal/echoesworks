@@ -1,10 +1,15 @@
 var EchoesWorks = function (options) {
-	if (!EchoesWorks.isObject(options)) {
-		options = {
-			element: 'slide',
-			source: 'data/data.json'
-		};
+	var defaults = {
+		element: 'slide',
+		source: 'data/data.json'
+	};
+
+	if(options === undefined) {
+		console.log("Default Options is Empty, use default options...");
+		options = {};
 	}
+
+	EchoesWorks.defaults(options, defaults);
 
 	this.options = options;
 	this.source = this.options.source;
