@@ -10,14 +10,40 @@
 #[EchoesWorks](http://www.echoesworks.com/)#
 
 > Next-Generation Tech Blog/Presentation Framework
+
+zh
+
+> 下一代技术``博客``/``展示``框架
  
+##Feature
+
+###Main
+
+- ``Markdown`` Presentation
+- Integrate Github Code/Gist Code
+- ``Full Screen`` Background Image
+
+###Addon
+
 - Timer Audio
 - Timer subtitles
-- Markdown Presentation
-- Integrate Github Code/Gist Code
 - Time Control
 
 ##Usage##
+
+
+1.Install
+
+    bower install echoesworks
+    
+2.Data
+
+create ``example.md`` & ``data.json`` under ``data`` folder 
+    
+- Markdown Slide
+- Data for code & Time Control     
+    
+3.Code    
 
      var EW = new EchoesWorks({
      		element: 'slide',

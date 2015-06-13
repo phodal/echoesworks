@@ -13,3 +13,14 @@
 ##Goal
 
 - Be Useful for show
+
+##Idea
+
+6.12
+
+- Chrome Extension Support
+
+6.13
+
+- Lead Motion Control
+- Phone Control
