@@ -45,6 +45,14 @@ section.first h1 {
     position: relative;
 }
 
+section.first h2 {
+    font-size: 2.5em;
+    color: #00bcd4;
+    top: 30%;
+    left: 60%;
+    position: relative;
+}
+
 slide {
     width: 50%;
     float: left;

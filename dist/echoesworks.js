@@ -211,14 +211,13 @@ var from = function () {
 				return;
 			}
 
-			if(index === 0) {
-				activeSlide.classList.add('first');
-			}
-
 			activeSlide.className = activeSlide.className.replace(new RegExp('active' + '(\\s|$)', 'g'), ' ').trim();
 			fire('deactivate', createEventData(activeSlide, customData));
 			activeSlide = slides[index];
 			activeSlide.classList.add('active');
+			if(index === 0) {
+				activeSlide.classList.add('first');
+			}
 			writeURL(index);
 			fire('activate', createEventData(activeSlide, customData));
 		},
