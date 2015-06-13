@@ -33,6 +33,10 @@ section h1 {
     margin-right: auto;
 }
 
+section h2 {
+    font-size: 2.8em;
+}
+
 section h1,
 section h2,
 section h3,
@@ -52,7 +56,7 @@ section ul {
 }
 
 section ul li {
-    font-size: 1.8em;
+    font-size: 2.2em;
 }
 
 section.first h1 {
