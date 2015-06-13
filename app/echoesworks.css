@@ -1,3 +1,7 @@
+body {
+    height: 100%;
+}
+
 section {
     display: block;
     width: 100%;
@@ -23,14 +27,13 @@ section h1,
 section h2,
 section h3,
 section ul,
-section p
-{
+section p {
     padding: 0 0 0 40px;
 }
 
-slide  {
+slide {
     width: 50%;
-    float:left;
+    float: left;
 }
 
 slide section {
