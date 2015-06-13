@@ -1,4 +1,12 @@
+html {
+    height: 100%; /* <------------ */
+}
+
 body {
+    height: 100%; /* <------------ */
+}
+
+div.show {
     height: 100%;
 }
 
@@ -42,6 +50,7 @@ slide section {
 
 section.active {
     display: block;
+    height: 100%;
 }
 
 code {
