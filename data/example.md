@@ -29,7 +29,7 @@
 * Integrate Code
 * Github Code
  
-Add On
+**Add On**
  
 * Subtitles
 * Audio 
@@ -38,9 +38,9 @@ Add On
 <section>
 #Slide 4
 </section>
-<section>
-#Slide 5
+<section class="first">
+#Q & A
 </section>
-<section>
-#Slide 6
+<section class="first">
+#Thank you
 </section>

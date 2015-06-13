@@ -11,6 +11,7 @@ div.show {
 }
 
 section {
+    font-size: 1em;
     display: block;
     width: 100%;
     min-height: 600px;
@@ -35,8 +36,22 @@ section h1,
 section h2,
 section h3,
 section ul,
+section b,
 section p {
     padding: 0 0 0 40px;
+}
+
+section b,
+section strong {
+    font-size: 2em;
+}
+
+section ul {
+    margin-left: 5em;
+}
+
+section ul li {
+    font-size: 1.8em;
 }
 
 section.first h1 {
