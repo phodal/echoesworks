@@ -10,6 +10,7 @@
  * Version: 0.3.0
  */
 
+/*jshint strict: true */
 var micromarkdown = {
 	regexobject: {
 		headline: /^(\#{1,6})([^\#\n]+)$/m,

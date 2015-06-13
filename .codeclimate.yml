@@ -6,3 +6,4 @@ exclude_paths:
   - "specs/*.js"
   - "app/*.js"
   - "dist/*.js"
+  - "lib/*"
