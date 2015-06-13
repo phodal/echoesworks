@@ -8,31 +8,37 @@
 
 /*jshint -W030 */
 
-var from = function() {
+var from = function () {
 
-	var element =  this.options.element,
+	var element = this.options.element,
 		parent = element.nodeType === 1 ? element : document.querySelector(element),
-		slides = [].filter.call(parent.children, function(el) { return el.nodeName !== 'SCRIPT'; }),
+		slides = [].filter.call(parent.children, function (el) {
+			return el.nodeName !== 'SCRIPT';
+		}),
 		activeSlide = slides[0],
 		listeners = {},
 
 		readURL = function () {
 			var hash = window.location.hash,
-				 current = hash.replace( /#|\//gi, '' );
+				current = hash.replace(/#|\//gi, '');
 
-			if(current > 0){
+			if (current > 0) {
 				activate(current);
 			} else {
 				activate(0);
 			}
 		},
 
-		activate = function(index, customData) {
+		activate = function (index, customData) {
 			if (!slides[index]) {
 				return;
 			}
 
-			activeSlide.className = activeSlide.className.replace(new RegExp('active' +'(\\s|$)', 'g'), ' ').trim();
+			if(index === 0) {
+				activeSlide.classList.add('first');
+			}
+
+			activeSlide.className = activeSlide.className.replace(new RegExp('active' + '(\\s|$)', 'g'), ' ').trim();
 			fire('deactivate', createEventData(activeSlide, customData));
 			activeSlide = slides[index];
 			activeSlide.classList.add('active');
@@ -40,7 +46,7 @@ var from = function() {
 			fire('activate', createEventData(activeSlide, customData));
 		},
 
-		slide = function(index, customData) {
+		slide = function (index, customData) {
 			if (arguments.length) {
 				fire('slide', createEventData(slides[index], customData)) && activate(index, customData);
 			} else {
@@ -48,34 +54,34 @@ var from = function() {
 			}
 		},
 
-		writeURL = function(index) {
+		writeURL = function (index) {
 			window.location.hash = '#/' + index;
 		},
 
-		step = function(offset, customData) {
+		step = function (offset, customData) {
 			var slideIndex = slides.indexOf(activeSlide) + offset;
 
 			fire(offset > 0 ? 'next' : 'prev', createEventData(activeSlide, customData)) && activate(slideIndex, customData);
 		},
 
-		on = function(eventName, callback) {
+		on = function (eventName, callback) {
 			(listeners[eventName] || (listeners[eventName] = [])).push(callback);
 
-			return function() {
-				listeners[eventName] = listeners[eventName].filter(function(listener) {
+			return function () {
+				listeners[eventName] = listeners[eventName].filter(function (listener) {
 					return listener !== callback;
 				});
 			};
 		},
 
-		fire = function(eventName, eventData) {
+		fire = function (eventName, eventData) {
 			return (listeners[eventName] || [])
-				.reduce(function(notCancelled, callback) {
+				.reduce(function (notCancelled, callback) {
 					return notCancelled && callback(eventData) !== false;
 				}, true);
 		},
 
-		createEventData = function(el, eventData) {
+		createEventData = function (el, eventData) {
 			eventData = eventData || {};
 			eventData.index = slides.indexOf(el);
 			eventData.slide = el;

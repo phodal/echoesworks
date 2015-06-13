@@ -24,7 +24,7 @@ section {
 }
 
 section h1 {
-    font-size: 3em;
+    font-size: 4em;
     min-width: 200px;
     text-align: center;
     margin-left: auto;
@@ -37,6 +37,12 @@ section h3,
 section ul,
 section p {
     padding: 0 0 0 40px;
+}
+
+section.first h1 {
+    top: 30%;
+    font-size: 5em;
+    position: relative;
 }
 
 slide {
