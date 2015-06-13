@@ -1,6 +1,10 @@
 <section>
+![hello](app/background.jpg)
+
 #EchoesWorks
-##Phodal Huang  
+
+##Phodal Huang
+  
 </section>
 <section>
 #Design for Developer
@@ -9,7 +13,7 @@
 
 ##What is different?
 
-##What we need ?
+##What we need?
 </section>
 <section>
 #Code
