@@ -51,3 +51,83 @@ describe("Helper", function () {
     });
 
 });
+
+/**
+ * forEach.js
+ */
+/*! foreach.js v1.1.0 | (c) 2014 @toddmotto | https://github.com/toddmotto/foreach */
+
+describe('EchoesWorks.forEach', function () {
+    describe('Array looping', function () {
+        var myArray;
+        beforeEach(function () {
+            myArray = ['A', 'B', 'C', 'D'];
+        });
+        
+        it('should pass the index', function () {
+            EchoesWorks.forEach(myArray, function (value, index) {
+                expect(index).toMatch(/[0-9]/);
+            });
+        });
+        
+        it('should pass the element', function () {
+            EchoesWorks.forEach(myArray, function (value, index) {
+                expect(value).toMatch(/[A-D]/);
+            });
+        });
+        
+    });
+    
+    /**
+     * Object
+     */
+    describe('Object looping', function () {
+        var myObject;
+        beforeEach(function () {
+            myObject = {testA: 'A', testB: 'B', testC: 'C', testD: 'D'};
+        });
+        
+        it('should pass the value', function () {
+            EchoesWorks.forEach(myObject, function (value, prop, obj) {
+                expect(value).toMatch(/[A-D]/);
+            });
+        });
+        
+        it('should pass the property name', function () {
+            EchoesWorks.forEach(myObject, function (value, prop, obj) {
+                expect(prop).toMatch(/test[A-D]/);
+            });
+        });
+        
+        it('should pass the initial object', function () {
+            EchoesWorks.forEach(myObject, function (value, prop, obj) {
+                expect(Object.prototype.toString.call(obj)).toBe('[object Object]');
+            });
+        });
+            });
+    
+    /**
+     * Context
+     */
+    describe('Context changing', function () {
+        var myObject;
+        var myArray;
+        
+        beforeEach(function () {
+            myArray = ['A', 'B', 'C', 'D'];
+            myObject = {testA: 'A', testB: 'B', testC: 'C', testD: 'D'};
+        });
+        
+        it('should change the context to the iterated Object', function () {
+            EchoesWorks.forEach(myObject, function (value, prop, obj) {
+                expect(this.testA).toEqual('A');
+            }, myObject);
+        });
+        
+        it('should change the context to the iterated Array', function () {
+            EchoesWorks.forEach(myArray, function (value, index) {
+                expect(this[0]).toEqual('A');
+            }, myArray);
+        });
+    });
+});
