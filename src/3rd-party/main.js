@@ -1,5 +1,3 @@
-var fn = function () {
-
-};
+var fn =  {};
 
 EchoesWorks.fn = fn;
