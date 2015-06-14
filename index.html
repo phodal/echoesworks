@@ -48,14 +48,15 @@
 <a id="feature" class="anchor" href="#feature" aria-hidden="true"><span class="octicon octicon-link"></span></a>Feature</h2>
 
 <h3>
-<a id="main" class="anchor" href="#main" aria-hidden="true"><span class="octicon octicon-link"></span></a>Main</h3>
+<a id="core" class="anchor" href="#core" aria-hidden="true"><span class="octicon octicon-link"></span></a>Core</h3>
 
 <ul>
 <li>
 <code>Markdown</code> Presentation</li>
 <li>Integrate Github Code/Gist Code</li>
 <li>
-<code>Full Screen</code> Background Image</li>
+<code>Full Screen</code> Background Image </li>
+<li>Process Bar</li>
 </ul>
 
 <h3>
@@ -95,16 +96,15 @@
 
 <p>Example with slide</p>
 
-<pre><code>window.onload = function(){
-  EchoesWorks.get('data/example.md', function(data){
-    var sections = EchoesWorks.md.parse(data);
-    document.querySelector('slide').innerHTML = sections;
-    new EchoesWorks({
-      element: 'slide',
-      source: 'data/data.json'
-    });
-  })
-};
+<pre><code>EchoesWorks.get('data/example.md', function(data){
+        document.querySelector('slide').innerHTML = EchoesWorks.md.parse(data);
+        EchoesWorks.imageHandler();
+        new EchoesWorks({
+            element: 'slide',
+            source: 'data/data.json',
+            auto: false
+        });
+    })
 </code></pre>
 
 <h2>
@@ -148,6 +148,13 @@
 
 <ul>
 <li><a href="https://github.com/vorg/timeline.js">https://github.com/vorg/timeline.js</a></li>
+</ul>
+</li>
+<li>
+<p>Process Bar </p>
+
+<ul>
+<li><a href="https://github.com/jacoborus/nanobar">https://github.com/jacoborus/nanobar</a></li>
 </ul>
 </li>
 </ul>
