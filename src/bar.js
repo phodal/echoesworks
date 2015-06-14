@@ -97,4 +97,7 @@ Nanobar.prototype.go = function (p) {
 	}
 };
 
-EchoesWorks.bar = Nanobar;
+var bar = new Nanobar();
+window.bar = bar;
+
+EchoesWorks.bar = bar;

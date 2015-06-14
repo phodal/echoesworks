@@ -754,7 +754,7 @@ init = function () {
 
 Bar = function (cont) {
 	this.el = document.createElement('div');
-	this.el.style.backgroundColor = cont.opts.bg;
+	this.el.style.backgroundColor = '#F44336';
 	this.width = 0;
 	this.here = 0;
 	this.moving = false;
@@ -777,14 +777,12 @@ Bar.prototype.go = function (num) {
 
 
 Nanobar = function () {
-	var opts = this.opts = {}, el;
-	opts.bg = '#F44336';
 	this.bars = [];
 
-	el = this.el = document.createElement('div');
+	this.el = document.createElement('div');
 	addCss(this.el, cssCont);
-	el.style.position = 'fixed';
-	document.getElementsByTagName('body')[0].appendChild(el);
+	this.el.style.position = 'fixed';
+	document.getElementsByTagName('body')[0].appendChild(this.el);
 
 	init.call(this);
 };
@@ -797,9 +795,12 @@ Nanobar.prototype.go = function (p) {
 	}
 };
 
-EchoesWorks.bar = Nanobar;
+var bar = new Nanobar();
+window.bar = bar;
 
-var fn = {};
+EchoesWorks.bar = bar;
+
+var fn =  {};
 
 EchoesWorks.fn = fn;
 
