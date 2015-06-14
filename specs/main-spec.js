@@ -18,7 +18,11 @@ describe("Main", function () {
 
 		document.body.appendChild(article);
 
-		EW = new EchoesWorks({element: 'slide'});
+		EW = new EchoesWorks({
+			element: 'slide',
+			source: 'data/data.json',
+			auto: false
+		});
 		jasmine.clock().install();
 	});
 	afterEach(function () {
@@ -40,7 +44,11 @@ describe("Main", function () {
 	});
 
 	it("should auto call update function", function () {
-		var ew = new EchoesWorks();
+		var ew = new EchoesWorks({
+			element: 'slide',
+			source: 'data/data.json',
+			auto: false
+		});
 		ew.play();
 		spyOn(ew, 'update');
 		expect(ew.update).not.toHaveBeenCalled();
@@ -49,10 +57,35 @@ describe("Main", function () {
 	});
 
 	it("should test time correctly", function () {
-		var ew = new EchoesWorks();
+		var ew = new EchoesWorks({
+			element: 'slide',
+			source: 'data/data.json',
+			auto: false
+		});
 		ew.play();
 		jasmine.clock().tick(2000);
 		expect(ew.time).toBeGreaterThan(2);
+	});
+
+	it("should update code correctly", function () {
+		spyOn(EchoesWorks, "get").and.returnValue({});
+
+		var ew = new EchoesWorks({
+			element: 'slide',
+			source: 'data/data.json',
+			auto: true
+		});
+		spyOn(window.slide, 'next');
+		spyOn(document, 'querySelector');
+		ew.dataStatus = true;
+		ew.data = {
+			times: ["00:01.00", "00:01.30"],
+			codes: ["https://raw.githubusercontent.com/phodal/echoesworks/master/bower.json",
+				"https://raw.githubusercontent.com/phodal/echoesworks/master/bower.json"],
+			words: ["hello, world"]
+		};
+		jasmine.clock().tick(2500);
+		expect(window.slide.next).toHaveBeenCalled();
 	});
 
 });

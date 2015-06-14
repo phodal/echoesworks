@@ -13,7 +13,6 @@ describe("Image", function () {
 	});
 
 	it("should return element", function () {
-		var sections = document.getElementsByTagName('section');
 		spyOn(EchoesWorks.imageHandler, 'removeImages');
 		EchoesWorks.imageHandler();
 		expect(EchoesWorks.imageHandler.removeImages).toHaveBeenCalled();
