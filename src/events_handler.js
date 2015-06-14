@@ -14,18 +14,10 @@
 		DOWN = 40,
 		PAGE_UP = 33,
 		UP = 38,
-		EW,
 		slide;
 
-	EW = new EchoesWorks({
-		element: 'slide',
-		source: 'data/data.json'
-	});
 
 	document.addEventListener("ew:slide:init", function (event) {
-		slide = EW.slide();
-		window.slide = slide;
-
 		document.addEventListener("keydown", function (event) {
 			var keyCode = event.keyCode;
 			if (keyCode === TAB || ( keyCode >= SPACE && keyCode <= PAGE_DOWN ) || (keyCode >= LEFT && keyCode <= DOWN)) {

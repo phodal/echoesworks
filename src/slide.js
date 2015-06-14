@@ -98,6 +98,7 @@ var from = function () {
 		};
 
 	readURL();
+	window.slide = deck;
 
 	return deck;
 };

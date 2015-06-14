@@ -3,7 +3,7 @@
   "use strict";
 
 var EchoesWorks = function (options) {
-	var defaults, self = this;
+	var defaults;
 	defaults = {
 		element: 'slide',
 		source: 'data/data.json',
@@ -25,30 +25,38 @@ var EchoesWorks = function (options) {
 	this.data = [];
 	this.dataStatus = false;
 	this.fps = 10;
-	setInterval(function () {
-		self.update();
-	}, 1000 / this.fps);
 	this.time = 0;
 	this.init();
 };
 
 EchoesWorks.prototype.init = function () {
+	var that = this;
+
 	function getMaxOfArray(numArray) {
 		return Math.max.apply(null, numArray);
 	}
 
-	var that = this;
-	that.parser();
-	if (typeof that.parser.data.times === 'object') {
-		that.data = that.parser.data;
-		that.dataStatus = true;
-		var times = that.parser.parseTime(that.parser.data.times);
-		that.totalTime = getMaxOfArray(times);
-		EchoesWorks.triggerEvent("ew:slide:init");
+	that.slide();
+	EchoesWorks.triggerEvent("ew:slide:init");
+
+	if (window.slide) {
+		setInterval(function () {
+			that.update();
+		}, 1000 / this.fps);
+
+		that.parser();
+		if (typeof that.parser.data.times === 'object') {
+			console.log(that.parser.data.times);
+			that.data = that.parser.data;
+			that.dataStatus = true;
+			var times = that.parser.parseTime(that.parser.data.times);
+			that.totalTime = getMaxOfArray(times);
+		}
 	}
 };
 
 EchoesWorks.prototype.stop = function () {
+	console.log("total time:", this.totalTime);
 	this.playing = false;
 	this.time = 0;
 };
@@ -290,6 +298,7 @@ var from = function () {
 		};
 
 	readURL();
+	window.slide = deck;
 
 	return deck;
 };
@@ -715,18 +724,10 @@ EchoesWorks.fn = EchoesWorks.extend(EchoesWorks.fn, Github);
 		DOWN = 40,
 		PAGE_UP = 33,
 		UP = 38,
-		EW,
 		slide;
 
-	EW = new EchoesWorks({
-		element: 'slide',
-		source: 'data/data.json'
-	});
 
 	document.addEventListener("ew:slide:init", function (event) {
-		slide = EW.slide();
-		window.slide = slide;
-
 		document.addEventListener("keydown", function (event) {
 			var keyCode = event.keyCode;
 			if (keyCode === TAB || ( keyCode >= SPACE && keyCode <= PAGE_DOWN ) || (keyCode >= LEFT && keyCode <= DOWN)) {
