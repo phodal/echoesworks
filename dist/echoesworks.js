@@ -92,7 +92,7 @@ EchoesWorks.prototype.applyEchoes = function () {
 };
 
 
-EchoesWorks.VERSION = '0.0.3';
+EchoesWorks.VERSION = '0.0.4';
 
 root.EchoesWorks = EchoesWorks;
 root.EW = EchoesWorks;
@@ -644,6 +644,15 @@ var micromarkdown = {
 };
 
 EchoesWorks.md = micromarkdown;
+
+var imageHandler = function (sections){
+	console.log(sections);
+	return sections;
+};
+
+EchoesWorks.imageHandler = imageHandler;
+
+
 
 var fn = function () {
 

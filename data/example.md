@@ -1,5 +1,5 @@
 <section>
-![hello](app/background.jpg)
+![full](app/background.jpg)
 
 #EchoesWorks
 
@@ -7,6 +7,9 @@
   
 </section>
 <section>
+
+![full](app/background.jpg)
+
 #Design for Developer
 
 ##EchoesWorks?

@@ -1,6 +1,7 @@
 window.onload = function(){
 	EchoesWorks.get('data/example.md', function(data){
 		var sections = EchoesWorks.md.parse(data);
+		sections = EchoesWorks.imageHandler(sections);
 		document.querySelector('slide').innerHTML = sections;
 		new EchoesWorks({
 			element: 'slide',
