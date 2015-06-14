@@ -4,8 +4,10 @@ var imageHandler = function (sections) {
 		if (image !== undefined) {
 			var imageSrc = image.src;
 			var imageType = image.title;
-			image.parentNode.style.backgroundImage = "url('" + imageSrc + "')";
-			image.parentNode.classList.add(imageType);
+			if(image.title === 'background'){
+				image.parentNode.style.backgroundImage = "url('" + imageSrc + "')";
+				image.parentNode.classList.add(imageType);
+			}
 		}
 	});
 	imageHandler.removeImages();
