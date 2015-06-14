@@ -23,6 +23,10 @@ section {
     box-shadow: 0 2px 6px rgba(0, 0, 0, .1);
     color: #34495e;
     text-shadow: 0 2px 2px rgba(0, 0, 0, .1);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 section h1 {
@@ -99,13 +103,6 @@ code {
     height: 80%;
 }
 
-/*@media screen and (max-width: 1024px) { /!* Specific to this particular image *!/*/
-    /*img {*/
-        /*left: 50%;*/
-        /*margin-left: -512px;   /!* 50% *!/*/
-    /*}*/
-/*}*/
-
 .full {
     width: 100%;
     height: 100%;
@@ -121,19 +118,4 @@ code {
 
 .hidden {
     display: none;
-}
-
-img.background {
-    /* Set rules to fill background */
-    min-height: 100%;
-    min-width: 1024px;
-
-    /* Set up proportionate scaling */
-    width: 100%;
-    height: auto;
-
-    /* Set up positioning */
-    position: fixed;
-    top: 0;
-    left: 0;
 }
