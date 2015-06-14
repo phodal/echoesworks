@@ -1,7 +1,24 @@
 describe("Main", function () {
-	var EW = new EchoesWorks();
+	var PARENT_TAG = 'slide',
+		SLIDE_TAG = 'section',
+		NO_OF_SLIDES = 10,
+		article,
+		slides,
+		slide,
+		EW;
 
 	beforeEach(function () {
+		slides = [];
+
+		article = document.createElement(PARENT_TAG);
+		for (var i = 0; i < NO_OF_SLIDES; i++) {
+			slides.push(document.createElement(SLIDE_TAG));
+			article.appendChild(slides[i]);
+		}
+
+		document.body.appendChild(article);
+
+		EW = new EchoesWorks({element: 'slide'});
 		jasmine.clock().install();
 	});
 	afterEach(function () {

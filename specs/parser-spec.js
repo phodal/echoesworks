@@ -1,5 +1,25 @@
 describe("Parser", function () {
+	var PARENT_TAG = 'slide',
+		SLIDE_TAG = 'section',
+		NO_OF_SLIDES = 10,
+		article,
+		slides,
+		slide,
+		ew;
+
 	beforeEach(function () {
+		slides = [];
+
+		article = document.createElement(PARENT_TAG);
+		for (var i = 0; i < NO_OF_SLIDES; i++) {
+			slides.push(document.createElement(SLIDE_TAG));
+			article.appendChild(slides[i]);
+		}
+
+		document.body.appendChild(article);
+
+		ew = new EchoesWorks({element: 'slide', source: 'data/data.json'});
+
 		jasmine.clock().install();
 		jasmine.Ajax.install();
 	});
@@ -7,8 +27,6 @@ describe("Parser", function () {
 		jasmine.clock().uninstall();
 		jasmine.Ajax.uninstall();
 	});
-
-	var ew = new EchoesWorks({element: 'slide', source: 'data/data.json'});
 
 	it("parse data", function () {
 		spyOn(ew.parser, 'parse');
