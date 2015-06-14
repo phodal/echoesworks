@@ -19,11 +19,12 @@ Online Demo: [http://demo.echoesworks.com/](http://demo.echoesworks.com/)
  
 ##Feature
 
-###Main
+###Core
 
 - ``Markdown`` Presentation
 - Integrate Github Code/Gist Code
-- ``Full Screen`` Background Image
+- ``Full Screen`` Background Image 
+- Process Bar
 
 ###Addon
 
@@ -54,16 +55,15 @@ create ``example.md`` & ``data.json`` under ``data`` folder
 
 Example with slide
 
-    window.onload = function(){
-      EchoesWorks.get('data/example.md', function(data){
-        var sections = EchoesWorks.md.parse(data);
-        document.querySelector('slide').innerHTML = sections;
-        new EchoesWorks({
-          element: 'slide',
-          source: 'data/data.json'
-        });
-      })
-    };
+    EchoesWorks.get('data/example.md', function(data){
+    		document.querySelector('slide').innerHTML = EchoesWorks.md.parse(data);
+    		EchoesWorks.imageHandler();
+    		new EchoesWorks({
+    			element: 'slide',
+    			source: 'data/data.json',
+    			auto: false
+    		});
+    	})
 
 
 ##Setup Development##
@@ -94,6 +94,10 @@ Example with slide
 - Time 
     
     * [https://github.com/vorg/timeline.js](https://github.com/vorg/timeline.js)
+
+- Process Bar 
+ 
+    * [https://github.com/jacoborus/nanobar](https://github.com/jacoborus/nanobar)
 
 ##License##
 
