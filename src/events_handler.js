@@ -17,7 +17,15 @@
 		slide;
 
 
+	function countPercent() {
+		var current = window.slide.slide() + 1;
+		var total = window.slide.slides.length;
+		return 100 * current / total;
+	}
+
 	document.addEventListener("ew:slide:init", function (event) {
+		window.bar.go(countPercent());
+
 		document.addEventListener("keydown", function (event) {
 			var keyCode = event.keyCode;
 			if (keyCode === TAB || ( keyCode >= SPACE && keyCode <= PAGE_DOWN ) || (keyCode >= LEFT && keyCode <= DOWN)) {
@@ -43,6 +51,7 @@
 						break;
 				}
 
+				window.bar.go(countPercent());
 				event.preventDefault();
 			}
 		});
