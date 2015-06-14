@@ -51,6 +51,7 @@ module.exports = function (grunt) {
 					'src/parser.js',
 					'src/umarkdown.js',
 					'src/image.js',
+					'src/bar.js',
 					'src/3rd-party/main.js',
 					'src/3rd-party/github.js',
 					'src/_outro.js',
