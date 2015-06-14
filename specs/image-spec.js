@@ -13,11 +13,11 @@ describe("Image", function () {
 	});
 
 	it("should return element", function () {
-		//var sections = document.getElementsByTagName('section');
-		//spyOn(HTMLImageElement.prototype, 'remove');
-		//console.log(sections);
-		//EchoesWorks.imageHandler();
-		//expect(HTMLImageElement.prototype.remove).toHaveBeenCalled();
+		var sections = document.getElementsByTagName('section');
+		spyOn(EchoesWorks.imageHandler, 'removeImages');
+		console.log(sections);
+		EchoesWorks.imageHandler();
+		expect(EchoesWorks.imageHandler.removeImages).toHaveBeenCalled();
 	});
 
 });
