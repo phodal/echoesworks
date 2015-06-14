@@ -24,3 +24,7 @@
 
 - Lead Motion Control
 - Phone Control
+
+6.14
+
+- Time Summary
