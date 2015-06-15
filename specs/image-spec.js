@@ -1,14 +1,24 @@
 describe("Image", function () {
 	var section,
-		image;
+		image1, image2, image3;
 
 	beforeEach(function () {
 
 		section = document.createElement('section');
-		image = document.createElement('img');
-		image.src = "app/background.jpg";
-		image.title = "full";
-		section.appendChild(image);
+		image1 = document.createElement('img');
+		image1.src = "app/background.jpg";
+		image1.title = "background";
+		image2 = document.createElement('img');
+		image2.src = "app/left.jpg";
+		image2.title = "left";
+		image3 = document.createElement('img');
+		image3.src = "app/right.jpg";
+		image3.title = "right";
+
+		section.appendChild(image1);
+		section.appendChild(image2);
+		section.appendChild(image3);
+
 		document.body.appendChild(section);
 	});
 
@@ -16,6 +26,16 @@ describe("Image", function () {
 		spyOn(EchoesWorks.imageHandler, 'removeImages');
 		EchoesWorks.imageHandler();
 		expect(EchoesWorks.imageHandler.removeImages).toHaveBeenCalled();
+	});
+
+	it("should return correctly image", function () {
+		EchoesWorks.imageHandler();
+		expect(document.getElementsByTagName('img').length).toBe(0);
+		expect(document.querySelector('.image-left').style.backgroundImage)
+			.toBe('url(http://0.0.0.0:8000/app/left.jpg)');
+
+		expect(document.querySelector('.image-right').style.backgroundImage)
+			.toBe('url(http://0.0.0.0:8000/app/right.jpg)');
 	});
 
 });
