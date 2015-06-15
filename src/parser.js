@@ -12,8 +12,6 @@ parser.init = function (source) {
 	request.onreadystatechange = function () {
 		if (request.readyState === 4 && (request.status === 200 || request.status === 0)) {
 			parser.parse(JSON.parse(request.responseText));
-		} else {
-
 		}
 	};
 

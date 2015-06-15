@@ -23,7 +23,8 @@ Online Demo: [http://demo.echoesworks.com/](http://demo.echoesworks.com/)
 
 - ``Markdown`` Presentation
 - Integrate Github Code/Gist Code
-- ``Full Screen`` Background Image 
+- ``Full Screen`` Background Image
+- Left/Right Images Support
 - Process Bar
 
 ###Addon
@@ -58,8 +59,7 @@ Example with slide
 				document.querySelector('slide').innerHTML = EchoesWorks.md.parse(data);
 				EchoesWorks.imageHandler();
 				new EchoesWorks({
-					element: 'slide',
-					auto: false
+					element: 'slide'
 				});
 			})
 

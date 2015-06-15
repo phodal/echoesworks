@@ -5,7 +5,7 @@ window.onload = function(){
 		new EchoesWorks({
 			element: 'slide',
 			source: 'data/data.json',
-			auto: false
+			auto: true
 		});
 	})
 };

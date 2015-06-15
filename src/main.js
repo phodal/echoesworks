@@ -17,12 +17,15 @@ var EchoesWorks = function (options) {
 		this.source = this.options.source;
 	}
 	this.element = this.options.element;
-	this.playing = this.options.auto;
+	this.playing = false;
 	this.totalTime = 0;
 	this.data = [];
 	this.dataStatus = false;
 	this.fps = 10;
 	this.time = 0;
+	if(this.options.auto) {
+		this.play();
+	}
 	this.init();
 };
 
