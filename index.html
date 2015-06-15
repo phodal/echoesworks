@@ -55,7 +55,8 @@
 <code>Markdown</code> Presentation</li>
 <li>Integrate Github Code/Gist Code</li>
 <li>
-<code>Full Screen</code> Background Image </li>
+<code>Full Screen</code> Background Image</li>
+<li>Left/Right Images Support</li>
 <li>Process Bar</li>
 </ul>
 
@@ -89,22 +90,19 @@
 <p>3.Code    </p>
 
 <pre><code> var EW = new EchoesWorks({
-        element: 'slide',
-        source: 'data/data.json'
+        element: 'slide'
     });
 </code></pre>
 
 <p>Example with slide</p>
 
-<pre><code>EchoesWorks.get('data/example.md', function(data){
-        document.querySelector('slide').innerHTML = EchoesWorks.md.parse(data);
-        EchoesWorks.imageHandler();
-        new EchoesWorks({
-            element: 'slide',
-            source: 'data/data.json',
-            auto: false
-        });
-    })
+<pre><code>    EchoesWorks.get('data/example.md', function(data){
+            document.querySelector('slide').innerHTML = EchoesWorks.md.parse(data);
+            EchoesWorks.imageHandler();
+            new EchoesWorks({
+                element: 'slide'
+            });
+        })
 </code></pre>
 
 <h2>
@@ -162,7 +160,9 @@
 <h2>
 <a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
 
-<p>MIT. See <code>LICENSE.txt</code> in this directory.</p>
+<p>© 2015 <a href="http://www.phodal.com">Phodal Huang</a>. This code is distributed under the MIT license. See <code>LICENSE.txt</code> in this directory.</p>
+
+<p><a href="http://www.xuntayizhan.com/blog/ji-ke-ai-qing-zhi-er-shi-dai-wo-dai-ma-bian-cheng-qu-ni-wei-qi-ke-hao-wan/">待我代码编成，娶你为妻可好</a></p>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/phodal/echoesworks">Echoesworks</a> is maintained by <a href="https://github.com/phodal">phodal</a>.</span>
