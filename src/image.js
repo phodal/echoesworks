@@ -1,3 +1,14 @@
+var headerHandler = function() {
+	var headers = document.querySelectorAll('.header h1');
+	EchoesWorks.forEach(headers, function(header, index){
+		var head = document.createElement('h1');
+		var section = header.parentNode.parentNode;
+		head.innerHTML = header.innerHTML;
+		section.insertBefore(head, section.firstChild);
+		header.parentNode.removeChild(headers[index]);
+	});
+};
+
 var imageHandler = function (sections) {
 	var images = document.getElementsByTagName('img');
 	EchoesWorks.forEach(images, function (image) {
@@ -5,10 +16,13 @@ var imageHandler = function (sections) {
 		var imageType = image.title;
 		if (imageType === 'background') {
 			imageHandler.backgroundHandler(image, imageSrc, imageType);
-		} else if (imageType === 'left') {
-			imageHandler.directionHandler(image, imageType, imageSrc, 'right');
-		} else if (imageType === 'right') {
-			imageHandler.directionHandler(image, imageType, imageSrc, 'left');
+		} else {
+			if (imageType === 'left') {
+				imageHandler.directionHandler(image, imageType, imageSrc, 'right');
+			} else if (imageType === 'right') {
+				imageHandler.directionHandler(image, imageType, imageSrc, 'left');
+			}
+			headerHandler();
 		}
 	});
 	imageHandler.removeImages();
@@ -20,6 +34,7 @@ imageHandler.directionHandler = function (image, imageType, imageSrc, direction)
 	var contentDiv = document.createElement('div');
 	contentDiv.innerHTML = parentNode.innerHTML;
 	contentDiv.className = direction;
+	contentDiv.className += ' header';
 	parentNode.innerHTML = '';
 	parentNode.appendChild(contentDiv);
 

@@ -669,6 +669,17 @@ var micromarkdown = {
 
 EchoesWorks.md = micromarkdown;
 
+var headerHandler = function() {
+	var headers = document.querySelectorAll('.header h1');
+	EchoesWorks.forEach(headers, function(header, index){
+		var head = document.createElement('h1');
+		var section = header.parentNode.parentNode;
+		head.innerHTML = header.innerHTML;
+		section.insertBefore(head, section.firstChild);
+		header.parentNode.removeChild(headers[index]);
+	});
+};
+
 var imageHandler = function (sections) {
 	var images = document.getElementsByTagName('img');
 	EchoesWorks.forEach(images, function (image) {
@@ -676,29 +687,32 @@ var imageHandler = function (sections) {
 		var imageType = image.title;
 		if (imageType === 'background') {
 			imageHandler.backgroundHandler(image, imageSrc, imageType);
-		} else if (imageType === 'left') {
-			imageHandler.leftHandler(image, imageType, imageSrc, 'right');
-		} else if (imageType === 'right') {
-			imageHandler.leftHandler(image, imageType, imageSrc, 'left');
+		} else {
+			if (imageType === 'left') {
+				imageHandler.directionHandler(image, imageType, imageSrc, 'right');
+			} else if (imageType === 'right') {
+				imageHandler.directionHandler(image, imageType, imageSrc, 'left');
+			}
+			headerHandler();
 		}
 	});
 	imageHandler.removeImages();
 	return sections;
 };
 
-imageHandler.leftHandler = function (image, imageType, imageSrc, direction) {
-	var block = document.createElement('div');
-	var section = document.createElement('div');
-	var node = image.parentNode;
+imageHandler.directionHandler = function (image, imageType, imageSrc, direction) {
+	var parentNode = image.parentNode;
+	var contentDiv = document.createElement('div');
+	contentDiv.innerHTML = parentNode.innerHTML;
+	contentDiv.className = direction;
+	contentDiv.className += ' header';
+	parentNode.innerHTML = '';
+	parentNode.appendChild(contentDiv);
 
-	section.innerHTML = node.innerHTML;
-	section.className = direction;
-
-	node.innerHTML = '';
-	node.appendChild(block);
-	node.appendChild(section);
-	block.classList.add('image-' + imageType);
-	block.style.background = "url('" + imageSrc + "') no-repeat center center";
+	var imageDiv = document.createElement('div');
+	parentNode.appendChild(imageDiv);
+	imageDiv.classList.add('image-' + imageType);
+	imageDiv.style.background = "url('" + imageSrc + "') no-repeat center center";
 };
 
 imageHandler.backgroundHandler = function (image, imageSrc, imageType) {
