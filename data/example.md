@@ -8,8 +8,6 @@
 </section>
 <section>
 
-![background](app/background.jpg)
-
 #Design for Developer
 
 ##EchoesWorks?
@@ -20,7 +18,7 @@
 </section>
 <section>
 
-![left](app/left.jpg)
+![left](app/logo.png)
 
 #Code
 
@@ -28,11 +26,12 @@
 * Slide
 * Parser
 * Event Handler
+* Process Bar
 
 </section>
 <section>
 
-![right](app/left.jpg)
+![right](app/logo.png)
 
 #What is Different 
 
@@ -49,7 +48,16 @@
 
 </section>
 <section>
-#Slide 4
+#Image Support
+
+![background](app/background.jpg)
+
+![right](app/left.jpg)
+
+* Background
+* Left
+* Right
+
 </section>
 <section class="first">
 #Q & A

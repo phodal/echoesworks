@@ -712,7 +712,7 @@ imageHandler.directionHandler = function (image, imageType, imageSrc, direction)
 	var imageDiv = document.createElement('div');
 	parentNode.appendChild(imageDiv);
 	imageDiv.classList.add('image-' + imageType);
-	imageDiv.style.background = "url('" + imageSrc + "') no-repeat center center";
+	imageDiv.style.background = "url('" + imageSrc + "') no-repeat";
 };
 
 imageHandler.backgroundHandler = function (image, imageSrc, imageType) {
