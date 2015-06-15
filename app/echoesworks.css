@@ -119,3 +119,14 @@ code {
 .hidden {
     display: none;
 }
+
+.left {
+    float: left;
+    width: 50%;
+    height: 100%;
+}
+
+.right {
+    float: right;
+    width: 50%;
+}
