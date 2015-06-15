@@ -7,6 +7,8 @@
 [![Bower](https://img.shields.io/bower/v/echoesworks.svg?style=flat)]()
 [![LICENSE](https://img.shields.io/badge/license-MIT-green.svg?style=flat)]()
 
+![Logo](app/logo_small.png)
+
 #[EchoesWorks](http://www.echoesworks.com/)#
 
 > Next-Generation Tech Blog/Presentation Framework
