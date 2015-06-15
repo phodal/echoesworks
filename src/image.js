@@ -6,16 +6,16 @@ var imageHandler = function (sections) {
 		if (imageType === 'background') {
 			imageHandler.backgroundHandler(image, imageSrc, imageType);
 		} else if (imageType === 'left') {
-			imageHandler.leftHandler(image, imageType, imageSrc, 'right');
+			imageHandler.directionHandler(image, imageType, imageSrc, 'right');
 		} else if (imageType === 'right') {
-			imageHandler.leftHandler(image, imageType, imageSrc, 'left');
+			imageHandler.directionHandler(image, imageType, imageSrc, 'left');
 		}
 	});
 	imageHandler.removeImages();
 	return sections;
 };
 
-imageHandler.leftHandler = function (image, imageType, imageSrc, direction) {
+imageHandler.directionHandler = function (image, imageType, imageSrc, direction) {
 	var block = document.createElement('div');
 	var section = document.createElement('div');
 	var node = image.parentNode;
