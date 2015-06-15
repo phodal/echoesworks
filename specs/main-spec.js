@@ -33,6 +33,12 @@ describe("Main", function () {
 		expect(EW.element).toBe('slide');
 	});
 
+	it("should return default element", function () {
+		var ew = new EchoesWorks();
+		expect(ew.element).toBe('slide');
+		expect(ew.source).toBe('data/data.json');
+	});
+
 	it("should return respond logic", function () {
 		EW.play();
 		expect(EW.playing).toBeTruthy();
