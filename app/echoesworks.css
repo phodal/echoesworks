@@ -120,10 +120,21 @@ code {
     display: none;
 }
 
-.left {
+.image-left {
     float: left;
     width: 50%;
     height: 100%;
+}
+
+.image-right {
+    float: right;
+    width: 50%;
+    height: 100%;
+}
+
+.left {
+    float: left;
+    width: 50%;
 }
 
 .right {

@@ -31,6 +31,9 @@
 
 </section>
 <section>
+
+![right](app/left.jpg)
+
 #What is Different 
 
 **Impress.js**, **Reveal.js**

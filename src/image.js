@@ -6,21 +6,28 @@ var imageHandler = function (sections) {
 		if (imageType === 'background') {
 			imageHandler.backgroundHandler(image, imageSrc, imageType);
 		} else if (imageType === 'left') {
-			var block = document.createElement('div');
-			var section = document.createElement('div');
-			var node = image.parentNode;
-			section.innerHTML = node.innerHTML;
-			section.className = 'right';
-
-			node.innerHTML = '';
-			node.appendChild(block);
-			node.appendChild(section);
-			block.classList.add(imageType);
-			block.style.background = "url('" + imageSrc + "') no-repeat center center";
+			imageHandler.leftHandler(image, imageType, imageSrc, 'right');
+		} else if (imageType === 'right') {
+			imageHandler.leftHandler(image, imageType, imageSrc, 'left');
 		}
 	});
 	imageHandler.removeImages();
 	return sections;
+};
+
+imageHandler.leftHandler = function (image, imageType, imageSrc, direction) {
+	var block = document.createElement('div');
+	var section = document.createElement('div');
+	var node = image.parentNode;
+
+	section.innerHTML = node.innerHTML;
+	section.className = direction;
+
+	node.innerHTML = '';
+	node.appendChild(block);
+	node.appendChild(section);
+	block.classList.add('image-' + imageType);
+	block.style.background = "url('" + imageSrc + "') no-repeat center center";
 };
 
 imageHandler.backgroundHandler = function (image, imageSrc, imageType) {
