@@ -4,8 +4,7 @@ var imageHandler = function (sections) {
 		var imageSrc = image.src;
 		var imageType = image.title;
 		if (imageType === 'background') {
-			image.parentNode.style.backgroundImage = "url('" + imageSrc + "')";
-			image.parentNode.classList.add(imageType);
+			imageHandler.backgroundHandler(image, imageSrc, imageType);
 		} else if (imageType === 'left') {
 			var block = document.createElement('div');
 			var section = document.createElement('div');
@@ -22,6 +21,11 @@ var imageHandler = function (sections) {
 	});
 	imageHandler.removeImages();
 	return sections;
+};
+
+imageHandler.backgroundHandler = function (image, imageSrc, imageType) {
+	image.parentNode.style.backgroundImage = "url('" + imageSrc + "')";
+	image.parentNode.classList.add(imageType);
 };
 
 imageHandler.removeImages = function () {
