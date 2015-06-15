@@ -38,5 +38,12 @@ describe("Image", function () {
 			.toBe('url(http://0.0.0.0:8000/app/right.jpg)');
 	});
 
+	it("should remove all images", function () {
+		var images = document.getElementsByTagName('img');
+		expect(images.length).toBe(3);
+		EchoesWorks.imageHandler();
+		expect(images.length).toBe(0);
+	});
+
 });
 

@@ -16,18 +16,17 @@ var imageHandler = function (sections) {
 };
 
 imageHandler.directionHandler = function (image, imageType, imageSrc, direction) {
-	var block = document.createElement('div');
-	var section = document.createElement('div');
-	var node = image.parentNode;
+	var parentNode = image.parentNode;
+	var contentDiv = document.createElement('div');
+	contentDiv.innerHTML = parentNode.innerHTML;
+	contentDiv.className = direction;
+	parentNode.innerHTML = '';
+	parentNode.appendChild(contentDiv);
 
-	section.innerHTML = node.innerHTML;
-	section.className = direction;
-
-	node.innerHTML = '';
-	node.appendChild(block);
-	node.appendChild(section);
-	block.classList.add('image-' + imageType);
-	block.style.background = "url('" + imageSrc + "') no-repeat center center";
+	var imageDiv = document.createElement('div');
+	parentNode.appendChild(imageDiv);
+	imageDiv.classList.add('image-' + imageType);
+	imageDiv.style.background = "url('" + imageSrc + "') no-repeat center center";
 };
 
 imageHandler.backgroundHandler = function (image, imageSrc, imageType) {
