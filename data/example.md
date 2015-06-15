@@ -19,6 +19,9 @@
 ##What we need?
 </section>
 <section>
+
+![left](app/left.jpg)
+
 #Code
 
 * uMarkdown
