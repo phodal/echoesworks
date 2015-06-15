@@ -6,7 +6,6 @@ var EchoesWorks = function (options) {
 	var defaults;
 	defaults = {
 		element: 'slide',
-		source: 'data/data.json',
 		auto: false
 	};
 
@@ -18,7 +17,9 @@ var EchoesWorks = function (options) {
 	EchoesWorks.defaults(options, defaults);
 
 	this.options = options;
-	this.source = this.options.source;
+	if(options.source){
+		this.source = this.options.source;
+	}
 	this.element = this.options.element;
 	this.playing = this.options.auto;
 	this.totalTime = 0;
@@ -307,7 +308,9 @@ EchoesWorks.prototype = EchoesWorks.extend(EchoesWorks.prototype, {slide: from})
 
 var parser = function () {
 	var that = this;
-	parser.init(that.source);
+	if(that.source){
+		parser.init(that.source);
+	}
 };
 
 parser.data = [];
@@ -712,6 +715,7 @@ imageHandler.directionHandler = function (image, imageType, imageSrc, direction)
 	var imageDiv = document.createElement('div');
 	parentNode.appendChild(imageDiv);
 	imageDiv.classList.add('image-' + imageType);
+	imageDiv.width = 200;
 	imageDiv.style.background = "url('" + imageSrc + "') no-repeat";
 };
 

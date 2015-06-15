@@ -49,21 +49,19 @@ create ``example.md`` & ``data.json`` under ``data`` folder
 3.Code    
 
      var EW = new EchoesWorks({
-     		element: 'slide',
-     		source: 'data/data.json'
+     		element: 'slide'
      	});
 
 Example with slide
 
-    EchoesWorks.get('data/example.md', function(data){
-    		document.querySelector('slide').innerHTML = EchoesWorks.md.parse(data);
-    		EchoesWorks.imageHandler();
-    		new EchoesWorks({
-    			element: 'slide',
-    			source: 'data/data.json',
-    			auto: false
-    		});
-    	})
+		EchoesWorks.get('data/example.md', function(data){
+				document.querySelector('slide').innerHTML = EchoesWorks.md.parse(data);
+				EchoesWorks.imageHandler();
+				new EchoesWorks({
+					element: 'slide',
+					auto: false
+				});
+			})
 
 
 ##Setup Development##

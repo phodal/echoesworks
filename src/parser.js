@@ -1,6 +1,8 @@
 var parser = function () {
 	var that = this;
-	parser.init(that.source);
+	if(that.source){
+		parser.init(that.source);
+	}
 };
 
 parser.data = [];

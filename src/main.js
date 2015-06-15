@@ -2,7 +2,6 @@ var EchoesWorks = function (options) {
 	var defaults;
 	defaults = {
 		element: 'slide',
-		source: 'data/data.json',
 		auto: false
 	};
 
@@ -14,7 +13,9 @@ var EchoesWorks = function (options) {
 	EchoesWorks.defaults(options, defaults);
 
 	this.options = options;
-	this.source = this.options.source;
+	if(options.source){
+		this.source = this.options.source;
+	}
 	this.element = this.options.element;
 	this.playing = this.options.auto;
 	this.totalTime = 0;
