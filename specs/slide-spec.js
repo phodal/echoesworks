@@ -42,6 +42,7 @@ describe("Slide", function () {
 	describe("next", function() {
 		
 		it("should go to the next slide when not last slide", function() {
+			slide.slide(0);
 			slide.next();
 			expect(slide.slide()).toBe(1);
 		});

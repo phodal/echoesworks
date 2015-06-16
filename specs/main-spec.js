@@ -5,6 +5,8 @@ describe("Main", function () {
 		article,
 		slides,
 		slide,
+		pre,
+		code,
 		EW;
 
 	beforeEach(function () {
@@ -13,12 +15,12 @@ describe("Main", function () {
 		article = document.createElement(PARENT_TAG);
 		for (var i = 0; i < NO_OF_SLIDES; i++) {
 			slides.push(document.createElement(SLIDE_TAG));
+			slides.className = 'slide';
 			article.appendChild(slides[i]);
 		}
 
-		var pre = document.createElement('pre');
-		var code = document.createElement('code');
-		code.className = 'show';
+		pre = document.createElement('pre');
+		code = document.createElement('code');
 
 		document.body.appendChild(article);
 		document.body.appendChild(pre);
@@ -34,6 +36,10 @@ describe("Main", function () {
 	});
 
 	afterEach(function () {
+		document.body.removeChild(article);
+		document.body.removeChild(pre);
+		document.body.removeChild(code);
+		window.slide = null;
 		jasmine.Ajax.uninstall();
 		jasmine.clock().uninstall();
 	});
@@ -106,7 +112,26 @@ describe("Main", function () {
 			"contentType": 'text/plain',
 			"responseText": '{}'
 		});
+		expect(document.querySelector('slide').className).toBe('');
+		expect(document.querySelector('code').className).toBe('');
+	});
 
+	it("should hidden code", function () {
+		var ew = new EchoesWorks({
+			element: 'slide',
+			source: 'data/data.json',
+			auto: true
+		});
+
+		ew.parser.data = {
+			times: ["00:01.20", "00:01.30", "00:02.30"],
+			codes: [false, false, false],
+			words: ["hello, world"]
+		};
+
+		jasmine.clock().tick(1500);
+		expect(document.querySelector('slide').className).toBe('full');
+		expect(document.querySelector('code').className).toBe('hidden');
 	});
 
 });
