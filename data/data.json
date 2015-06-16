@@ -1,18 +1,11 @@
 [
   {
-    "time": "00:01.00"
-  },
-  {
     "time": "00:01.00",
-    "slide": 1,
     "code": "https://raw.githubusercontent.com/phodal/echoesworks/master/bower.json",
     "word": "hello, world"
   },
   {
-    "time": "00:7.51",
-    "slide": 2,
-    "code": "https://raw.githubusercontent.com/phodal/echoesworks/master/package.json",
-    "word": "hello, world, next"
+    "time": "00:05.00"
   },
   {
     "time": "00:12.51",
@@ -21,14 +14,12 @@
   },
   {
     "time": "00:17.51",
-    "slide": 3,
-    "code": "https://raw.githubusercontent.com/phodal/lettuce/master/bower.json",
+    "code": false,
     "word": "hello, world, next"
   },
   {
     "time": "00:22.51",
-    "slide": 4,
-    "code": "https://raw.githubusercontent.com/phodal/echoesworks/master/src/parser.js",
+    "code": false,
     "word": "hello, world, next"
   }
 ]
