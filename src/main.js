@@ -18,7 +18,6 @@ var EchoesWorks = function (options) {
 	}
 	this.element = this.options.element;
 	this.playing = false;
-	this.totalTime = 0;
 	this.data = [];
 	this.dataStatus = false;
 	this.fps = 10;
@@ -32,31 +31,34 @@ var EchoesWorks = function (options) {
 EchoesWorks.prototype.init = function () {
 	var that = this;
 
-	function getMaxOfArray(numArray) {
-		return Math.max.apply(null, numArray);
-	}
-
 	that.slide();
 	EchoesWorks.triggerEvent("ew:slide:init");
 
 	if (window.slide) {
+		that.parser();
 		setInterval(function () {
 			that.update();
 		}, 1000 / this.fps);
 
-		that.parser();
 		if (typeof that.parser.data.times === 'object') {
-			console.log(that.parser.data.times);
-			that.data = that.parser.data;
-			that.dataStatus = true;
-			var times = that.parser.parseTime(that.parser.data.times);
-			that.totalTime = getMaxOfArray(times);
+			that.getData();
 		}
 	}
 };
 
+function getMaxOfArray(numArray) {
+	return Math.max.apply(null, numArray);
+}
+
+EchoesWorks.prototype.getData = function () {
+	var that = this;
+
+	that.data = that.parser.data;
+	that.dataStatus = true;
+};
+
 EchoesWorks.prototype.stop = function () {
-	console.log("total time:", this.totalTime);
+	console.log("total time:", this.time);
 	this.playing = false;
 	this.time = 0;
 };
