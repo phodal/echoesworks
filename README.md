@@ -17,6 +17,8 @@ zh
 
 > 下一代技术``博客``/``展示``框架
  
+简介: [EchoesWorks —— 打造下一代技术Blog/Presentation 框架](http://www.phodal.com/blog/build-echoesworks/)
+ 
 Online Demo: [http://demo.echoesworks.com/](http://demo.echoesworks.com/) 
  
 ##Feature
