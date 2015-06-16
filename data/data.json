@@ -8,10 +8,22 @@
     "time": "00:05.00",
     "word": [
       {
-        "word": "Hello, World"
+        "word": "Привет"
       },
       {
-        "word": "Hello, World 2"
+        "word": "Bonjour"
+      },
+      {
+        "word": "こんにちは"
+      },
+      {
+        "word": "你好"
+      },
+      {
+        "word": "Ciao"
+      },
+      {
+        "word": "Hello, World"
       }
     ]
   },
