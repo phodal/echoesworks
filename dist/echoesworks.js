@@ -101,7 +101,7 @@ EchoesWorks.prototype.applyEchoes = function () {
 };
 
 
-EchoesWorks.version = EchoesWorks.VERSION = '0.1.0';
+EchoesWorks.version = EchoesWorks.VERSION = '0.1.1';
 
 root.EchoesWorks = EchoesWorks;
 root.EW = EchoesWorks;
@@ -242,6 +242,7 @@ var from = function () {
 			if(index === 0) {
 				activeSlide.classList.add('first');
 			}
+			window.bar.go(100 * ( index + 1) / slides.length);
 			writeURL(index);
 			fire('activate', createEventData(activeSlide, customData));
 		},
@@ -875,15 +876,7 @@ EchoesWorks.fn = EchoesWorks.extend(EchoesWorks.fn, Github);
 		UP = 38,
 		slide;
 
-
-	function countPercent() {
-		var current = window.slide.slide() + 1;
-		var total = window.slide.slides.length;
-		return 100 * current / total;
-	}
-
 	document.addEventListener("ew:slide:init", function () {
-		window.bar.go(countPercent());
 
 		document.addEventListener("keydown", function (event) {
 			window.slide.auto = false;
@@ -911,7 +904,6 @@ EchoesWorks.fn = EchoesWorks.extend(EchoesWorks.fn, Github);
 						break;
 				}
 
-				window.bar.go(countPercent());
 				event.preventDefault();
 			}
 		});

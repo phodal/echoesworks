@@ -1,6 +1,6 @@
 {
   "name": "echoesworks",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "dist/echoesworks.min.js",
   "description": "Next-Generation Tech Blog/Presentation Framework",
   "repository": {
