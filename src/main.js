@@ -34,6 +34,7 @@ EchoesWorks.prototype.init = function () {
 	EchoesWorks.triggerEvent("ew:slide:init");
 
 	if (window.slide) {
+		window.slide.auto = that.options.auto;
 		that.parser();
 		setInterval(function () {
 			that.update();
@@ -84,7 +85,7 @@ EchoesWorks.prototype.applyEchoes = function () {
 		var times = that.parser.parseTime(that.data.times);
 		var currentSlide = window.slide.slide();
 
-		if (parseFloat(that.time) > times[currentSlide]) {
+		if (parseFloat(that.time) > times[currentSlide] && window.slide.auto) {
 			window.slide.next();
 			if(that.data.codes[currentSlide]){
 				showCode(that, currentSlide);

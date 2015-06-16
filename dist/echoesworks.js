@@ -38,6 +38,7 @@ EchoesWorks.prototype.init = function () {
 	EchoesWorks.triggerEvent("ew:slide:init");
 
 	if (window.slide) {
+		window.slide.auto = that.options.auto;
 		that.parser();
 		setInterval(function () {
 			that.update();
@@ -88,7 +89,7 @@ EchoesWorks.prototype.applyEchoes = function () {
 		var times = that.parser.parseTime(that.data.times);
 		var currentSlide = window.slide.slide();
 
-		if (parseFloat(that.time) > times[currentSlide]) {
+		if (parseFloat(that.time) > times[currentSlide] && window.slide.auto) {
 			window.slide.next();
 			if(that.data.codes[currentSlide]){
 				showCode(that, currentSlide);
@@ -294,7 +295,8 @@ var from = function () {
 			next: step.bind(null, 1),
 			prev: step.bind(null, -1),
 			parent: parent,
-			slides: slides
+			slides: slides,
+			auto: false
 		};
 
 	readURL();
@@ -880,10 +882,11 @@ EchoesWorks.fn = EchoesWorks.extend(EchoesWorks.fn, Github);
 		return 100 * current / total;
 	}
 
-	document.addEventListener("ew:slide:init", function (event) {
+	document.addEventListener("ew:slide:init", function () {
 		window.bar.go(countPercent());
 
 		document.addEventListener("keydown", function (event) {
+			window.slide.auto = false;
 			var keyCode = event.keyCode;
 			if (keyCode === TAB || ( keyCode >= SPACE && keyCode <= PAGE_DOWN ) || (keyCode >= LEFT && keyCode <= DOWN)) {
 				event.preventDefault();

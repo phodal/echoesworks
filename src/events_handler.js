@@ -23,10 +23,11 @@
 		return 100 * current / total;
 	}
 
-	document.addEventListener("ew:slide:init", function (event) {
+	document.addEventListener("ew:slide:init", function () {
 		window.bar.go(countPercent());
 
 		document.addEventListener("keydown", function (event) {
+			window.slide.auto = false;
 			var keyCode = event.keyCode;
 			if (keyCode === TAB || ( keyCode >= SPACE && keyCode <= PAGE_DOWN ) || (keyCode >= LEFT && keyCode <= DOWN)) {
 				event.preventDefault();

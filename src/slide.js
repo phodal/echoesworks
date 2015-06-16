@@ -94,7 +94,8 @@ var from = function () {
 			next: step.bind(null, 1),
 			prev: step.bind(null, -1),
 			parent: parent,
-			slides: slides
+			slides: slides,
+			auto: false
 		};
 
 	readURL();
