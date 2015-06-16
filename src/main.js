@@ -46,10 +46,6 @@ EchoesWorks.prototype.init = function () {
 	}
 };
 
-function getMaxOfArray(numArray) {
-	return Math.max.apply(null, numArray);
-}
-
 EchoesWorks.prototype.getData = function () {
 	var that = this;
 
@@ -78,6 +74,20 @@ EchoesWorks.prototype.update = function () {
 	this.applyEchoes();
 };
 
+function showCode(that, currentSlide) {
+	var url = EchoesWorks.fn.rawGitConvert(that.data.codes[currentSlide]);
+	EchoesWorks.get(url, function (response) {
+		document.querySelector('pre').innerHTML = response;
+		document.querySelector('slide').classList.remove('full');
+		document.querySelector('code').classList.remove('hidden');
+	});
+}
+
+function hiddenCode() {
+	document.querySelector('slide').classList.add('full');
+	document.querySelector('code').classList.add('hidden');
+}
+
 EchoesWorks.prototype.applyEchoes = function () {
 	var that = this;
 	if (that.dataStatus && that.data) {
@@ -87,15 +97,9 @@ EchoesWorks.prototype.applyEchoes = function () {
 		if (parseFloat(that.time) > times[currentSlide]) {
 			window.slide.next();
 			if(that.data.codes[currentSlide]){
-				var url = EchoesWorks.fn.rawGitConvert(that.data.codes[currentSlide]);
-				EchoesWorks.get(url, function(response){
-					document.querySelector('pre').innerHTML = response;
-					document.querySelector('slide').classList.remove('full');
-					document.querySelector('code').classList.remove('hidden');
-				});
+				showCode(that, currentSlide);
 			} else {
-				document.querySelector('slide').classList.add('full');
-				document.querySelector('code').classList.add('hidden');
+				hiddenCode();
 			}
 		}
 	}
