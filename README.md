@@ -53,6 +53,11 @@ zh
 
 ##Usage##
 
+Clone
+
+    git clone git@github.com:echoesworks/echoesworks-demo.git
+
+``Or``
 
 1.Install
 
