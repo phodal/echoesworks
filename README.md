@@ -26,14 +26,28 @@ Online Demo: [http://demo.echoesworks.com/](http://demo.echoesworks.com/)
 - ``Markdown`` Presentation
 - Integrate Github Code/Gist Code
 - ``Full Screen`` Background Image
-- Left/Right Images Support
+- Left/Right side Images Support
 - Process Bar
+
+zh
+
+- 支持 Markdown
+- 集成Github代码
+- 全屏背景图片
+- 左/右侧图片支持
+- 进度条
 
 ###Addon
 
 - Timer Audio
 - Timer subtitles
 - Time Control
+
+zh
+
+- 定时音频
+- 定时字幕
+- 定时控制
 
 ##Usage##
 
