@@ -29,8 +29,8 @@ var micromarkdown = {
 	},
 
 	codeHandler: function (stra, str) {
-		var pre='', preClass;
-		if((preClass = this.regexobject.pre.exec(stra)) !== null){
+		var pre = '', preClass;
+		if ((preClass = this.regexobject.pre.exec(stra)) !== null) {
 			pre = preClass[1];
 		}
 
@@ -181,7 +181,9 @@ var micromarkdown = {
 			repstr += '</ol>';
 		}
 		return repstr;
-	}, listsHandlerSub: function (line, repstr, helper1) {
+	},
+
+	listsHandlerSub: function (line, repstr, helper1) {
 		if ((line[0].trim().substr(0, 1) === '*') || (line[0].trim().substr(0, 1) === '-')) {
 			repstr += '<ul>';
 			helper1.push('</ul>');
@@ -256,8 +258,8 @@ var micromarkdown = {
 		regexobject.lists = this.listStrict(strict, regexobject);
 
 		str = '\n' + str + '\n';
-		['code', 'headline', 'lists', 'tables', 'links', 'mail', 'url', 'smlinks', 'hr'].forEach(function(type){
-			while((stra = regexobject[type].exec(str)) !== null) {
+		['code', 'headline', 'lists', 'tables', 'links', 'mail', 'url', 'smlinks', 'hr'].forEach(function (type) {
+			while ((stra = regexobject[type].exec(str)) !== null) {
 				str = that[(type + 'Handler')].apply(that, [stra, str, strict]);
 			}
 		});
