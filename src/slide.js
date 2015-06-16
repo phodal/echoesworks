@@ -41,6 +41,7 @@ var from = function () {
 			if(index === 0) {
 				activeSlide.classList.add('first');
 			}
+			window.bar.go(100 * ( index + 1) / slides.length);
 			writeURL(index);
 			fire('activate', createEventData(activeSlide, customData));
 		},

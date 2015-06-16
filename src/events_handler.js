@@ -16,15 +16,7 @@
 		UP = 38,
 		slide;
 
-
-	function countPercent() {
-		var current = window.slide.slide() + 1;
-		var total = window.slide.slides.length;
-		return 100 * current / total;
-	}
-
 	document.addEventListener("ew:slide:init", function () {
-		window.bar.go(countPercent());
 
 		document.addEventListener("keydown", function (event) {
 			window.slide.auto = false;
@@ -52,7 +44,6 @@
 						break;
 				}
 
-				window.bar.go(countPercent());
 				event.preventDefault();
 			}
 		});
