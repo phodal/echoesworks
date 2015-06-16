@@ -81,16 +81,18 @@ describe("Main", function () {
 			source: 'data/data.json',
 			auto: true
 		});
-		spyOn(window.slide, 'next');
-		spyOn(document, 'querySelector');
-		ew.dataStatus = true;
-		ew.data = {
-			times: ["00:01.00", "00:01.30"],
+
+		ew.parser.data = {
+			times: ["00:01.20", "00:01.30"],
 			codes: ["https://raw.githubusercontent.com/phodal/echoesworks/master/bower.json",
 				"https://raw.githubusercontent.com/phodal/echoesworks/master/bower.json"],
 			words: ["hello, world"]
 		};
-		jasmine.clock().tick(2500);
+
+		spyOn(window.slide, 'next');
+		spyOn(document, 'querySelector');
+
+		jasmine.clock().tick(1500);
 		expect(window.slide.next).toHaveBeenCalled();
 	});
 

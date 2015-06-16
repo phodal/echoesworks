@@ -19,7 +19,6 @@ var EchoesWorks = function (options) {
 	this.element = this.options.element;
 	this.playing = false;
 	this.data = [];
-	this.dataStatus = false;
 	this.fps = 10;
 	this.time = 0;
 	if(this.options.auto) {
@@ -39,18 +38,7 @@ EchoesWorks.prototype.init = function () {
 		setInterval(function () {
 			that.update();
 		}, 1000 / this.fps);
-
-		if (typeof that.parser.data.times === 'object') {
-			that.getData();
-		}
 	}
-};
-
-EchoesWorks.prototype.getData = function () {
-	var that = this;
-
-	that.data = that.parser.data;
-	that.dataStatus = true;
 };
 
 EchoesWorks.prototype.stop = function () {
@@ -90,7 +78,9 @@ function hiddenCode() {
 
 EchoesWorks.prototype.applyEchoes = function () {
 	var that = this;
-	if (that.dataStatus && that.data) {
+	var isDataValid = that.parser.data && that.parser.data.codes !== undefined && that.parser.data.codes.length > 0;
+	if (isDataValid) {
+		that.data = that.parser.data;
 		var times = that.parser.parseTime(that.data.times);
 		var currentSlide = window.slide.slide();
 

@@ -22,9 +22,7 @@ var EchoesWorks = function (options) {
 	}
 	this.element = this.options.element;
 	this.playing = false;
-	this.totalTime = 0;
 	this.data = [];
-	this.dataStatus = false;
 	this.fps = 10;
 	this.time = 0;
 	if(this.options.auto) {
@@ -36,31 +34,19 @@ var EchoesWorks = function (options) {
 EchoesWorks.prototype.init = function () {
 	var that = this;
 
-	function getMaxOfArray(numArray) {
-		return Math.max.apply(null, numArray);
-	}
-
 	that.slide();
 	EchoesWorks.triggerEvent("ew:slide:init");
 
 	if (window.slide) {
+		that.parser();
 		setInterval(function () {
 			that.update();
 		}, 1000 / this.fps);
-
-		that.parser();
-		if (typeof that.parser.data.times === 'object') {
-			console.log(that.parser.data.times);
-			that.data = that.parser.data;
-			that.dataStatus = true;
-			var times = that.parser.parseTime(that.parser.data.times);
-			that.totalTime = getMaxOfArray(times);
-		}
 	}
 };
 
 EchoesWorks.prototype.stop = function () {
-	console.log("total time:", this.totalTime);
+	console.log("total time:", this.time);
 	this.playing = false;
 	this.time = 0;
 };
@@ -80,24 +66,34 @@ EchoesWorks.prototype.update = function () {
 	this.applyEchoes();
 };
 
+function showCode(that, currentSlide) {
+	var url = EchoesWorks.fn.rawGitConvert(that.data.codes[currentSlide]);
+	EchoesWorks.get(url, function (response) {
+		document.querySelector('pre').innerHTML = response;
+		document.querySelector('slide').classList.remove('full');
+		document.querySelector('code').classList.remove('hidden');
+	});
+}
+
+function hiddenCode() {
+	document.querySelector('slide').classList.add('full');
+	document.querySelector('code').classList.add('hidden');
+}
+
 EchoesWorks.prototype.applyEchoes = function () {
 	var that = this;
-	if (that.dataStatus && that.data) {
+	var isDataValid = that.parser.data && that.parser.data.codes !== undefined && that.parser.data.codes.length > 0;
+	if (isDataValid) {
+		that.data = that.parser.data;
 		var times = that.parser.parseTime(that.data.times);
 		var currentSlide = window.slide.slide();
 
 		if (parseFloat(that.time) > times[currentSlide]) {
 			window.slide.next();
 			if(that.data.codes[currentSlide]){
-				var url = EchoesWorks.fn.rawGitConvert(that.data.codes[currentSlide]);
-				EchoesWorks.get(url, function(response){
-					document.querySelector('pre').innerHTML = response;
-					document.querySelector('slide').classList.remove('full');
-					document.querySelector('code').classList.remove('hidden');
-				});
+				showCode(that, currentSlide);
 			} else {
-				document.querySelector('slide').classList.add('full');
-				document.querySelector('code').classList.add('hidden');
+				hiddenCode();
 			}
 		}
 	}
