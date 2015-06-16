@@ -5,7 +5,7 @@ var EchoesWorks = function (options) {
 		auto: false
 	};
 
-	if(options === undefined) {
+	if (options === undefined) {
 		console.log("Default Options is Empty, use default options...");
 		options = {};
 	}
@@ -13,7 +13,7 @@ var EchoesWorks = function (options) {
 	EchoesWorks.defaults(options, defaults);
 
 	this.options = options;
-	if(options.source){
+	if (options.source) {
 		this.source = this.options.source;
 	}
 	this.element = this.options.element;
@@ -21,7 +21,7 @@ var EchoesWorks = function (options) {
 	this.data = [];
 	this.fps = 10;
 	this.time = 0;
-	if(this.options.auto) {
+	if (this.options.auto) {
 		this.play();
 	}
 	this.init();
@@ -72,6 +72,15 @@ function showCode(that, currentSlide) {
 	});
 }
 
+function showWords(that, currentSlide) {
+	document.querySelector('words').innerHTML = that.data.words[currentSlide];
+}
+
+function hiddenWords() {
+	document.querySelector('slide').classList.add('full');
+	document.querySelector('words').classList.add('hidden');
+}
+
 function hiddenCode() {
 	document.querySelector('slide').classList.add('full');
 	document.querySelector('code').classList.add('hidden');
@@ -87,10 +96,15 @@ EchoesWorks.prototype.applyEchoes = function () {
 
 		if (parseFloat(that.time) > times[currentSlide] && window.slide.auto) {
 			window.slide.next();
-			if(that.data.codes[currentSlide]){
+			if (that.data.codes[currentSlide]) {
 				showCode(that, currentSlide);
 			} else {
 				hiddenCode();
+			}
+			if (that.data.words[currentSlide]) {
+				showWords(that, currentSlide);
+			} else {
+				hiddenWords(that, currentSlide);
 			}
 		}
 	}

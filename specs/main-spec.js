@@ -7,6 +7,7 @@ describe("Main", function () {
 		slide,
 		pre,
 		code,
+		words,
 		EW;
 
 	beforeEach(function () {
@@ -21,10 +22,12 @@ describe("Main", function () {
 
 		pre = document.createElement('pre');
 		code = document.createElement('code');
+		words = document.createElement('words');
 
 		document.body.appendChild(article);
 		document.body.appendChild(pre);
 		document.body.appendChild(code);
+		document.body.appendChild(words);
 
 		EW = new EchoesWorks({
 			element: 'slide',
@@ -114,6 +117,7 @@ describe("Main", function () {
 		});
 		expect(document.querySelector('slide').className).toBe('');
 		expect(document.querySelector('code').className).toBe('');
+		expect(document.querySelector('words').className).toBe('');
 	});
 
 	it("should hidden code", function () {
@@ -132,6 +136,7 @@ describe("Main", function () {
 		jasmine.clock().tick(1500);
 		expect(document.querySelector('slide').className).toBe('full');
 		expect(document.querySelector('code').className).toBe('hidden');
+		expect(document.querySelector('words').className).toBe('hidden');
 	});
 
 });

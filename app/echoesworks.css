@@ -103,6 +103,16 @@ code {
     height: 80%;
 }
 
+words {
+    width: 100%;
+    height: 15%;
+    bottom: 0;
+    position: fixed;
+    left: 5%;
+    font-size: 3em;
+    color: #888888;;
+}
+
 .full {
     width: 100%;
     height: 100%;
