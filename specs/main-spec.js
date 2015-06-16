@@ -16,17 +16,25 @@ describe("Main", function () {
 			article.appendChild(slides[i]);
 		}
 
+		var pre = document.createElement('pre');
+		var code = document.createElement('code');
+		code.className = 'show';
+
 		document.body.appendChild(article);
+		document.body.appendChild(pre);
+		document.body.appendChild(code);
 
 		EW = new EchoesWorks({
 			element: 'slide',
 			source: 'data/data.json',
 			auto: false
 		});
+		jasmine.Ajax.install();
 		jasmine.clock().install();
 	});
 
 	afterEach(function () {
+		jasmine.Ajax.uninstall();
 		jasmine.clock().uninstall();
 	});
 
@@ -74,8 +82,6 @@ describe("Main", function () {
 	});
 
 	it("should update code correctly", function () {
-		spyOn(EchoesWorks, "get").and.returnValue({});
-
 		var ew = new EchoesWorks({
 			element: 'slide',
 			source: 'data/data.json',
@@ -83,17 +89,24 @@ describe("Main", function () {
 		});
 
 		ew.parser.data = {
-			times: ["00:01.20", "00:01.30"],
+			times: ["00:01.20", "00:01.30", "00:02.30"],
 			codes: ["https://raw.githubusercontent.com/phodal/echoesworks/master/bower.json",
-				"https://raw.githubusercontent.com/phodal/echoesworks/master/bower.json"],
+				"https://raw.githubusercontent.com/phodal/echoesworks/master/bower.json", false],
 			words: ["hello, world"]
 		};
 
 		spyOn(window.slide, 'next');
-		spyOn(document, 'querySelector');
 
 		jasmine.clock().tick(1500);
 		expect(window.slide.next).toHaveBeenCalled();
+		window.slide.auto = true;
+
+		jasmine.Ajax.requests.mostRecent().respondWith({
+			"status": 200,
+			"contentType": 'text/plain',
+			"responseText": '{}'
+		});
+
 	});
 
 });
