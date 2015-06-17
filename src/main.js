@@ -74,12 +74,22 @@ function showCode(that, currentSlide) {
 
 function showWords(that, currentSlide) {
 	var words = that.data.words[currentSlide];
-	//To do use stand speak speed 
+	//To do use stand speak speed
 	//var standSpeakSpeed = 60 / 240 * 100;
 
 	if(EchoesWorks.isObject(words)){
-		if(that.time < that.parser.parseTime(that.data.times)[currentSlide + 1]){
-			document.querySelector('words').innerHTML = words[0].word;
+		var nextTime = that.parser.parseTime(that.data.times)[currentSlide + 1];
+		if(that.time < nextTime && words.length > 1){
+			var length = words.length;
+			var currentTime = that.parser.parseTime(that.data.times)[currentSlide];
+			var time = nextTime - currentTime;
+			var average = time / length * 1000;
+			var i = 0;
+
+			setInterval(function(){
+				document.querySelector('words').innerHTML = words[i].word;
+				i ++ ;
+			}, average);
 		}
 	} else {
 		document.querySelector('words').innerHTML = words;
