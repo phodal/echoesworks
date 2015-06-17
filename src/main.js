@@ -73,7 +73,17 @@ function showCode(that, currentSlide) {
 }
 
 function showWords(that, currentSlide) {
-	document.querySelector('words').innerHTML = that.data.words[currentSlide];
+	var words = that.data.words[currentSlide];
+	//To do use stand speak speed 
+	//var standSpeakSpeed = 60 / 240 * 100;
+
+	if(EchoesWorks.isObject(words)){
+		if(that.time < that.parser.parseTime(that.data.times)[currentSlide + 1]){
+			document.querySelector('words').innerHTML = words[0].word;
+		}
+	} else {
+		document.querySelector('words').innerHTML = words;
+	}
 }
 
 function hiddenWords() {
