@@ -4,6 +4,7 @@ describe("Process Bar", function () {
 	});
 
 	afterEach(function () {
+		document.body.innerHTML = "";
 		jasmine.clock().uninstall();
 	});
 

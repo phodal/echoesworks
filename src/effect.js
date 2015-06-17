@@ -73,8 +73,4 @@ var FX = {
 	}
 };
 
-var fx = {
-	FX: FX
-};
-
-EchoesWorks.prototype = EchoesWorks.extend(EchoesWorks.prototype, fx);
+EchoesWorks.FX = FX;
