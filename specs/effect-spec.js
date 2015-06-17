@@ -28,7 +28,6 @@ describe("Effect", function () {
 	});
 
 	afterEach(function () {
-		document.body.innerHTML = "";
 		jasmine.clock().uninstall();
 	});
 
