@@ -77,7 +77,32 @@ function showCode(that, currentSlide) {
 }
 
 function showWords(that, currentSlide) {
-	document.querySelector('words').innerHTML = that.data.words[currentSlide];
+	var timerWord;
+	var words = that.data.words[currentSlide];
+	//To do use stand speak speed
+	//var standSpeakSpeed = 60 / 240 * 100;
+
+	if(EchoesWorks.isObject(words)){
+		var nextTime = that.parser.parseTime(that.data.times)[currentSlide + 1];
+		if(that.time < nextTime && words.length > 1){
+			var length = words.length;
+			var currentTime = that.parser.parseTime(that.data.times)[currentSlide];
+			var time = nextTime - currentTime;
+			var average = time / length * 1000;
+			var i = 0;
+
+			timerWord = setInterval(function(){
+				document.querySelector('words').innerHTML = words[i].word;
+				i ++ ;
+				if(i === length) {
+					clearInterval(timerWord);
+				}
+			}, average);
+		}
+		return timerWord;
+	} else {
+		document.querySelector('words').innerHTML = words;
+	}
 }
 
 function hiddenWords() {
@@ -92,6 +117,7 @@ function hiddenCode() {
 
 EchoesWorks.prototype.applyEchoes = function () {
 	var that = this;
+	var wordTimer;
 	var isDataValid = that.parser.data && that.parser.data.codes !== undefined && that.parser.data.codes.length > 0;
 	if (isDataValid) {
 		that.data = that.parser.data;
@@ -106,7 +132,7 @@ EchoesWorks.prototype.applyEchoes = function () {
 				hiddenCode();
 			}
 			if (that.data.words[currentSlide]) {
-				showWords(that, currentSlide);
+				wordTimer = showWords(that, currentSlide);
 			} else {
 				hiddenWords(that, currentSlide);
 			}
@@ -412,8 +438,8 @@ var micromarkdown = {
 	},
 
 	codeHandler: function (stra, str) {
-		var pre='', preClass;
-		if((preClass = this.regexobject.pre.exec(stra)) !== null){
+		var pre = '', preClass;
+		if ((preClass = this.regexobject.pre.exec(stra)) !== null) {
 			pre = preClass[1];
 		}
 
@@ -564,7 +590,9 @@ var micromarkdown = {
 			repstr += '</ol>';
 		}
 		return repstr;
-	}, listsHandlerSub: function (line, repstr, helper1) {
+	},
+
+	listsHandlerSub: function (line, repstr, helper1) {
 		if ((line[0].trim().substr(0, 1) === '*') || (line[0].trim().substr(0, 1) === '-')) {
 			repstr += '<ul>';
 			helper1.push('</ul>');
@@ -639,8 +667,8 @@ var micromarkdown = {
 		regexobject.lists = this.listStrict(strict, regexobject);
 
 		str = '\n' + str + '\n';
-		['code', 'headline', 'lists', 'tables', 'links', 'mail', 'url', 'smlinks', 'hr'].forEach(function(type){
-			while((stra = regexobject[type].exec(str)) !== null) {
+		['code', 'headline', 'lists', 'tables', 'links', 'mail', 'url', 'smlinks', 'hr'].forEach(function (type) {
+			while ((stra = regexobject[type].exec(str)) !== null) {
 				str = that[(type + 'Handler')].apply(that, [stra, str, strict]);
 			}
 		});

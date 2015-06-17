@@ -73,6 +73,7 @@ function showCode(that, currentSlide) {
 }
 
 function showWords(that, currentSlide) {
+	var timerWord;
 	var words = that.data.words[currentSlide];
 	//To do use stand speak speed
 	//var standSpeakSpeed = 60 / 240 * 100;
@@ -86,11 +87,15 @@ function showWords(that, currentSlide) {
 			var average = time / length * 1000;
 			var i = 0;
 
-			setInterval(function(){
+			timerWord = setInterval(function(){
 				document.querySelector('words').innerHTML = words[i].word;
 				i ++ ;
+				if(i === length) {
+					clearInterval(timerWord);
+				}
 			}, average);
 		}
+		return timerWord;
 	} else {
 		document.querySelector('words').innerHTML = words;
 	}
