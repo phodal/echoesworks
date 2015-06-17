@@ -1,22 +1,10 @@
 describe("Image", function () {
 	var section,
 		image1, image2, image3,
-		PARENT_TAG = 'slide',
-		slides,
-		slide,
-		article,
-		NO_OF_SLIDES = 10,
-		SLIDE_TAG = 'section';
+		slides;
 
 	beforeEach(function () {
 		slides = [];
-
-		article = document.createElement(PARENT_TAG);
-		for (var i = 0; i < NO_OF_SLIDES; i++) {
-			slides.push(document.createElement(SLIDE_TAG));
-			slides.className = 'slide';
-			article.appendChild(slides[i]);
-		}
 
 		section = document.createElement('section');
 		image1 = document.createElement('img');
@@ -39,7 +27,6 @@ describe("Image", function () {
 		section.appendChild(image3);
 		section.appendChild(header);
 
-		document.body.appendChild(article);
 		document.body.appendChild(section);
 	});
 
