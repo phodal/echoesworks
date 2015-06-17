@@ -19,17 +19,19 @@ zh
  
 简介: [EchoesWorks —— 打造下一代技术Blog/Presentation 框架](http://www.phodal.com/blog/build-echoesworks/)
  
-Online Demo: [http://demo.echoesworks.com/](http://demo.echoesworks.com/) 
+##Demo: [http://demo.echoesworks.com/](http://demo.echoesworks.com/) 
  
 ##Feature
 
 ###Core
 
 - ``Markdown`` Presentation
-- Integrate Github Code/Gist Code
+- Integrate ``Github`` Code/Gist Code
 - ``Full Screen`` Background Image
 - Left/Right side Images Support
 - Process Bar
+- Auto Play
+- Subtitles
 
 zh
 
@@ -38,18 +40,8 @@ zh
 - 全屏背景图片
 - 左/右侧图片支持
 - 进度条
-
-###Addon
-
-- Timer Audio
-- Timer subtitles
-- Time Control
-
-zh
-
-- 定时音频
-- 定时字幕
-- 定时控制
+- 自动播放
+- 字幕
 
 ##Usage##
 
