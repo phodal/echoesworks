@@ -66,7 +66,7 @@ EchoesWorks.prototype.update = function () {
 function showCode(that, currentSlide) {
 	var url = EchoesWorks.fn.rawGitConvert(that.data.codes[currentSlide]);
 	EchoesWorks.get(url, function (response) {
-		document.querySelector('pre').innerHTML = response;
+		document.querySelector('code').innerHTML = response;
 		document.querySelector('slide').classList.remove('full');
 		document.querySelector('code').classList.remove('hidden');
 	});

@@ -92,15 +92,16 @@ section.active {
     position: relative;
 }
 
-code {
+pre {
     width: 49%;
     float: right;
     color: #ecf0f1;
-    font-size: 1.5em;
+    font-size: 1.2em;
     background-color: #34495e;
     border-radius: 10px;
     min-height: 600px;
-    height: 80%;
+    height: 100%;
+    margin: 0;
 }
 
 words {
