@@ -117,7 +117,6 @@ function hiddenCode() {
 
 EchoesWorks.prototype.applyEchoes = function () {
 	var that = this;
-	var wordTimer;
 	var isDataValid = that.parser.data && that.parser.data.codes !== undefined && that.parser.data.codes.length > 0;
 	if (isDataValid) {
 		that.data = that.parser.data;
@@ -132,7 +131,7 @@ EchoesWorks.prototype.applyEchoes = function () {
 				hiddenCode();
 			}
 			if (that.data.words[currentSlide]) {
-				wordTimer = showWords(that, currentSlide);
+				showWords(that, currentSlide);
 			} else {
 				hiddenWords(that, currentSlide);
 			}
