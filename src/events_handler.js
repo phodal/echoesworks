@@ -30,34 +30,37 @@
 
 		if (slides && isTouchDevice && window.slide) {
 			slideElement = slides[window.slide.slide()];
-			slideElement.addEventListener('touchstart', function (event) {
-				start = {
-					x: event.touches[0].pageX,
-					y: event.touches[0].pageY
-				};
-				dragging = true;
-			});
 
-			slideElement.addEventListener('touchend', function () {
-				dragging = false;
-			});
-
-			slideElement.addEventListener('touchmove', function (e) {
-				if (dragging) {
-					e.preventDefault();
-					console.log(e);
-					console.log(e.touches[0].pageX, start.x);
-					var delta = {
-						x: e.touches[0].pageX - start.x,
-						y: e.touches[0].pageY - start.y
+			EchoesWorks.forEach(slides, function(slide){
+				slide.addEventListener('touchstart', function (event) {
+					start = {
+						x: event.touches[0].pageX,
+						y: event.touches[0].pageY
 					};
+					dragging = true;
+				});
 
-					if(delta.x > 0){
-					  window.slide.next();
-					} else if (delta.x < 0) {
-						window.slide.prev();
+				slide.addEventListener('touchend', function () {
+					dragging = false;
+				});
+
+				slide.addEventListener('touchmove', function (e) {
+					if (dragging) {
+						e.preventDefault();
+						console.log(e);
+						console.log(e.touches[0].pageX, start.x);
+						var delta = {
+							x: e.touches[0].pageX - start.x,
+							y: e.touches[0].pageY - start.y
+						};
+
+						if (delta.x > 0) {
+							window.slide.next();
+						} else if (delta.x < 0) {
+							window.slide.prev();
+						}
 					}
-				}
+				});
 			});
 		}
 
