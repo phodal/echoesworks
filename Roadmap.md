@@ -28,3 +28,7 @@
 6.14
 
 - Time Summary
+
+6.18
+
+- Support for Mobile Devices
