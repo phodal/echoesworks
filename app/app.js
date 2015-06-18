@@ -4,8 +4,8 @@ window.onload = function(){
 		EchoesWorks.imageHandler();
 		new EchoesWorks({
 			element: 'slide',
-			source: 'data/data.json'
-			//auto: true
+			source: 'data/data.json',
+			auto: true
 		});
 	})
 };

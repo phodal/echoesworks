@@ -140,7 +140,7 @@ EchoesWorks.prototype.applyEchoes = function () {
 };
 
 
-EchoesWorks.version = EchoesWorks.VERSION = '0.1.2';
+EchoesWorks.version = EchoesWorks.VERSION = '0.1.3';
 
 root.EchoesWorks = EchoesWorks;
 root.EW = EchoesWorks;
@@ -1028,7 +1028,6 @@ EchoesWorks.fn = EchoesWorks.extend(EchoesWorks.fn, Github);
 				slide.addEventListener('touchmove', function (e) {
 					if (dragging) {
 						e.preventDefault();
-						console.log(e.touches[0].pageX, start.x);
 						delta = {
 							x: e.touches[0].pageX - start.x,
 							y: e.touches[0].pageY - start.y
@@ -1041,7 +1040,7 @@ EchoesWorks.fn = EchoesWorks.extend(EchoesWorks.fn, Github);
 							window.slide.prev();
 							dragging = false;
 						}
-						delta = {};
+						window.slide.auto = false;
 					}
 				});
 			});

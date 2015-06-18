@@ -61,7 +61,7 @@
 							window.slide.prev();
 							dragging = false;
 						}
-						delta = {};
+						window.slide.auto = false;
 					}
 				});
 			});
