@@ -18,6 +18,7 @@
 		slide,
 		slideElement,
 		slides,
+		start,
 		dragging;
 
 	var isTouchDevice = function () {
@@ -25,11 +26,15 @@
 	};
 
 	document.addEventListener("ew:slide:init", function () {
-		slides = document.getElementsByTagName('slide');
+		slides = document.getElementsByTagName('section');
 
 		if (slides && isTouchDevice && window.slide) {
 			slideElement = slides[window.slide.slide()];
-			slideElement.addEventListener('touchstart', function () {
+			slideElement.addEventListener('touchstart', function (event) {
+				start = {
+					x: event.touches[0].pageX,
+					y: event.touches[0].pageY
+				};
 				dragging = true;
 			});
 
@@ -40,6 +45,18 @@
 			slideElement.addEventListener('touchmove', function (e) {
 				if (dragging) {
 					e.preventDefault();
+					console.log(e);
+					console.log(e.touches[0].pageX, start.x);
+					var delta = {
+						x: e.touches[0].pageX - start.x,
+						y: e.touches[0].pageY - start.y
+					};
+
+					if(delta.x > 0){
+					  window.slide.next();
+					} else if (delta.x < 0) {
+						window.slide.prev();
+					}
 				}
 			});
 		}
