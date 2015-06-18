@@ -74,6 +74,16 @@
 			});
 		}
 
+		function handler() {
+			window.slide.slide(parseInt(localStorage.getItem('echoesworks'), 10));
+		}
+
+		if (window.addEventListener) {
+			window.addEventListener("storage", handler, false);
+		} else {
+			window.attachEvent("onstorage", handler);
+		}
+
 		document.addEventListener("keydown", function (event) {
 			window.slide.auto = false;
 			var keyCode = event.keyCode;

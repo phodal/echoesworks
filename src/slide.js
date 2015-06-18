@@ -43,6 +43,7 @@ var from = function () {
 			}
 			window.bar.go(100 * ( index + 1) / slides.length);
 			writeURL(index);
+			localStorage.setItem('echoesworks', index);
 			fire('activate', createEventData(activeSlide, customData));
 		},
 

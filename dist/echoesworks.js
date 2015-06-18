@@ -283,6 +283,7 @@ var from = function () {
 			}
 			window.bar.go(100 * ( index + 1) / slides.length);
 			writeURL(index);
+			localStorage.setItem('echoesworks', index);
 			fire('activate', createEventData(activeSlide, customData));
 		},
 
@@ -1051,6 +1052,16 @@ EchoesWorks.fn = EchoesWorks.extend(EchoesWorks.fn, Github);
 					window.slide.auto = false;
 				});
 			});
+		}
+
+		function handler() {
+			window.slide.slide(parseInt(localStorage.getItem('echoesworks'), 10));
+		}
+
+		if (window.addEventListener) {
+			window.addEventListener("storage", handler, false);
+		} else {
+			window.attachEvent("onstorage", handler);
 		}
 
 		document.addEventListener("keydown", function (event) {
