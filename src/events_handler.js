@@ -31,7 +31,9 @@
 		if (slides && isTouchDevice && window.slide) {
 			slideElement = slides[window.slide.slide()];
 
-			EchoesWorks.forEach(slides, function(slide){
+			EchoesWorks.forEach(slides, function (slide) {
+				var halfWidth = window.screen.width / 2;
+
 				slide.addEventListener('touchstart', function (event) {
 					start = {
 						x: event.touches[0].pageX,
@@ -54,9 +56,9 @@
 							y: e.touches[0].pageY - start.y
 						};
 
-						if (delta.x > 0) {
+						if (delta.x > 0 && (delta.x > halfWidth)) {
 							window.slide.next();
-						} else if (delta.x < 0) {
+						} else if (delta.x < 0 && (Math.abs(delta.x) > halfWidth)) {
 							window.slide.prev();
 						}
 					}
