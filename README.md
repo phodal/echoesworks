@@ -155,6 +155,8 @@ Example with slide
 
     * [https://github.com/markdalgleish/bespoke.js](https://github.com/markdalgleish/bespoke.js)
     * [https://github.com/bartaz/impress.js](https://github.com/bartaz/impress.js)
+    * [https://github.com/gajus/swing](https://github.com/gajus/swing)
+    * [https://github.com/thebird/Swipe](https://github.com/thebird/Swipe)
 
 - Markdown
     
