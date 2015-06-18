@@ -32,7 +32,7 @@
 			slideElement = slides[window.slide.slide()];
 
 			EchoesWorks.forEach(slides, function (slide) {
-				var halfWidth = window.screen.width / 2;
+				var halfWidth = window.screen.width / 2, delta;
 
 				slide.addEventListener('touchstart', function (event) {
 					start = {
@@ -49,18 +49,19 @@
 				slide.addEventListener('touchmove', function (e) {
 					if (dragging) {
 						e.preventDefault();
-						console.log(e);
-						console.log(e.touches[0].pageX, start.x);
-						var delta = {
+						delta = {
 							x: e.touches[0].pageX - start.x,
 							y: e.touches[0].pageY - start.y
 						};
 
 						if (delta.x > 0 && (delta.x > halfWidth)) {
 							window.slide.next();
+							dragging = false;
 						} else if (delta.x < 0 && (Math.abs(delta.x) > halfWidth)) {
 							window.slide.prev();
+							dragging = false;
 						}
+						delta = {};
 					}
 				});
 			});
