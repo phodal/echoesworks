@@ -1011,7 +1011,9 @@ EchoesWorks.fn = EchoesWorks.extend(EchoesWorks.fn, Github);
 			slideElement = slides[window.slide.slide()];
 
 			EchoesWorks.forEach(slides, function (slide) {
-				var halfWidth = window.screen.width / 2, delta;
+				var halfWidth = window.screen.width / 2,
+						thirdHeight = window.screen.height / 3,
+						delta;
 
 				slide.addEventListener('touchstart', function (event) {
 					start = {
@@ -1025,23 +1027,28 @@ EchoesWorks.fn = EchoesWorks.extend(EchoesWorks.fn, Github);
 					dragging = false;
 				});
 
-				slide.addEventListener('touchmove', function (e) {
+				slide.addEventListener('touchmove', function (event) {
 					if (dragging) {
-						e.preventDefault();
+						event.preventDefault();
 						delta = {
-							x: e.touches[0].pageX - start.x,
-							y: e.touches[0].pageY - start.y
+							x: event.touches[0].pageX - start.x,
+							y: event.touches[0].pageY - start.y
 						};
 
-						if (delta.x > 0 && (delta.x > halfWidth)) {
+						var nextX = delta.x > 0 && (delta.x > halfWidth);
+						var nextY = delta.y > 0 && (delta.y > thirdHeight);
+						var lastX = delta.x < 0 && (Math.abs(delta.x) > halfWidth);
+						var lastY = delta.y < 0 && (Math.abs(delta.y) > thirdHeight);
+
+						if (nextX || nextY) {
 							window.slide.next();
 							dragging = false;
-						} else if (delta.x < 0 && (Math.abs(delta.x) > halfWidth)) {
+						} else if (lastX || lastY) {
 							window.slide.prev();
 							dragging = false;
 						}
-						window.slide.auto = false;
 					}
+					window.slide.auto = false;
 				});
 			});
 		}
