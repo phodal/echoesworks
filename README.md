@@ -45,7 +45,7 @@ zh
 
 ##Usage##
 
-Clone
+###Clone Demo
 
     git clone git@github.com:echoesworks/echoesworks-demo.git
 
@@ -57,7 +57,63 @@ Clone
     
 2.Data
 
-create ``example.md`` & ``data.json`` under ``data`` folder 
+Create ``example.md``: 
+
+    <section>
+    ![background](app/background.jpg)
+    
+    #EchoesWorks
+    
+    ##Phodal Huang
+      
+    </section>
+    <section>
+    
+    #Design for Developer
+    
+    ##EchoesWorks?
+    
+    ##What is different?
+    
+    ##What we need?
+    </section>
+    
+Create ``data.json``:
+    
+    [
+      {
+        "time": "00:01.00",
+        "code": "https://raw.githubusercontent.com/phodal/echoesworks/master/bower.json",
+        "word": "hello, world"
+      },
+      {
+        "time": "00:05.00",
+        "word": [
+          {
+            "word": "Привет"
+          },
+          {
+            "word": "Bonjour"
+          },
+          {
+            "word": "こんにちは"
+          },
+          {
+            "word": "你好"
+          },
+          {
+            "word": "Ciao"
+          },
+          {
+            "word": "Hello, World"
+          }
+        ]
+      },
+      {
+        "time": "00:12.51",
+        "code": false,
+        "word": "hello, world, 2"
+      }]
     
 - Markdown Slide
 - Data for code & Time Control     
