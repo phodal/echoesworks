@@ -4,7 +4,7 @@ html {
 
 body {
     height: 100%; /* <------------ */
-    overflow:hidden;
+    overflow: hidden;
 }
 
 div.show {
@@ -64,7 +64,7 @@ section ul li {
 }
 
 section.first h1 {
-    top: 30%;
+    margin-top: 30%;
     font-size: 5em;
     position: relative;
 }
@@ -72,8 +72,7 @@ section.first h1 {
 section.first h2 {
     font-size: 2.8em;
     color: #00bcd4;
-    top: 30%;
-    left: 60%;
+    margin-left: 60%;
     position: relative;
 }
 
@@ -102,6 +101,16 @@ pre {
     min-height: 600px;
     height: 100%;
     margin: 0;
+}
+
+@media screen and (min-width: 321px) {
+    .full section {
+        background: no-repeat fixed center;
+        webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
 }
 
 words {
