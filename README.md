@@ -32,6 +32,7 @@ zh
 - Process Bar
 - Auto Play
 - Subtitles
+- Tab Control
 
 zh
 
@@ -42,6 +43,7 @@ zh
 - 进度条
 - 自动播放
 - 字幕
+- 分屏控制
 
 ##Usage##
 
