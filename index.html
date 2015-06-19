@@ -28,6 +28,8 @@
 <a href=""><img src="https://img.shields.io/bower/v/echoesworks.svg?style=flat" alt="Bower"></a>
 <a href=""><img src="https://img.shields.io/badge/license-MIT-green.svg?style=flat" alt="LICENSE"></a></p>
 
+<p><img src="app/logo_small.png" alt="Logo"></p>
+
 <h1>
 <a id="echoesworks" class="anchor" href="#echoesworks" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="http://www.echoesworks.com/">EchoesWorks</a>
 </h1>
@@ -42,7 +44,11 @@
 <p>下一代技术<code>博客</code>/<code>展示</code>框架</p>
 </blockquote>
 
-<p>Online Demo: <a href="http://demo.echoesworks.com/">http://demo.echoesworks.com/</a> </p>
+<p>简介: <a href="http://www.phodal.com/blog/build-echoesworks/">EchoesWorks —— 打造下一代技术Blog/Presentation 框架</a></p>
+
+<h2>
+<a id="demo-httpdemoechoesworkscom" class="anchor" href="#demo-httpdemoechoesworkscom" aria-hidden="true"><span class="octicon octicon-link"></span></a>Demo: <a href="http://demo.echoesworks.com/">http://demo.echoesworks.com/</a>
+</h2>
 
 <h2>
 <a id="feature" class="anchor" href="#feature" aria-hidden="true"><span class="octicon octicon-link"></span></a>Feature</h2>
@@ -53,24 +59,39 @@
 <ul>
 <li>
 <code>Markdown</code> Presentation</li>
-<li>Integrate Github Code/Gist Code</li>
+<li>Integrate <code>Github</code> Code/Gist Code</li>
 <li>
 <code>Full Screen</code> Background Image</li>
-<li>Left/Right Images Support</li>
+<li>Left/Right side Images Support</li>
 <li>Process Bar</li>
+<li>Auto Play</li>
+<li>Subtitles</li>
+<li>Tab Control</li>
 </ul>
 
-<h3>
-<a id="addon" class="anchor" href="#addon" aria-hidden="true"><span class="octicon octicon-link"></span></a>Addon</h3>
+<p>zh</p>
 
 <ul>
-<li>Timer Audio</li>
-<li>Timer subtitles</li>
-<li>Time Control</li>
+<li>支持 Markdown</li>
+<li>集成Github代码</li>
+<li>全屏背景图片</li>
+<li>左/右侧图片支持</li>
+<li>进度条</li>
+<li>自动播放</li>
+<li>字幕</li>
+<li>分屏控制</li>
 </ul>
 
 <h2>
 <a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<h3>
+<a id="clone-demo" class="anchor" href="#clone-demo" aria-hidden="true"><span class="octicon octicon-link"></span></a>Clone Demo</h3>
+
+<pre><code>git clone git@github.com:echoesworks/echoesworks-demo.git
+</code></pre>
+
+<p><code>Or</code></p>
 
 <p>1.Install</p>
 
@@ -79,7 +100,65 @@
 
 <p>2.Data</p>
 
-<p>create <code>example.md</code> &amp; <code>data.json</code> under <code>data</code> folder </p>
+<p>Create <code>example.md</code>: </p>
+
+<pre><code>&lt;section&gt;
+![background](app/background.jpg)
+
+#EchoesWorks
+
+##Phodal Huang
+
+&lt;/section&gt;
+&lt;section&gt;
+
+#Design for Developer
+
+##EchoesWorks?
+
+##What is different?
+
+##What we need?
+&lt;/section&gt;
+</code></pre>
+
+<p>Create <code>data.json</code>:</p>
+
+<pre><code>[
+  {
+    "time": "00:01.00",
+    "code": "https://raw.githubusercontent.com/phodal/echoesworks/master/bower.json",
+    "word": "hello, world"
+  },
+  {
+    "time": "00:05.00",
+    "word": [
+      {
+        "word": "Привет"
+      },
+      {
+        "word": "Bonjour"
+      },
+      {
+        "word": "こんにちは"
+      },
+      {
+        "word": "你好"
+      },
+      {
+        "word": "Ciao"
+      },
+      {
+        "word": "Hello, World"
+      }
+    ]
+  },
+  {
+    "time": "00:12.51",
+    "code": false,
+    "word": "hello, world, 2"
+  }]
+</code></pre>
 
 <ul>
 <li>Markdown Slide</li>
@@ -132,6 +211,8 @@
 <ul>
 <li><a href="https://github.com/markdalgleish/bespoke.js">https://github.com/markdalgleish/bespoke.js</a></li>
 <li><a href="https://github.com/bartaz/impress.js">https://github.com/bartaz/impress.js</a></li>
+<li><a href="https://github.com/gajus/swing">https://github.com/gajus/swing</a></li>
+<li><a href="https://github.com/thebird/Swipe">https://github.com/thebird/Swipe</a></li>
 </ul>
 </li>
 <li>
