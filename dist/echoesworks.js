@@ -980,7 +980,6 @@ EchoesWorks.fn = EchoesWorks.extend(EchoesWorks.fn, Github);
 
 /* global EchoesWorks */
 
-/* istanbul ignore next */
 /*jshint unused:false, eqnull:true */
 /* global window, navigator */
 
@@ -996,7 +995,6 @@ EchoesWorks.fn = EchoesWorks.extend(EchoesWorks.fn, Github);
 		PAGE_UP = 33,
 		UP = 38,
 		slide,
-		slideElement,
 		slides,
 		start,
 		dragging;
@@ -1009,8 +1007,6 @@ EchoesWorks.fn = EchoesWorks.extend(EchoesWorks.fn, Github);
 		slides = document.getElementsByTagName('section');
 
 		if (slides && isTouchDevice && window.slide) {
-			slideElement = slides[window.slide.slide()];
-
 			EchoesWorks.forEach(slides, function (slide) {
 				var halfWidth = window.screen.width / 2,
 						thirdHeight = window.screen.height / 3,

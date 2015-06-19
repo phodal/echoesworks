@@ -1,6 +1,5 @@
 /* global EchoesWorks */
 
-/* istanbul ignore next */
 /*jshint unused:false, eqnull:true */
 /* global window, navigator */
 
@@ -16,7 +15,6 @@
 		PAGE_UP = 33,
 		UP = 38,
 		slide,
-		slideElement,
 		slides,
 		start,
 		dragging;
@@ -35,7 +33,6 @@
 						delta;
 
 				slide.addEventListener('touchstart', function (event) {
-					console.log("========");
 					start = {
 						x: event.touches[0].pageX,
 						y: event.touches[0].pageY
@@ -48,7 +45,6 @@
 				});
 
 				slide.addEventListener('touchmove', function (event) {
-					console.log(window.screen.width, window.screen.height);
 					if (dragging) {
 						event.preventDefault();
 						delta = {
