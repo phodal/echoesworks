@@ -140,7 +140,7 @@ EchoesWorks.prototype.applyEchoes = function () {
 };
 
 
-EchoesWorks.version = EchoesWorks.VERSION = '0.1.3';
+EchoesWorks.version = EchoesWorks.VERSION = '0.1.4';
 
 root.EchoesWorks = EchoesWorks;
 root.EW = EchoesWorks;
