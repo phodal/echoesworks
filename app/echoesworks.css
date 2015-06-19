@@ -1,9 +1,9 @@
 html {
-    height: 100%; /* <------------ */
+    height: 100%;
 }
 
 body {
-    height: 100%; /* <------------ */
+    height: 100%;
     overflow: hidden;
 }
 
@@ -156,6 +156,7 @@ words {
     pre {
         height: auto;
     }
+
     .full section {
         background: no-repeat fixed center;
         webkit-background-size: cover;
@@ -165,20 +166,24 @@ words {
     }
 }
 
-@media only screen and (min-device-width: 1200px)
-    and (-webkit-device-pixel-ratio: 1.5) {
+@media only screen
+and (min-device-width: 1200px)
+and (-webkit-device-pixel-ratio: 1.5) {
     section h1,
-    section.first h1{
+    section.first h1 {
         font-size: 12em;
     }
+
     section h2 {
         font-size: 7.2em;
     }
+
     section ul li {
         font-size: 4.4em;
         margin-top: 0.5em;
         margin-bottom: 0.5em;
     }
+
     section b {
         font-size: 6em;
     }
