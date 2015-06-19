@@ -87,13 +87,13 @@ describe("EVent", function () {
 		slides = document.getElementsByTagName('section');
 		window.slide.slide(0);
 
-		touchTrigger(slides, 'touchstart', { pageX: 400, pageY: 900});
-		touchTrigger(slides, 'touchmove', { pageX: 1440, pageY: 900});
+		touchTrigger(slides, 'touchstart', { pageX: 1440, pageY: 900});
+		touchTrigger(slides, 'touchmove', { pageX: 400, pageY: 900});
 		jasmine.clock().tick(100);
 		expect(window.slide.slide()).toBe(1);
 
-		touchTrigger(slides, 'touchstart', { pageX: 1440, pageY: 900});
-		touchTrigger(slides, 'touchmove', { pageX: 400, pageY: 900});
+		touchTrigger(slides, 'touchstart', { pageX: 400, pageY: 900});
+		touchTrigger(slides, 'touchmove', { pageX: 1440, pageY: 900});
 		jasmine.clock().tick(100);
 		expect(window.slide.slide()).toBe(0);
 	});

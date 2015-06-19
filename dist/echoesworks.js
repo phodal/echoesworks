@@ -1032,9 +1032,9 @@ EchoesWorks.fn = EchoesWorks.extend(EchoesWorks.fn, Github);
 							y: event.touches[0].pageY - start.y
 						};
 
-						var nextX = delta.x > 0 && (delta.x > halfWidth);
+						var lastX = delta.x > 0 && (delta.x > halfWidth);
 						var nextY = delta.y > 0 && (delta.y > thirdHeight);
-						var lastX = delta.x < 0 && (Math.abs(delta.x) > halfWidth);
+						var nextX = delta.x < 0 && (Math.abs(delta.x) > halfWidth);
 						var lastY = delta.y < 0 && (Math.abs(delta.y) > thirdHeight);
 
 						if (nextX || nextY) {
