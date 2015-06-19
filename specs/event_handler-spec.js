@@ -32,13 +32,6 @@ describe("EVent", function () {
 		jasmine.clock().install();
 	});
 
-	function keyPress(key) {
-		var event = document.createEvent('Event');
-		event.keyCode = key;
-		event.initEvent('keyup');
-		document.dispatchEvent(event);
-	}
-
 	afterEach(function () {
 		document.body.removeChild(article);
 		document.body.removeChild(pre);
@@ -47,6 +40,13 @@ describe("EVent", function () {
 		jasmine.Ajax.uninstall();
 		jasmine.clock().uninstall();
 	});
+
+	function eventTrigger(key, eventName) {
+		var event = document.createEvent('Event');
+		event.keyCode = key;
+		event.initEvent(eventName);
+		document.dispatchEvent(event);
+	}
 
 	it("should return correctly slide when key press", function () {
 		var UP = 40,
@@ -58,11 +58,13 @@ describe("EVent", function () {
 		});
 		window.slide.slide(0);
 
-		keyPress(UP);
+		eventTrigger(UP, 'keyup');
+		eventTrigger(UP, 'keydown');
 		jasmine.clock().tick(100);
 		expect(window.slide.slide()).toBe(1);
-		keyPress(DOWN);
 
+		eventTrigger(DOWN, 'keyup');
+		eventTrigger(DOWN, 'keydown');
 		jasmine.clock().tick(100);
 		expect(window.slide.slide()).toBe(0);
 	});
@@ -97,7 +99,6 @@ describe("EVent", function () {
 	});
 
 	it("should return correctly slide when swipe top & bottom", function () {
-		window.ontouchstart = true;
 		var ew = new EchoesWorks({
 			element: 'slide',
 			source: 'data/data.json',
@@ -108,11 +109,13 @@ describe("EVent", function () {
 
 		touchTrigger(slides, 'touchstart', { pageX: 1440, pageY: 300});
 		touchTrigger(slides, 'touchmove', { pageX: 1440, pageY: 900});
+		touchTrigger(slides, 'touchend', { pageX: 1440, pageY: 900});
 		jasmine.clock().tick(100);
 		expect(window.slide.slide()).toBe(1);
 
 		touchTrigger(slides, 'touchstart', { pageX: 1440, pageY: 900});
 		touchTrigger(slides, 'touchmove', { pageX: 1440, pageY: 300});
+		touchTrigger(slides, 'touchend', { pageX: 1440, pageY: 900});
 		jasmine.clock().tick(100);
 		expect(window.slide.slide()).toBe(0);
 	});
