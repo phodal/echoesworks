@@ -155,9 +155,29 @@ describe("Main", function () {
 		window.slide.slide(0);
 
 		jasmine.clock().tick(1500);
+
 		expect(document.querySelector('words').className).toBe('hidden');
 		expect(document.querySelector('words').innerHTML).toBe('hello, world');
 	});
+
+	it("should return correctly localstorage", function () {
+		var ew = new EchoesWorks({
+			element: 'slide',
+			source: 'data/data.json',
+			auto: true
+		});
+
+		ew.parser.data = {
+			times: ["00:01.20", "00:01.30", "00:02.30"],
+			codes: [false, false, false],
+			words: [[{"word": "Привет"}],
+				[{"word": "Привет"},{"word": "Bonjour"}, {"word": "Hello, World"}, {"word": "213"}],""]
+		};
+		window.slide.slide(0);
+
+		jasmine.clock().tick(1500);
+	});
+
 
 });
 
