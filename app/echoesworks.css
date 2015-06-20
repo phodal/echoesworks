@@ -193,12 +193,18 @@ pre.hidden {
 }
 
 @media screen and (orientation:landscape) and (min-width: 321px) {
+    .bar {
+        height: 0.6em!important;
+    }
     section.first h1 {
         margin-top: 20%;
     }
 }
 
 @media screen and (orientation:portrait) {
+    .bar {
+        height: 0.8em!important;
+    }
     section h1 {
         font-size: 7.2rem;
     }

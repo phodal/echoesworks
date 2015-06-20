@@ -862,6 +862,7 @@ Nanobar = function () {
 	this.bars = [];
 
 	this.el = document.createElement('div');
+	this.el.className = 'bar';
 	addCss(this.el, cssCont);
 	this.el.style.position = 'fixed';
 	document.getElementsByTagName('body')[0].appendChild(this.el);
