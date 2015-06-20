@@ -135,7 +135,7 @@ describe("Main", function () {
 
 		jasmine.clock().tick(1500);
 		expect(document.querySelector('slide').className).toBe('full');
-		expect(document.querySelector('code').className).toBe('hidden');
+		expect(document.querySelector('pre').className).toBe('hidden');
 		expect(document.querySelector('words').className).toBe('hidden');
 	});
 

@@ -108,6 +108,7 @@ function hiddenWords() {
 
 function hiddenCode() {
 	document.querySelector('slide').classList.add('full');
+	document.querySelector('pre').classList.add('hidden');
 	document.querySelector('code').classList.add('hidden');
 }
 
@@ -121,7 +122,7 @@ EchoesWorks.prototype.applyEchoes = function () {
 
 		if (parseFloat(that.time) > times[currentSlide] && window.slide.auto) {
 			window.slide.next();
-			if (that.data.codes[currentSlide]) {
+			if (that.data.codes[currentSlide] && window.slide.auto) {
 				showCode(that, currentSlide);
 			} else {
 				hiddenCode();

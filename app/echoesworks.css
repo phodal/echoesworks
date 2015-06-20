@@ -202,6 +202,11 @@ words {
     }
 }
 
+code.hidden,
+pre.hidden{
+    display: none;
+}
+
 @media only screen
 and (min-device-width: 1200px)
 and (-webkit-device-pixel-ratio: 1.5) {
