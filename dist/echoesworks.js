@@ -72,7 +72,7 @@ function showCode(that, currentSlide) {
 	EchoesWorks.get(url, function (response) {
 		document.querySelector('code').innerHTML = response;
 		document.querySelector('slide').classList.remove('full');
-		document.querySelector('code').classList.remove('hidden');
+		document.querySelector('pre ').classList.remove('hidden');
 	});
 }
 
@@ -113,7 +113,6 @@ function hiddenWords() {
 function hiddenCode() {
 	document.querySelector('slide').classList.add('full');
 	document.querySelector('pre').classList.add('hidden');
-	document.querySelector('code').classList.add('hidden');
 }
 
 EchoesWorks.prototype.applyEchoes = function () {
