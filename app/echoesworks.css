@@ -12,7 +12,7 @@ div.show {
 }
 
 section {
-    font-size: 1em;
+    font-size: 1rem;
     display: block;
     width: 100%;
     min-height: 600px;
@@ -30,7 +30,7 @@ section {
 }
 
 section h1 {
-    font-size: 4em;
+    font-size: 4rem;
     min-width: 200px;
     text-align: center;
     margin-left: auto;
@@ -38,7 +38,7 @@ section h1 {
 }
 
 section h2 {
-    font-size: 2.8em;
+    font-size: 2.8rem;
 }
 
 section h1,
@@ -52,25 +52,25 @@ section p {
 
 section b,
 section strong {
-    font-size: 2em;
+    font-size: 2rem;
 }
 
 section ul {
-    margin-left: 5em;
+    margin-left: 5rem;
 }
 
 section ul li {
-    font-size: 2.5em;
+    font-size: 2.5rem;
 }
 
 section.first h1 {
     margin-top: 30%;
-    font-size: 5em;
+    font-size: 5rem;
     position: relative;
 }
 
 section.first h2 {
-    font-size: 2.8em;
+    font-size: 2.8rem;
     color: #00bcd4;
     margin-left: 60%;
     position: relative;
@@ -95,7 +95,7 @@ pre {
     width: 49%;
     float: right;
     color: #ecf0f1;
-    font-size: 1.2em;
+    font-size: 1.2rem;
     background-color: #34495e;
     border-radius: 10px;
     min-height: 600px;
@@ -109,7 +109,7 @@ words {
     bottom: 0;
     position: fixed;
     left: 5%;
-    font-size: 3em;
+    font-size: 3rem;
     color: #888888;;
 }
 
@@ -152,43 +152,50 @@ words {
     width: 50%;
 }
 
+code.hidden,
+pre.hidden{
+    display: none;
+}
+
 @media screen and (min-width: 321px) {
-    section h1,
+    section h1 {
+        font-size: 4rem;
+    }
     section.first h1 {
-        font-size: 7.2em;
+        font-size: 5.2rem;
     }
 
     section h2 {
-        font-size: 4em;
+        font-size: 2.4rem;
     }
 
     section ul li {
-        font-size: 3em;
-        margin-top: 0.5em;
-        margin-bottom: 0.5em;
+        font-size: 2.0rem;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
     }
 
     section b {
-        font-size: 3.5em;
+        font-size: 2.2rem;
     }
-    .left {
-        float: none;
-        width: 100%
-    }
-    .image-right {
-        margin-top: 10%;
-        float:none;
-        width: 100%
-    }
-    .right {
-        float: none;
-        width: 100%
-    }
-    .image-left {
-        margin-top: 10%;
-        float:none;
-        width: 100%
-    }
+    /*.left {*/
+        /*float: none;*/
+        /*width: 100%*/
+    /*}*/
+    /*.image-right {*/
+        /*margin-top: 10%;*/
+        /*float:none;*/
+        /*width: 100%*/
+    /*}*/
+    /*.right {*/
+        /*float: none;*/
+        /*width: 100%*/
+    /*}*/
+    /*.image-left {*/
+        /*margin-top: 10%;*/
+        /*float:none;*/
+        /*width: 100%*/
+    /*}*/
     pre {
         height: auto;
     }
@@ -202,30 +209,25 @@ words {
     }
 }
 
-code.hidden,
-pre.hidden{
-    display: none;
-}
-
 @media only screen
 and (min-device-width: 1200px)
 and (-webkit-device-pixel-ratio: 1.5) {
     section h1,
     section.first h1 {
-        font-size: 12em;
+        font-size: 12rem;
     }
 
     section h2 {
-        font-size: 7.2em;
+        font-size: 7.2rem;
     }
 
     section ul li {
-        font-size: 4.4em;
-        margin-top: 0.5em;
-        margin-bottom: 0.5em;
+        font-size: 4.4rem;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
     }
 
     section b {
-        font-size: 6em;
+        font-size: 6rem;
     }
 }
