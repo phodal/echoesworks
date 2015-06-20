@@ -153,17 +153,15 @@ words {
 }
 
 code.hidden,
-pre.hidden{
+pre.hidden {
     display: none;
 }
 
-@media screen and (min-width: 321px) {
-    section.first h1 {
-        margin-top: 20%;
-    }
+@media screen {
     section h1 {
         font-size: 4rem;
     }
+
     section.first h1 {
         font-size: 5.2rem;
     }
@@ -181,34 +179,71 @@ pre.hidden{
     section b {
         font-size: 2.2rem;
     }
-    /*.left {*/
-        /*float: none;*/
-        /*width: 100%*/
-    /*}*/
-    /*.image-right {*/
-        /*margin-top: 10%;*/
-        /*float:none;*/
-        /*width: 100%*/
-    /*}*/
-    /*.right {*/
-        /*float: none;*/
-        /*width: 100%*/
-    /*}*/
-    /*.image-left {*/
-        /*margin-top: 10%;*/
-        /*float:none;*/
-        /*width: 100%*/
-    /*}*/
+
     pre {
         height: auto;
     }
-
     .full section {
         background: no-repeat fixed center;
         webkit-background-size: cover;
         -moz-background-size: cover;
         -o-background-size: cover;
         background-size: cover;
+    }
+}
+
+@media screen and (orientation:landscape) and (min-width: 321px) {
+    section.first h1 {
+        margin-top: 20%;
+    }
+}
+
+@media screen and (orientation:portrait) {
+    section h1 {
+        font-size: 7.2rem;
+    }
+
+    section.first h1 {
+        font-size: 8rem;
+    }
+
+    section h2 {
+        font-size: 3.5rem;
+    }
+
+    section ul li {
+        font-size: 3.5rem;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    section b {
+        font-size: 4.0rem;
+    }
+    section.first h1 {
+        margin-top: 40%;
+    }
+
+    .left {
+        float: none;
+        width: 100%
+    }
+
+    .image-right {
+        margin-top: 10%;
+        float: none;
+        width: 100%
+    }
+
+    .right {
+        float: none;
+        width: 100%
+    }
+
+    .image-left {
+        margin-top: 10%;
+        float: none;
+        width: 100%
     }
 }
 
