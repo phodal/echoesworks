@@ -158,6 +158,9 @@ pre.hidden{
 }
 
 @media screen and (min-width: 321px) {
+    section.first h1 {
+        margin-top: 20%;
+    }
     section h1 {
         font-size: 4rem;
     }
