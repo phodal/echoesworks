@@ -153,6 +153,42 @@ words {
 }
 
 @media screen and (min-width: 321px) {
+    section h1,
+    section.first h1 {
+        font-size: 7.2em;
+    }
+
+    section h2 {
+        font-size: 4em;
+    }
+
+    section ul li {
+        font-size: 3em;
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
+    }
+
+    section b {
+        font-size: 3.5em;
+    }
+    .left {
+        float: none;
+        width: 100%
+    }
+    .image-right {
+        margin-top: 10%;
+        float:none;
+        width: 100%
+    }
+    .right {
+        float: none;
+        width: 100%
+    }
+    .image-left {
+        margin-top: 10%;
+        float:none;
+        width: 100%
+    }
     pre {
         height: auto;
     }
