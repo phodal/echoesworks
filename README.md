@@ -25,9 +25,9 @@ zh
 
 ###Core
 
-- ``Markdown`` Presentation
-- Integrate ``Github`` Code/Gist Code
-- ``Full Screen`` Background Image
+- **Markdown** Presentation
+- Integrate **Github** Code/Gist Code
+- **Full Screen** Background Image
 - Left/Right side Images Support
 - Process Bar
 - Auto Play
@@ -36,9 +36,9 @@ zh
 
 zh
 
-- 支持 Markdown
-- 集成Github代码
-- 全屏背景图片
+- 支持 **Markdown**
+- **Github**代码显示
+- **全屏背景**图片
 - 左/右侧图片支持
 - 进度条
 - 自动播放
@@ -49,9 +49,9 @@ zh
 
 ###Clone Demo
 
-    git clone git@github.com:echoesworks/echoesworks-demo.git
+    git clone git@github.com:echoesworks/echoesworks-demo.git yourslide
 
-``Or``
+###Setup
 
 1.Install
 
