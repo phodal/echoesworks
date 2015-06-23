@@ -5,6 +5,7 @@ window.onload = function(){
 		new EchoesWorks({
 			element: 'slide',
 			source: 'data/data.json',
+			src: 'app/audio.mp3',
 			auto: true
 		});
 	})

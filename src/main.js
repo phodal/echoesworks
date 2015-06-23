@@ -16,11 +16,15 @@ var EchoesWorks = function (options) {
 	if (options.source) {
 		this.source = this.options.source;
 	}
+	if (options.src) {
+		this.audioSrc = this.options.src;
+	}
 	this.element = this.options.element;
 	this.playing = false;
 	this.data = [];
 	this.fps = 10;
 	this.time = 0;
+	this.audio = null;
 	if (this.options.auto) {
 		this.play();
 	}
@@ -29,6 +33,11 @@ var EchoesWorks = function (options) {
 
 EchoesWorks.prototype.init = function () {
 	var that = this;
+	if(this.audioSrc){
+		this.audio = document.createElement('audio');
+		this.audio.src = this.audioSrc;
+		this.audio.autoplay = this.options.auto;
+	}
 
 	that.slide();
 	EchoesWorks.triggerEvent("ew:slide:init");
@@ -78,19 +87,19 @@ function showWords(that, currentSlide) {
 	//To do use stand speak speed
 	//var standSpeakSpeed = 60 / 240 * 100;
 
-	if(EchoesWorks.isObject(words)){
+	if (EchoesWorks.isObject(words)) {
 		var nextTime = that.parser.parseTime(that.data.times)[currentSlide + 1];
-		if(that.time < nextTime && words.length > 1){
+		if (that.time < nextTime && words.length > 1) {
 			var length = words.length;
 			var currentTime = that.parser.parseTime(that.data.times)[currentSlide];
 			var time = nextTime - currentTime;
 			var average = time / length * 1000;
 			var i = 0;
 
-			timerWord = setInterval(function(){
+			timerWord = setInterval(function () {
 				document.querySelector('words').innerHTML = words[i].word;
-				i ++ ;
-				if(i === length) {
+				i++;
+				if (i === length) {
 					clearInterval(timerWord);
 				}
 			}, average);
@@ -136,7 +145,7 @@ EchoesWorks.prototype.applyEchoes = function () {
 };
 
 
-EchoesWorks.version = EchoesWorks.VERSION = '0.2.0';
+EchoesWorks.version = EchoesWorks.VERSION = '0.2.0  ';
 
 root.EchoesWorks = EchoesWorks;
 root.EW = EchoesWorks;
