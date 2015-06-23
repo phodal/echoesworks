@@ -11,11 +11,11 @@
 
 #[EchoesWorks](http://www.echoesworks.com/)#
 
-> Next-Generation Tech Blog/Presentation Framework
+> Next-Generation Tech Blog/Presentation/Slider Framework
 
 zh
 
-> 下一代技术``博客``/``展示``框架
+> 下一代技术``博客``/``展示``/``幻灯片``框架
  
 简介: [EchoesWorks —— 打造下一代技术Blog/Presentation 框架](http://www.phodal.com/blog/build-echoesworks/)
  
