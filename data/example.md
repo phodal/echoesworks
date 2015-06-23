@@ -1,5 +1,4 @@
 <section>
-![background](app/background.jpg)
 
 #EchoesWorks
 
