@@ -35,9 +35,11 @@ var from = function () {
 			}
 
 			activeSlide.className = activeSlide.className.replace(new RegExp('active' + '(\\s|$)', 'g'), ' ').trim();
+			activeSlide.classList.add('past');
+
 			fire('deactivate', createEventData(activeSlide, customData));
 			activeSlide = slides[index];
-			activeSlide.classList.add('active');
+			activeSlide.className = 'active';
 			if(index === 0) {
 				activeSlide.classList.add('first');
 			}
