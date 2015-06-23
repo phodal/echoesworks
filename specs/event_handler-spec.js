@@ -33,9 +33,11 @@ describe("EVent", function () {
 	});
 
 	afterEach(function () {
-		document.body.removeChild(article);
-		document.body.removeChild(pre);
-		document.body.removeChild(code);
+		article.parentNode.removeChild(article);
+		pre.parentNode.removeChild(pre);
+		code.parentNode.removeChild(code);
+		words.parentNode.removeChild(words);
+
 		window.slide = null;
 		jasmine.Ajax.uninstall();
 		jasmine.clock().uninstall();

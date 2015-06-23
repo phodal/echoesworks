@@ -28,6 +28,7 @@ describe("Effect", function () {
 	});
 
 	afterEach(function () {
+		article.parentNode.removeChild(article);
 		jasmine.clock().uninstall();
 	});
 

@@ -30,6 +30,10 @@ describe("Image", function () {
 		document.body.appendChild(section);
 	});
 
+	afterEach(function () {
+		section.parentNode.removeChild(section);
+	});
+
 	it("should return element", function () {
 		spyOn(EchoesWorks.imageHandler, 'removeImages');
 		EchoesWorks.imageHandler();
@@ -53,9 +57,9 @@ describe("Image", function () {
 		expect(images.length).toBe(0);
 	});
 
-	//it("should up h1", function () {
-	//	EchoesWorks.imageHandler();
-	//	expect(document.getElementsByTagName('section')[0].innerHTML).toBe('HELLO');
-	//});
+	it("should up h1", function () {
+		EchoesWorks.imageHandler();
+		expect(document.getElementsByTagName('section')[0].children[0].innerHTML).toBe('HELLO');
+	});
 });
 

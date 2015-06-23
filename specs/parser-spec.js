@@ -24,6 +24,7 @@ describe("Parser", function () {
 		jasmine.Ajax.install();
 	});
 	afterEach(function () {
+		article.parentNode.removeChild(article);
 		jasmine.clock().uninstall();
 		jasmine.Ajax.uninstall();
 	});

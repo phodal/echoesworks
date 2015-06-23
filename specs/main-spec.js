@@ -39,9 +39,11 @@ describe("Main", function () {
 	});
 
 	afterEach(function () {
-		document.body.removeChild(article);
-		document.body.removeChild(pre);
-		document.body.removeChild(code);
+		article.parentNode.removeChild(article);
+		pre.parentNode.removeChild(pre);
+		code.parentNode.removeChild(code);
+		words.parentNode.removeChild(words);
+
 		window.slide = null;
 		jasmine.Ajax.uninstall();
 		jasmine.clock().uninstall();
@@ -154,10 +156,10 @@ describe("Main", function () {
 		};
 		window.slide.slide(0);
 
-		jasmine.clock().tick(1500);
+		jasmine.clock().tick(1800);
 
-		expect(document.querySelector('words').className).toBe('hidden');
-		expect(document.querySelector('words').innerHTML).toBe('hello, world');
+		expect(document.querySelector('words').className).toBe('');
+		expect(document.querySelector('words').innerHTML).toBe('Привет');
 	});
 
 	it("should return correctly localstorage", function () {

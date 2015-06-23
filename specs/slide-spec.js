@@ -31,7 +31,7 @@ describe("Slide", function () {
 	});
 
 	afterEach(function() {
-		document.body.removeChild(article);
+		article.parentNode.removeChild(article);
 	});
 
 	it("should return true", function () {
