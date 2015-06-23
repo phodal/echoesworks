@@ -77,8 +77,10 @@ describe("Markdown", function () {
 			.toBe('<table><tr><th align="right">this</th><th align="center">is a</th><th align="left">table</th></tr><tr><td align="right">with</td><td align="center">sample</td><td align="left">content</td></tr>\n</table>');
 	});
 
-	it("should parse h1~h3", function () {
+	it("should return correctly class name", function () {
 		expect(EW.md.mmdCSSclass('', '')).toBe('');
+		expect(EW.md.mmdCSSclass('phodal.cc', false)).toBe('');
+		expect(EW.md.mmdCSSclass('http://phodal.com', false)).toBe('class="mmd_phodalcom" ');
 	});
 
 });
