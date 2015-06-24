@@ -67,13 +67,7 @@
 		});
 	}
 
-	document.addEventListener("ew:slide:init", function () {
-		slides = document.getElementsByTagName('section');
-
-		if (slides && isTouchDevice && window.slide) {
-			touchDeviceHandler();
-		}
-
+	function syncSliderEventHandler() {
 		function handler() {
 			window.slide.slide(parseInt(localStorage.getItem('echoesworks'), 10));
 		}
@@ -82,6 +76,15 @@
 			window.addEventListener("storage", handler, false);
 		} else {
 			window.attachEvent("onstorage", handler);
+		}
+	}
+
+	document.addEventListener("ew:slide:init", function () {
+		slides = document.getElementsByTagName('section');
+		syncSliderEventHandler();
+
+		if (slides && isTouchDevice && window.slide) {
+			touchDeviceHandler();
 		}
 
 		document.addEventListener("keydown", function (event) {
