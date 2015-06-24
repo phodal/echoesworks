@@ -589,6 +589,24 @@ pre.hidden {
     display: none;
 }
 
+slide section {
+    opacity: 0;
+    visibility: hidden;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+
+slide section.past {
+    -webkit-transform: translate(-150%, 0);
+    -ms-transform: translate(-150%, 0);
+    transform: translate(-150%, 0);
+}
+
+slide section.active {
+    opacity: 1;
+    visibility: visible;
+}
+
 @media screen {
     section h1 {
         font-size: 4rem;
@@ -615,6 +633,7 @@ pre.hidden {
     pre {
         height: auto;
     }
+
     .full section {
         background: no-repeat fixed center;
         webkit-background-size: cover;
@@ -626,7 +645,7 @@ pre.hidden {
 
 @media screen and (orientation:landscape) and (min-width: 321px) {
     .bar {
-        height: 0.6em!important;
+        height: 0.4em!important;
     }
     section.first h1 {
         margin-top: 20%;
