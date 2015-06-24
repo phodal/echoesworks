@@ -23,6 +23,10 @@
 		return 'ontouchstart' in window || navigator.msMaxTouchPoints;
 	};
 
+	function stopAutoPlay() {
+		window.slide.auto = false;
+	}
+
 	function touchDeviceHandler() {
 		EchoesWorks.forEach(slides, function (slide) {
 			var halfWidth = window.screen.width / 3,
@@ -62,7 +66,7 @@
 						dragging = false;
 					}
 				}
-				window.slide.auto = false;
+				stopAutoPlay();
 			});
 		});
 	}
@@ -88,7 +92,7 @@
 		}
 
 		document.addEventListener("keydown", function (event) {
-			window.slide.auto = false;
+			stopAutoPlay();
 			var keyCode = event.keyCode;
 			if (keyCode === TAB || ( keyCode >= SPACE && keyCode <= PAGE_DOWN ) || (keyCode >= LEFT && keyCode <= DOWN)) {
 				event.preventDefault();

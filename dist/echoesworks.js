@@ -1015,6 +1015,10 @@ EchoesWorks.fn = EchoesWorks.extend(EchoesWorks.fn, Github);
 		return 'ontouchstart' in window || navigator.msMaxTouchPoints;
 	};
 
+	function stopAutoPlay() {
+		window.slide.auto = false;
+	}
+
 	function touchDeviceHandler() {
 		EchoesWorks.forEach(slides, function (slide) {
 			var halfWidth = window.screen.width / 3,
@@ -1054,7 +1058,7 @@ EchoesWorks.fn = EchoesWorks.extend(EchoesWorks.fn, Github);
 						dragging = false;
 					}
 				}
-				window.slide.auto = false;
+				stopAutoPlay();
 			});
 		});
 	}
@@ -1080,7 +1084,7 @@ EchoesWorks.fn = EchoesWorks.extend(EchoesWorks.fn, Github);
 		}
 
 		document.addEventListener("keydown", function (event) {
-			window.slide.auto = false;
+			stopAutoPlay();
 			var keyCode = event.keyCode;
 			if (keyCode === TAB || ( keyCode >= SPACE && keyCode <= PAGE_DOWN ) || (keyCode >= LEFT && keyCode <= DOWN)) {
 				event.preventDefault();
