@@ -57,50 +57,50 @@ var micromarkdown = {
 		return str.replace(stra[0], '\n<hr/>\n');
 	},
 	urlHandler: function (stra, str, strict) {
-		var repString = stra[1];
-		if (repString.indexOf('://') === -1) {
-			repString = 'http://' + repString;
+		var replaceString = stra[1];
+		if (replaceString.indexOf('://') === -1) {
+			replaceString = 'http://' + replaceString;
 		}
-		return str.replace(stra[0], '<a ' + micromarkdown.mmdCSSclass(repString, strict) + 'href="' + repString + '">' + repString.replace(/(https:\/\/|http:\/\/|mailto:|ftp:\/\/)/gmi, '') + '</a>');
+		return str.replace(stra[0], '<a ' + micromarkdown.mmdCSSclass(replaceString, strict) + 'href="' + replaceString + '">' + replaceString.replace(/(https:\/\/|http:\/\/|mailto:|ftp:\/\/)/gmi, '') + '</a>');
 	},
 	refLinksHandler: function (str, stra, helper, strict) {
 		return str.replace(stra[0], '<a ' + micromarkdown.mmdCSSclass(helper[1], strict) + 'href="' + helper[1] + '">' + stra[1] + '</a>');
 	},
 	smlinksHandler: function (stra, str, strict) {
-		var repstr = "";
+		var replaceStr = "";
 		switch (stra[2]) {
 			case 't':
-				repstr = 'https://twitter.com/' + stra[1];
+				replaceStr = 'https://twitter.com/' + stra[1];
 				break;
 			case 'gh':
-				repstr = 'https://github.com/' + stra[1];
+				replaceStr = 'https://github.com/' + stra[1];
 				break;
 			case 'fb':
-				repstr = 'https://www.facebook.com/' + stra[1];
+				replaceStr = 'https://www.facebook.com/' + stra[1];
 				break;
 			case 'gp':
-				repstr = 'https://plus.google.com/+' + stra[1];
+				replaceStr = 'https://plus.google.com/+' + stra[1];
 				break;
 		}
-		return str.replace(stra[0], '<a ' + micromarkdown.mmdCSSclass(repstr, strict) + 'href="' + repstr + '">' + stra[1] + '</a>');
+		return str.replace(stra[0], '<a ' + micromarkdown.mmdCSSclass(replaceStr, strict) + 'href="' + replaceStr + '">' + stra[1] + '</a>');
 	},
 	boldItalicHandler: function (stra, str) {
-		var repstr = [];
+		var replaceStr = [];
 		if (stra[1] === '~~') {
 			str = str.replace(stra[0], '<del>' + stra[2] + '</del>');
 		} else {
 			switch (stra[1].length) {
 				case 1:
-					repstr = ['<i>', '</i>'];
+					replaceStr = ['<i>', '</i>'];
 					break;
 				case 2:
-					repstr = ['<b>', '</b>'];
+					replaceStr = ['<b>', '</b>'];
 					break;
 				case 3:
-					repstr = ['<i><b>', '</b></i>'];
+					replaceStr = ['<i><b>', '</b></i>'];
 					break;
 			}
-			str = str.replace(stra[0], repstr[0] + stra[2] + repstr[1]);
+			str = str.replace(stra[0], replaceStr[0] + stra[2] + replaceStr[1]);
 		}
 		return str;
 	},
@@ -126,75 +126,75 @@ var micromarkdown = {
 			}
 		}
 	},
-	tableHandler: function (helper1, i, calign, repstr, cel) {
+	tableHandler: function (helper1, i, calign, replaceStr, cel) {
 		var j, helper2;
 		helper2 = helper1[i].split('|');
 		if (helper2[0].length !== 0) {
 			while (calign.length < helper2.length) {
 				calign.push(0);
 			}
-			repstr += '<tr>';
+			replaceStr += '<tr>';
 			for (j = 0; j < helper2.length; j++) {
-				repstr += cel[calign[j]] + helper2[j].trim() + '</td>';
+				replaceStr += cel[calign[j]] + helper2[j].trim() + '</td>';
 			}
-			repstr += '</tr>' + '\n';
+			replaceStr += '</tr>' + '\n';
 		}
-		return {helper2: helper2, repstr: repstr};
+		return {helper2: helper2, replaceStr: replaceStr};
 	},
 
 	tablesHandler: function (stra, str, strict) {
-		var repstr, cel, helper, calign, helper1, helper2, i;
+		var replaceStr, cel, helper, calign, helper1, helper2, i;
 
-		repstr = '<table><tr>';
+		replaceStr = '<table><tr>';
 		helper = stra[1].split('|');
 		calign = stra[4].split('|');
 		this.tableHandlerHelper(helper, calign, strict);
 		cel = ['<th>', '<th align="left">', '<th align="right">', '<th align="center">'];
 		for (i = 0; i < helper.length; i++) {
-			repstr += cel[calign[i]] + helper[i].trim() + '</th>';
+			replaceStr += cel[calign[i]] + helper[i].trim() + '</th>';
 		}
-		repstr += '</tr>';
+		replaceStr += '</tr>';
 		cel = ['<td>', '<td align="left">', '<td align="right">', '<td align="center">'];
 		helper1 = stra[7].split('\n');
 		for (i = 0; i < helper1.length; i++) {
-			var result = this.tableHandler(helper1, i, calign, repstr, cel);
+			var result = this.tableHandler(helper1, i, calign, replaceStr, cel);
 			helper2 = result.helper2;
-			repstr = result.repstr;
+			replaceStr = result.replaceStr;
 		}
-		repstr += '</table>';
-		return str.replace(stra[0], repstr);
+		replaceStr += '</table>';
+		return str.replace(stra[0], replaceStr);
 	},
 
-	listHandlerStart: function (stra, repstr) {
+	listHandlerStart: function (stra, replaceStr) {
 		if ((stra[0].trim().substr(0, 1) === '*') || (stra[0].trim().substr(0, 1) === '-')) {
-			repstr = '<ul>';
+			replaceStr = '<ul>';
 		} else {
-			repstr = '<ol>';
+			replaceStr = '<ol>';
 		}
-		return repstr;
+		return replaceStr;
 	},
 
-	listsHandlerEnd: function (stra, repstr) {
+	listsHandlerEnd: function (stra, replaceStr) {
 		if ((stra[0].trim().substr(0, 1) === '*') || (stra[0].trim().substr(0, 1) === '-')) {
-			repstr += '</ul>';
+			replaceStr += '</ul>';
 		} else {
-			repstr += '</ol>';
+			replaceStr += '</ol>';
 		}
-		return repstr;
+		return replaceStr;
 	},
 
-	listsHandlerSub: function (line, repstr, helper1) {
+	listsHandlerSub: function (line, replaceStr, helper1) {
 		if ((line[0].trim().substr(0, 1) === '*') || (line[0].trim().substr(0, 1) === '-')) {
-			repstr += '<ul>';
+			replaceStr += '<ul>';
 			helper1.push('</ul>');
 		} else {
-			repstr += '<ol>';
+			replaceStr += '<ol>';
 			helper1.push('</ol>');
 		}
-		return repstr;
+		return replaceStr;
 	},
 
-	listHandler: function (line, nstatus, status, repstr, helper1, casca) {
+	listHandler: function (line, nstatus, status, replaceStr, helper1, casca) {
 		var indent = false;
 		if ((line[2] === undefined) || (line[2].length === 0)) {
 			nstatus = 0;
@@ -205,38 +205,38 @@ var micromarkdown = {
 			nstatus = Math.round(line[2].replace(/\t/, '    ').length / indent);
 		}
 		while (status > nstatus) {
-			repstr += helper1.pop();
+			replaceStr += helper1.pop();
 			status--;
 			casca--;
 		}
 		while (status < nstatus) {
-			repstr = this.listsHandlerSub(line, repstr, helper1);
+			replaceStr = this.listsHandlerSub(line, replaceStr, helper1);
 			status++;
 			casca++;
 		}
-		repstr += '<li>' + line[6] + '</li>' + '\n';
-		return {nstatus: nstatus, status: status, repstr: repstr, casca: casca};
+		replaceStr += '<li>' + line[6] + '</li>' + '\n';
+		return {nstatus: nstatus, status: status, replaceStr: replaceStr, casca: casca};
 	},
 
 	listsHandler: function (stra, str) {
-		var helper, helper1 = [], status = 0, line, nstatus, repstr, i, casca = 0;
-		repstr = this.listHandlerStart(stra, repstr);
+		var helper, helper1 = [], status = 0, line, nstatus, replaceStr, i, casca = 0;
+		replaceStr = this.listHandlerStart(stra, replaceStr);
 		helper = stra[0].split('\n');
 		for (i = 0; i < helper.length; i++) {
 			if ((line = /^((\s*)((\*|\-)|\d(\.|\))) ([^\n]+))/.exec(helper[i])) !== null) {
-				var result = this.listHandler(line, nstatus, status, repstr, helper1, casca);
+				var result = this.listHandler(line, nstatus, status, replaceStr, helper1, casca);
 				nstatus = result.nstatus;
 				status = result.status;
-				repstr = result.repstr;
+				replaceStr = result.replaceStr;
 				casca = result.casca;
 			}
 		}
 		while (casca > 0) {
-			repstr += '</ul>';
+			replaceStr += '</ul>';
 			casca--;
 		}
-		repstr = this.listsHandlerEnd(stra, repstr);
-		return str.replace(stra[0], repstr + '\n');
+		replaceStr = this.listsHandlerEnd(stra, replaceStr);
+		return str.replace(stra[0], replaceStr + '\n');
 	},
 
 	listStrict: function (strict, regexobject) {
@@ -254,23 +254,23 @@ var micromarkdown = {
 	},
 
 	parse: function (str, strict) {
-		var helper, helper1, stra, trashgc = [], i, that = this, regexobject = micromarkdown.regexobject;
-		regexobject.lists = this.listStrict(strict, regexobject);
+		var helper, helper1, stra, trashgc = [], i, that = this, regexObject = micromarkdown.regexobject;
+		regexObject.lists = this.listStrict(strict, regexObject);
 
 		str = '\n' + str + '\n';
 		['code', 'headline', 'lists', 'tables', 'links', 'mail', 'url', 'smlinks', 'hr'].forEach(function (type) {
-			while ((stra = regexobject[type].exec(str)) !== null) {
+			while ((stra = regexObject[type].exec(str)) !== null) {
 				str = that[(type + 'Handler')].apply(that, [stra, str, strict]);
 			}
 		});
 
 		for (i = 0; i < 3; i++) {
-			while ((stra = regexobject.bolditalic.exec(str)) !== null) {
+			while ((stra = regexObject.bolditalic.exec(str)) !== null) {
 				str = this.boldItalicHandler(stra, str);
 			}
 		}
 
-		while ((stra = regexobject.reflinks.exec(str)) !== null) {
+		while ((stra = regexObject.reflinks.exec(str)) !== null) {
 			helper1 = new RegExp('\\[' + stra[2] + '\\]: ?([^ \n]+)', "gi");
 			if ((helper = helper1.exec(str)) !== null) {
 				str = this.refLinksHandler(str, stra, helper, strict);
