@@ -23,51 +23,55 @@
 		return 'ontouchstart' in window || navigator.msMaxTouchPoints;
 	};
 
+	function touchDeviceHandler() {
+		EchoesWorks.forEach(slides, function (slide) {
+			var halfWidth = window.screen.width / 3,
+				thirdHeight = window.screen.height / 3,
+				delta;
+
+			slide.addEventListener('touchstart', function (event) {
+				start = {
+					x: event.touches[0].pageX,
+					y: event.touches[0].pageY
+				};
+				dragging = true;
+			});
+
+			slide.addEventListener('touchend', function () {
+				dragging = false;
+			});
+
+			slide.addEventListener('touchmove', function (event) {
+				if (dragging) {
+					event.preventDefault();
+					delta = {
+						x: event.touches[0].pageX - start.x,
+						y: event.touches[0].pageY - start.y
+					};
+
+					var lastX = delta.x > 0 && (delta.x > halfWidth);
+					var nextY = delta.y > 0 && (delta.y > thirdHeight);
+					var nextX = delta.x < 0 && (Math.abs(delta.x) > halfWidth);
+					var lastY = delta.y < 0 && (Math.abs(delta.y) > thirdHeight);
+
+					if (nextX || nextY) {
+						window.slide.next();
+						dragging = false;
+					} else if (lastX || lastY) {
+						window.slide.prev();
+						dragging = false;
+					}
+				}
+				window.slide.auto = false;
+			});
+		});
+	}
+
 	document.addEventListener("ew:slide:init", function () {
 		slides = document.getElementsByTagName('section');
 
 		if (slides && isTouchDevice && window.slide) {
-			EchoesWorks.forEach(slides, function (slide) {
-				var halfWidth = window.screen.width / 2,
-						thirdHeight = window.screen.height / 3,
-						delta;
-
-				slide.addEventListener('touchstart', function (event) {
-					start = {
-						x: event.touches[0].pageX,
-						y: event.touches[0].pageY
-					};
-					dragging = true;
-				});
-
-				slide.addEventListener('touchend', function () {
-					dragging = false;
-				});
-
-				slide.addEventListener('touchmove', function (event) {
-					if (dragging) {
-						event.preventDefault();
-						delta = {
-							x: event.touches[0].pageX - start.x,
-							y: event.touches[0].pageY - start.y
-						};
-
-						var lastX = delta.x > 0 && (delta.x > halfWidth);
-						var nextY = delta.y > 0 && (delta.y > thirdHeight);
-						var nextX = delta.x < 0 && (Math.abs(delta.x) > halfWidth);
-						var lastY = delta.y < 0 && (Math.abs(delta.y) > thirdHeight);
-
-						if (nextX || nextY) {
-							window.slide.next();
-							dragging = false;
-						} else if (lastX || lastY) {
-							window.slide.prev();
-							dragging = false;
-						}
-					}
-					window.slide.auto = false;
-				});
-			});
+			touchDeviceHandler();
 		}
 
 		function handler() {
