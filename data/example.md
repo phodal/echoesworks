@@ -58,9 +58,9 @@
 * Right
 
 </section>
-<section class="first">
+<section>
 #Q & A
 </section>
-<section class="first">
+<section>
 #Thank you
 </section>

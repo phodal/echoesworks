@@ -40,8 +40,10 @@ var from = function () {
 			fire('deactivate', createEventData(activeSlide, customData));
 			activeSlide = slides[index];
 			activeSlide.className = 'active';
-			if(index === 0) {
-				activeSlide.classList.add('first');
+			var isLastSlide = parseInt(index, 10) === (slides.length - 1);
+			var isFirstSlide = parseInt(index, 10) === 0;
+			if(isFirstSlide || isLastSlide) {
+				activeSlide.classList.add('specify');
 			}
 			window.bar.go(100 * ( index + 1) / slides.length);
 			writeURL(index);
