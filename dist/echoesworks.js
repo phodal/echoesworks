@@ -33,6 +33,7 @@ var EchoesWorks = function (options) {
 		this.play();
 	}
 	this.init();
+	window.ew = this;
 };
 
 EchoesWorks.prototype.init = function () {
@@ -1019,6 +1020,7 @@ EchoesWorks.fn = EchoesWorks.extend(EchoesWorks.fn, Github);
 
 	function stopAutoPlay() {
 		window.slide.auto = false;
+		window.ew.audio.pause();
 	}
 
 	function touchDeviceHandler() {

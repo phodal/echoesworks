@@ -25,6 +25,7 @@
 
 	function stopAutoPlay() {
 		window.slide.auto = false;
+		window.ew.audio.pause();
 	}
 
 	function touchDeviceHandler() {

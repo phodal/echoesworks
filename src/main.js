@@ -29,6 +29,7 @@ var EchoesWorks = function (options) {
 		this.play();
 	}
 	this.init();
+	window.ew = this;
 };
 
 EchoesWorks.prototype.init = function () {
