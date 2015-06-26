@@ -2,49 +2,41 @@
   {
     "time": "00:01.00",
     "code": "https://raw.githubusercontent.com/phodal/echoesworks/master/bower.json",
-    "word": "hello, world"
+    "word": "虞美人 - 李煜"
   },
   {
     "time": "00:05.00",
     "word": [
       {
-        "word": "Привет"
+        "word": "春花秋月何时了"
       },
       {
-        "word": "Bonjour"
+        "word": "往事知多少"
       },
       {
-        "word": "こんにちは"
+        "word": "小楼昨夜又东风"
       },
       {
-        "word": "你好"
+        "word": "故国不堪回首月明中"
       },
       {
-        "word": "Ciao"
-      },
-      {
-        "word": "Hello, World"
+        "word": "雕栏玉砌应犹在"
       }
     ]
   },
   {
-    "time": "00:12.51",
-    "code": false,
-    "word": "hello, world, 2"
+    "time": "00:20.51",
+    "word": "只是朱颜改"
   },
   {
-    "time": "00:17.51",
-    "code": false,
-    "word": "hello, world, 3"
+    "time": "00:25.51",
+    "word": "问君能有几多愁"
   },
   {
-    "time": "00:22.51",
-    "code": false,
-    "word": "hello, world, 1"
+    "time": "00:32.51",
+    "word": "恰似一江春水向东流"
   },
   {
-    "time": "00:27.51",
-    "code": false,
-    "word": "hello, world, 3"
+    "time": "00:37.51"
   }
 ]
