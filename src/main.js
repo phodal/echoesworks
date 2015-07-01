@@ -96,12 +96,14 @@ function showWords(that, currentSlide) {
 			var time = nextTime - currentTime;
 			var average = time / length * 1000;
 			var i = 0;
+			document.querySelector('words').innerHTML = words[i].word;
 
 			timerWord = setInterval(function () {
-				document.querySelector('words').innerHTML = words[i].word;
 				i++;
-				if (i === length) {
+				if (i - 1 === length) {
 					clearInterval(timerWord);
+				} else {
+					document.querySelector('words').innerHTML = words[i].word;
 				}
 			}, average);
 		}

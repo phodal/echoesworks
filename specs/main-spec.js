@@ -156,7 +156,7 @@ describe("Main", function () {
 		};
 		window.slide.slide(0);
 
-		jasmine.clock().tick(1800);
+		jasmine.clock().tick(1400);
 
 		expect(document.querySelector('words').className).toBe('');
 		expect(document.querySelector('words').innerHTML).toBe('Привет');
