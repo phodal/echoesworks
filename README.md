@@ -19,22 +19,9 @@ zh
  
 简介: [EchoesWorks —— 打造下一代技术Blog/Presentation 框架](http://www.phodal.com/blog/build-echoesworks/)
  
-##Demo: [http://demo.echoesworks.com/](http://demo.echoesworks.com/) 
+Demo: [http://demo.echoesworks.com/](http://demo.echoesworks.com/) 
  
-##Feature
-
-###Core
-
-- **Markdown** Presentation
-- Integrate **Github** Code/Gist Code
-- **Full Screen** Background Image
-- Left/Right side Images Support
-- Process Bar
-- Auto Play
-- Subtitles
-- Tab Control
-
-zh
+###功能
 
 - 支持 **Markdown**
 - **Github**代码显示
@@ -150,19 +137,6 @@ Example with slide
      npm test
       
 4.Push Code & Waiting CI            
-
-##Intro
-
-1. ajax. Ajax Function
-2. bar. Process Bar Function
-3. effect. fadeIn & fadeOut animate
-4. events_handler. handler keydown & touch & slide event
-5. image. fullscreen, left ,right image 
-6. main. main function to connection other function
-7. parser. parser data.json
-8. slide. core slide code
-9. umarkdown. markdown convert
-10. utils. utils function
 
 ##Inspired by & Thanks to##
 
