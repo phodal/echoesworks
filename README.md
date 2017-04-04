@@ -9,7 +9,8 @@
 
 ![Logo](app/logo_small.png)
 
-#[EchoesWorks](http://www.echoesworks.com/)#
+[EchoesWorks](http://www.echoesworks.com/)
+===
 
 > Next-Generation Tech Blog/Presentation/Slider Framework
 
@@ -21,7 +22,7 @@ zh
  
 Demo: [http://demo.echoesworks.com/](http://demo.echoesworks.com/) 
  
-###功能
+### 功能
 
 - 支持 **Markdown**
 - **Github**代码显示
@@ -32,13 +33,13 @@ Demo: [http://demo.echoesworks.com/](http://demo.echoesworks.com/)
 - 字幕
 - 分屏控制
 
-##Usage##
+## Usage
 
-###Clone Demo
+### Clone Demo
 
     git clone git@github.com:echoesworks/echoesworks-demo.git yourslide
 
-###Setup
+### Setup
 
 1.Install
 
@@ -138,7 +139,7 @@ Example with slide
       
 4.Push Code & Waiting CI            
 
-##Inspired by & Thanks to##
+## Inspired by & Thanks to
 
 - Slide
 
@@ -159,7 +160,8 @@ Example with slide
  
     * [https://github.com/jacoborus/nanobar](https://github.com/jacoborus/nanobar)
 
-##License##
+License
+---
 
 © 2015 [Phodal Huang](http://www.phodal.com). This code is distributed under the MIT license. See `LICENSE.txt` in this directory.
 
