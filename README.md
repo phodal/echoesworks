@@ -9,7 +9,7 @@
 
 ![Logo](app/logo_small.png)
 
-[EchoesWorks](http://www.echoesworks.com/)
+[EchoesWorks](http://phodal.github.io/echoesworks/)
 ===
 
 > Next-Generation Tech Blog/Presentation/Slider Framework
@@ -19,9 +19,7 @@ zh
 > 下一代技术``博客``/``展示``/``幻灯片``框架
  
 简介: [EchoesWorks —— 打造下一代技术Blog/Presentation 框架](http://www.phodal.com/blog/build-echoesworks/)
- 
-Demo: [http://demo.echoesworks.com/](http://demo.echoesworks.com/) 
- 
+  
 ### 功能
 
 - 支持 **Markdown**
