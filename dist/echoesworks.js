@@ -944,7 +944,9 @@ EchoesWorks.fn = EchoesWorks.extend(EchoesWorks.fn, Github);
 
 	function stopAutoPlay() {
 		window.slide.auto = false;
-		window.ew.audio.pause();
+    if(!!window.ew && !!window.ew.audio) {
+      window.ew.audio.pause();
+    }
 	}
 
 	function touchDeviceHandler() {
