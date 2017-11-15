@@ -12,6 +12,11 @@
 [EchoesWorks](http://phodal.github.io/echoesworks/)
 ===
 
+Demo
+---
+
+[http://phodal-archive.github.io/echoesworks-demo/](http://phodal-archive.github.io/echoesworks-demo/)
+
 > Next-Generation Tech Blog/Presentation/Slider Framework
 
 zh
